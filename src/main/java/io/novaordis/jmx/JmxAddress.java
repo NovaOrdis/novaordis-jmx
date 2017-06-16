@@ -16,6 +16,7 @@
 
 package io.novaordis.jmx;
 
+import io.novaordis.utilities.address.AddressException;
 import io.novaordis.utilities.address.AddressImpl;
 
 /**
@@ -34,8 +35,6 @@ public class JmxAddress extends AddressImpl {
 
     // Constructors ----------------------------------------------------------------------------------------------------
 
-    // Public ----------------------------------------------------------------------------------------------------------
-
     public JmxAddress() {
 
         super();
@@ -43,15 +42,66 @@ public class JmxAddress extends AddressImpl {
         setProtocol(PROTOCOL);
     }
 
-    public JmxAddress(String s) throws JmxException {
+    /**
+     * @throws AddressException
+     * @throws IllegalArgumentException>
+     */
+    public JmxAddress(String s) throws AddressException {
 
-        throw new RuntimeException("NOT YET IMPLEMENTED");
+        super(s);
+
+        String protocol = getProtocol();
+
+        if (protocol == null) {
+
+            setProtocol(PROTOCOL);
+        }
     }
 
+    // Overrides -------------------------------------------------------------------------------------------------------
+
+    @Override
+    public JmxAddress copy() {
+
+        return (JmxAddress)super.copy();
+    }
+
+    /**
+     * Extra semantic protection.
+     */
+    @Override
+    public void setProtocol(String s) {
+
+        if (!PROTOCOL.equals(s)) {
+
+            throw new IllegalArgumentException("invalid protocol " + (s == null ? "null" : "\"" + s + "\""));
+        }
+
+        super.setProtocol(s);
+    }
+
+    /**
+     * We want the superclass behavior, a JmxAddress with a content identical to an AddressImpl is equals to the
+     * AddressImpl instance. This is because we want to support the intuitive behavior of creating new
+     * AddressImpl("jmx://...") and using it to search in sets and maps.
+     */
+    @Override
+    public boolean equals(Object o) {
+
+        return super.equals(o);
+    }
+
+    // Public ----------------------------------------------------------------------------------------------------------
 
     // Package protected -----------------------------------------------------------------------------------------------
 
     // Protected -------------------------------------------------------------------------------------------------------
+
+    @Override
+    protected JmxAddress createBlankInstance() {
+
+        return new JmxAddress();
+    }
 
     // Private ---------------------------------------------------------------------------------------------------------
 
