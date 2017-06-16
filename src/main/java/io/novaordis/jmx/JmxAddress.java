@@ -43,6 +43,12 @@ public class JmxAddress extends AddressImpl {
         setProtocol(PROTOCOL);
     }
 
+    public JmxAddress(String s) throws JmxException {
+
+        throw new RuntimeException("NOT YET IMPLEMENTED");
+    }
+
+
     // Package protected -----------------------------------------------------------------------------------------------
 
     // Protected -------------------------------------------------------------------------------------------------------
