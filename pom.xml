@@ -16,6 +16,8 @@
                Dependency Versions
         -->
 
+        <novaordis.utilities.version>4.7.5</novaordis.utilities.version>
+
         <slf4j.version>1.7.12</slf4j.version>
         <junit.version>4.12</junit.version>
 
@@ -31,6 +33,7 @@
     <build>
 
         <!-- needed by the version mechanism -->
+
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -64,6 +67,11 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>io.novaordis.utilities</groupId>
+            <artifactId>novaordis-utilities</artifactId>
+            <version>${novaordis.utilities.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
