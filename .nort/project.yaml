@@ -2,7 +2,7 @@
 # release configuration 
 #
 qualification:
-  os.command.to.get.installed.version: nort version
+  os.command.to.get.installed.version: 
 
 build:
 
