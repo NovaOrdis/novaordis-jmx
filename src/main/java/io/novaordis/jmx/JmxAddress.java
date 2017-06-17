@@ -35,7 +35,12 @@ public class JmxAddress extends AddressImpl {
 
     // Constructors ----------------------------------------------------------------------------------------------------
 
-    public JmxAddress() {
+    /**
+     * There is no public no-argument constructor because there are no default coordinates for a JMX endpoint. In order
+     * to get a valid JMX address, we will need to specify at least a host and a port. This constructor returns a
+     * partially initialized instance.
+     */
+    protected JmxAddress() {
 
         super();
 
