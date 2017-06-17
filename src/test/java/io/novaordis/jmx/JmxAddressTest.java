@@ -110,6 +110,23 @@ public class JmxAddressTest {
         }
     }
 
+    @Test
+    public void constructor_String_NoPort() throws Exception {
+
+        try {
+
+            new JmxAddress("1.2.3.4");
+            fail("should have thrown exception");
+        }
+        catch(AddressException e) {
+
+            String msg = e.getMessage();
+
+            assertTrue(msg.contains("missing port value"));
+        }
+    }
+
+
     // copy() ----------------------------------------------------------------------------------------------------------
 
     @Test
@@ -155,7 +172,7 @@ public class JmxAddressTest {
     @Test
     public void setProtocol_CanNotChangeFromJmx() throws Exception {
 
-        JmxAddress a = new JmxAddress("jmx://example");
+        JmxAddress a = new JmxAddress("jmx://example:80");
 
         try {
 
@@ -172,7 +189,7 @@ public class JmxAddressTest {
     @Test
     public void setProtocol_CanNotChangeFromJmx_Null() throws Exception {
 
-        JmxAddress a = new JmxAddress("jmx://example");
+        JmxAddress a = new JmxAddress("jmx://example:80");
 
         try {
 
@@ -190,7 +207,7 @@ public class JmxAddressTest {
     @Test
     public void setProtocol_JmxIsNoop() throws Exception {
 
-        JmxAddress a = new JmxAddress("jmx://example");
+        JmxAddress a = new JmxAddress("jmx://example:80");
 
         // noop
         a.setProtocol("jmx");

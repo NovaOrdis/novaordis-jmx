@@ -61,6 +61,11 @@ public class JmxAddress extends AddressImpl {
 
             setProtocol(PROTOCOL);
         }
+
+        if (getPort() == null) {
+
+            throw new AddressException("missing port value");
+        }
     }
 
     // Overrides -------------------------------------------------------------------------------------------------------
