@@ -23,8 +23,11 @@ import org.junit.Test;
 
 import javax.management.Attribute;
 import javax.management.AttributeList;
+import javax.management.AttributeNotFoundException;
+import javax.management.InstanceNotFoundException;
 import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;
+import javax.management.ReflectionException;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -194,6 +197,8 @@ public abstract class JmxClientTest {
         // configure the mock server to "go down" after connection
         //
 
+        ClientProvider.setRemoteJmxFailsToProduceAMBeanServerConnection(true);
+
         try {
 
             c.getMBeanServerConnection();
@@ -206,7 +211,7 @@ public abstract class JmxClientTest {
 
             Throwable cause = e.getCause();
             assertNotNull(cause);
-            assertTrue(cause instanceof IllegalAccessException);
+            assertTrue(cause instanceof IOException);
         }
     }
 
@@ -275,8 +280,16 @@ public abstract class JmxClientTest {
     @Test
     public void getMBeanServerConnection_Unconnected() throws Exception {
 
-        JmxAddress a = new JmxAddress("jmx://mock-server:1000");
-        JmxClient c = getJmxClientToTest(a);
+        MockJmxAddress ma = new MockJmxAddress();
+
+        JmxClient c = getJmxClientToTest(ma);
+
+        //
+        // configure jmx client for testing, io.novaordis.jmx.mockpackage.mockprotcol.ClientProvider
+        // builds a test JMXConnector
+        //
+
+        c.setProtocolProviderPackage("io.novaordis.jmx.mockpackage");
 
         assertFalse(c.isConnected());
 
@@ -303,9 +316,16 @@ public abstract class JmxClientTest {
 
         MockMBeanServerConnection.addAttribute(new ObjectName("test:service=MockService"), "TestAttribute2", 7);
 
-        JmxAddress a = new JmxAddress("jmx://mock-server:1000");
+        MockJmxAddress ma = new MockJmxAddress();
 
-        JmxClient c = getJmxClientToTest(a);
+        JmxClient c = getJmxClientToTest(ma);
+
+        //
+        // configure jmx client for testing, io.novaordis.jmx.mockpackage.mockprotcol.ClientProvider
+        // builds a test JMXConnector
+        //
+
+        c.setProtocolProviderPackage("io.novaordis.jmx.mockpackage");
 
         c.connect();
 
@@ -322,6 +342,8 @@ public abstract class JmxClientTest {
         assertEquals(7, o2);
 
         c.disconnect();
+
+        assertFalse(c.isConnected());
     }
 
     @Test
@@ -335,9 +357,16 @@ public abstract class JmxClientTest {
 
         MockMBeanServerConnection.addAttribute(new ObjectName("test:service=MockService"), "TestAttribute2", 7);
 
-        JmxAddress a = new JmxAddress("jmx://mock-server:1000");
+        MockJmxAddress ma = new MockJmxAddress();
 
-        JmxClient c = getJmxClientToTest(a);
+        JmxClient c = getJmxClientToTest(ma);
+
+        //
+        // configure jmx client for testing, io.novaordis.jmx.mockpackage.mockprotcol.ClientProvider
+        // builds a test JMXConnector
+        //
+
+        c.setProtocolProviderPackage("io.novaordis.jmx.mockpackage");
 
         c.connect();
 
@@ -345,7 +374,7 @@ public abstract class JmxClientTest {
 
         ObjectName on = new ObjectName("test:service=MockService");
 
-        AttributeList al = mBeanServer.getAttributes(on, new String[] {"TestAttribute", "TestAttribute2"});
+        AttributeList al = mBeanServer.getAttributes(on, new String[]{"TestAttribute", "TestAttribute2"});
 
         List<Attribute> attributes = al.asList();
 
@@ -362,25 +391,131 @@ public abstract class JmxClientTest {
         assertEquals(7, jmxAttribute2.getValue());
 
         c.disconnect();
-    }
 
+        assertFalse(c.isConnected());
+    }
 
     @Test
     public void getMBeanServerConnection_getAttribute_ObjectNameDoesNotExist() throws Exception {
 
-        fail("RETURN HERE");
+        MockJmxAddress ma = new MockJmxAddress();
+
+        JmxClient c = getJmxClientToTest(ma);
+
+        //
+        // configure jmx client for testing, io.novaordis.jmx.mockpackage.mockprotcol.ClientProvider
+        // builds a test JMXConnector
+        //
+
+        c.setProtocolProviderPackage("io.novaordis.jmx.mockpackage");
+
+        c.connect();
+
+        MBeanServerConnection mBeanServer = c.getMBeanServerConnection();
+
+        ObjectName on = new ObjectName("test:service=NoSuchService");
+
+        try {
+
+            mBeanServer.getAttribute(on, "TestAttribute");
+            fail("should have thrown exception");
+        }
+        catch(InstanceNotFoundException e) {
+
+            String msg = e.getMessage();
+            assertEquals("test:service=NoSuchService", msg);
+        }
+
+        c.disconnect();
+
+        assertFalse(c.isConnected());
     }
 
     @Test
     public void getMBeanServerConnection_getAttribute_AttributeDoesNotExist() throws Exception {
 
-        fail("RETURN HERE");
+        //
+        // "populate" the remote server with the correct ObjectName, but not the attribute
+        //
+
+        MockMBeanServerConnection.addAttribute(
+                new ObjectName("test:service=MockService"), "TestAttribute", "something");
+
+        MockJmxAddress ma = new MockJmxAddress();
+
+        JmxClient c = getJmxClientToTest(ma);
+
+        //
+        // configure jmx client for testing, io.novaordis.jmx.mockpackage.mockprotcol.ClientProvider
+        // builds a test JMXConnector
+        //
+
+        c.setProtocolProviderPackage("io.novaordis.jmx.mockpackage");
+
+        c.connect();
+
+        MBeanServerConnection mBeanServer = c.getMBeanServerConnection();
+
+        ObjectName on = new ObjectName("test:service=MockService");
+
+        try {
+
+            mBeanServer.getAttribute(on, "SomeAttributeThatDoesNotExist");
+            fail("should have thrown exception");
+        }
+        catch(AttributeNotFoundException e) {
+
+            String msg = e.getMessage();
+            assertTrue(msg.contains("SomeAttributeThatDoesNotExist"));
+        }
+
+        c.disconnect();
+
+        assertFalse(c.isConnected());
     }
 
     @Test
-    public void getMBeanServerConnection_NetworkFailure() throws Exception {
+    public void getMBeanServerConnection_getAttribute_JustOneAttributeFromTheListDoesNotExist() throws Exception {
 
-        fail("RETURN HERE");
+        //
+        // "populate" the remote server
+        //
+
+        MockMBeanServerConnection.addAttribute(
+                new ObjectName("test:service=MockService"), "TestAttribute", "something");
+
+        MockJmxAddress ma = new MockJmxAddress();
+
+        JmxClient c = getJmxClientToTest(ma);
+
+        //
+        // configure jmx client for testing, io.novaordis.jmx.mockpackage.mockprotcol.ClientProvider
+        // builds a test JMXConnector
+        //
+
+        c.setProtocolProviderPackage("io.novaordis.jmx.mockpackage");
+
+        c.connect();
+
+        MBeanServerConnection mBeanServer = c.getMBeanServerConnection();
+
+        ObjectName on = new ObjectName("test:service=MockService");
+
+        // the first attribute exists, but the second doesn't
+
+        try {
+            mBeanServer.getAttributes(on, new String[]{"TestAttribute", "NoSuchAttribute"});
+        }
+        catch(ReflectionException e) {
+
+            AttributeNotFoundException cause = (AttributeNotFoundException)e.getCause();
+            String msg = cause.getMessage();
+            assertTrue(msg.contains("NoSuchAttribute"));
+        }
+
+        c.disconnect();
+
+        assertFalse(c.isConnected());
     }
 
     // Package protected -----------------------------------------------------------------------------------------------

@@ -16,7 +16,10 @@
 
 package io.novaordis.jmx;
 
+import javax.management.Attribute;
+import javax.management.AttributeList;
 import javax.management.MBeanServerConnection;
+import javax.management.ObjectName;
 
 /**
  * @author Ovidiu Feodorov <ovidiu@novaordis.com>
@@ -50,6 +53,21 @@ public class Main {
         int count = mBeanServerConnection.getMBeanCount();
 
         System.out.println(count);
+
+//        ObjectName on = new ObjectName("jboss.as:subsystem=messaging,hornetq-server=default,jms-queue=DLQ");
+//
+//        Object o = mBeanServerConnection.getAttribute(on, "messageCount");
+//
+//        System.out.println(o);
+
+        ObjectName on = new ObjectName("jboss.as:subsystem=messaging,hornetq-server=default,jms-queue=DLQ");
+
+        AttributeList al = mBeanServerConnection.getAttributes(on, new String[]{"messageCount", "nosuchatt"});
+
+        for(Attribute a: al.asList()) {
+
+            System.out.println(a.getName() + ": " + a.getValue());
+        }
 
         client.disconnect();
     }

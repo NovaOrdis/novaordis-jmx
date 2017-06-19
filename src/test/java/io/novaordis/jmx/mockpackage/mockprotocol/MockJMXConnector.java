@@ -45,21 +45,16 @@ public class MockJMXConnector implements JMXConnector {
 
     private JMXServiceURL serviceUrl;
 
-    private Map<String, ?> environment;
-
     private boolean connected;
 
     private MockMBeanServerConnection mockMBeanServerProxy;
-
 
     // Constructors ----------------------------------------------------------------------------------------------------
 
     public MockJMXConnector(JMXServiceURL serviceURL, Map<String, ?> environment) {
 
         this.serviceUrl = serviceURL;
-        this.environment = environment;
     }
-
 
     // JMXConnector implementation -------------------------------------------------------------------------------------
 
@@ -82,22 +77,17 @@ public class MockJMXConnector implements JMXConnector {
     @Override
     public MBeanServerConnection getMBeanServerConnection() throws IOException {
 
-        //
-        // TODO what happens if I call getMBeanServerConnection() on a real client that was not connected
-        //
+        if (!connected) {
 
-        throw new RuntimeException("NOT YET IMPLEMENTED: what happens if I call getMBeanServerConnection() on a real client that was not connected");
+            throw new IllegalStateException(this + " was not connected to the remote server");
+        }
 
-//        if (!connected) {
-//
-//            //
-//            // TODO what happens if I call getMBeanServerConnection() on a real client that was not connected
-//            //
-//
-//            throw new RuntimeException("NOT YET IMPLEMENTED");
-//        }
-//
-//        return mockMBeanServerProxy;
+        if (ClientProvider.isRemoteJmxFailsToProduceAMBeanServerConnection()) {
+
+            throw new IOException("the remote server failed to provide a MBeanServerConnection");
+        }
+
+        return mockMBeanServerProxy;
     }
 
     @Override

@@ -42,10 +42,26 @@ public class ClientProvider implements JMXConnectorProvider {
     // Static ----------------------------------------------------------------------------------------------------------
 
     private static boolean remoteJmxServerNotAvailable;
+    private static boolean remoteJmxFailsToProduceAMBeanServerConnection;
 
     public static void setRemoteJmxServerNotAvailable(boolean b) {
 
         remoteJmxServerNotAvailable = b;
+    }
+
+    public static boolean isRemoteJmxServerNotAvailable() {
+
+        return remoteJmxServerNotAvailable;
+    }
+
+    public static void setRemoteJmxFailsToProduceAMBeanServerConnection(boolean b) {
+
+        remoteJmxFailsToProduceAMBeanServerConnection = b;
+    }
+
+    public static boolean isRemoteJmxFailsToProduceAMBeanServerConnection() {
+
+        return remoteJmxFailsToProduceAMBeanServerConnection;
     }
 
     /**
@@ -54,6 +70,7 @@ public class ClientProvider implements JMXConnectorProvider {
     public static void clear() {
 
         remoteJmxServerNotAvailable = false;
+        remoteJmxFailsToProduceAMBeanServerConnection = false;
     }
 
     // Attributes ------------------------------------------------------------------------------------------------------
@@ -67,7 +84,7 @@ public class ClientProvider implements JMXConnectorProvider {
 
         log.info(this + " creating a new JMXConnector instance ...");
 
-        if (remoteJmxServerNotAvailable) {
+        if (isRemoteJmxServerNotAvailable()) {
 
             log.info("simulating a remote JMX server that is not available");
             throw new ConnectException("Connection refused");

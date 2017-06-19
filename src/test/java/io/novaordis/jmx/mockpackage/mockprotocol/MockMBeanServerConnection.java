@@ -160,8 +160,34 @@ public class MockMBeanServerConnection implements MBeanServerConnection {
     }
 
     @Override
-    public Object getAttribute(ObjectName name, String attribute)
-            throws MBeanException, AttributeNotFoundException, InstanceNotFoundException, ReflectionException, IOException {
+    public Object getAttribute(ObjectName name, String attributeName)
+            throws MBeanException, AttributeNotFoundException,
+            InstanceNotFoundException, ReflectionException, IOException {
+
+        List<Attribute> attributes = content.get(name);
+
+        if (attributes == null) {
+
+            //
+            // this simulates a real response
+            //
+            throw new InstanceNotFoundException(name.toString());
+        }
+
+        for(Attribute a: attributes) {
+
+            if (a.getName().equals(attributeName)) {
+
+                return a.getValue();
+            }
+        }
+
+        throw new AttributeNotFoundException("Could not find any attribute matching: " + attributeName);
+    }
+
+    @Override
+    public AttributeList getAttributes(ObjectName name, String[] attributeNames)
+            throws InstanceNotFoundException, ReflectionException, IOException {
 
         List<Attribute> attributes = content.get(name);
 
@@ -170,20 +196,38 @@ public class MockMBeanServerConnection implements MBeanServerConnection {
             throw new InstanceNotFoundException();
         }
 
-        for(Attribute a: attributes) {
+        List<Object> values = new ArrayList<>();
 
-            if (a.getName().equals(attribute)) {
+        outer: for(String attributeName: attributeNames) {
 
-                return a.getValue();
+            for (Attribute a : attributes) {
+
+                if (a.getName().equals(attributeName)) {
+
+                    values.add(a.getValue());
+                    continue outer;
+                }
             }
+
+            //
+            // attribute not found
+            //
+
+            //
+            // simulates real behavior
+            //
+            throw new ReflectionException(new AttributeNotFoundException(
+                    "Could not find any attribute matching: " + attributeName));
         }
 
-        throw new AttributeNotFoundException();
-    }
+        AttributeList result = new AttributeList(values.size());
 
-    @Override
-    public AttributeList getAttributes(ObjectName name, String[] attributes) throws InstanceNotFoundException, ReflectionException, IOException {
-        throw new RuntimeException("getAttributes() NOT YET IMPLEMENTED");
+        for(int i = 0; i < values.size(); i ++) {
+
+            result.add(i, new Attribute(attributeNames[i], values.get(i)));
+        }
+
+        return result;
     }
 
     @Override

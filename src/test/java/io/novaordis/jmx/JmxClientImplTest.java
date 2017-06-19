@@ -19,6 +19,7 @@ package io.novaordis.jmx;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Ovidiu Feodorov <ovidiu@novaordis.com>
@@ -51,11 +52,20 @@ public class JmxClientImplTest extends JmxClientTest {
     @Test
     public void connect() throws Exception {
 
-        JmxAddress a = new JmxAddress("jmx://mock-host:1000");
+        MockJmxAddress a = new MockJmxAddress();
 
         JmxClientImpl c = new JmxClientImpl(a);
 
+        //
+        // configure jmx client for testing, io.novaordis.jmx.mockpackage.mockprotcol.ClientProvider
+        // builds a test JMXConnector
+        //
+
+        c.setProtocolProviderPackage("io.novaordis.jmx.mockpackage");
+
         c.connect();
+
+        assertTrue(c.isConnected());
     }
 
     // Package protected -----------------------------------------------------------------------------------------------
