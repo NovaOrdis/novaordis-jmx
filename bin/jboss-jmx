@@ -1,0 +1,30 @@
+#!/bin/bash
+
+unset JBOSS_HOMEA
+
+jboss_home=/Users/ovidiu/runtime/jboss-eap-6.4.15
+
+while [ -n "$1" ]; do
+
+    if [ $1 = "-d" ]; then
+        debug_args="-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005";
+    else
+        args="${args} $1"
+    fi
+    shift
+done
+
+jar_file=$(find $(dirname $0)/../target -name novaordis-jmx*[0-9].jar)
+
+[ -z "${jar_file}" ] && { echo "no JAR file found" 1>&2; exit 1; }
+[ -f ${jar_file} ] || { echo "JAR file ${jar_file} does not exist" 1>&2; exit 1; }
+
+classpath=${jar_file}:\
+${M2}/io/novaordis/utilities/novaordis-utilities/4.7.5/novaordis-utilities-4.7.5.jar:\
+${M2}/org/slf4j/slf4j-api/1.7.12/slf4j-api-1.7.12.jar:\
+${M2}/org/slf4j/slf4j-log4j12/1.7.12/slf4j-log4j12-1.7.12.jar:\
+${M2}/log4j/log4j/1.2.17/log4j-1.2.17.jar:\
+${jboss_home}/bin/client/jboss-cli-client.jar
+
+echo java ${debug_args} -cp ${classpath} io.novaordis.jmx.Main ${args}
+java ${debug_args} -cp ${classpath} io.novaordis.jmx.Main ${args}

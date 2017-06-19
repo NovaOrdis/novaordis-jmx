@@ -33,6 +33,10 @@ public class JmxAddress extends AddressImpl {
 
     // Attributes ------------------------------------------------------------------------------------------------------
 
+    // the string to send to the lower Java JMX remoting API as "protocol".
+
+    private String jmxServiceUrlProtocol;
+
     // Constructors ----------------------------------------------------------------------------------------------------
 
     /**
@@ -66,6 +70,14 @@ public class JmxAddress extends AddressImpl {
 
             throw new AddressException("missing port value");
         }
+    }
+
+    /**
+     * Used for testing.
+     */
+    JmxAddress(String protocol, String host, Integer port) throws AddressException {
+
+        super(protocol, null, null, host, port);
     }
 
     // Overrides -------------------------------------------------------------------------------------------------------
@@ -102,6 +114,39 @@ public class JmxAddress extends AddressImpl {
     }
 
     // Public ----------------------------------------------------------------------------------------------------------
+
+    /**
+     * The "protocol" part from a JMXServiceURL address "service:jmx:<protocol>://<host>:<port>" corresponding to this
+     * JMX address:
+     * <ul>
+     *     <li>"remoting-jmx" for JBoss 6</li>
+     *     <li>"mock-jmx" for testing</li>
+     * </ul>
+     */
+    public String getJmxServiceUrlProtocol() {
+
+        return jmxServiceUrlProtocol;
+    }
+
+    public void setJmxServiceUrlProtocol(String s) {
+
+        this.jmxServiceUrlProtocol = s;
+    }
+
+    @Override
+    public String toString() {
+
+        String s = super.toString();
+
+        String jp = getJmxServiceUrlProtocol();
+
+        if (jp != null) {
+
+            s += ", jmxServiceUrlProtocol=" + jp;
+        }
+
+        return s;
+    }
 
     // Package protected -----------------------------------------------------------------------------------------------
 

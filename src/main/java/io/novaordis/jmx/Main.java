@@ -16,30 +16,47 @@
 
 package io.novaordis.jmx;
 
+import javax.management.MBeanServerConnection;
+
 /**
  * @author Ovidiu Feodorov <ovidiu@novaordis.com>
- * @since 6/16/17
+ * @since 6/17/17
  */
-public class JmxException extends Exception {
+public class Main {
 
     // Constants -------------------------------------------------------------------------------------------------------
 
     // Static ----------------------------------------------------------------------------------------------------------
 
+    public static void main(String[] args) throws Exception {
+
+        if (args.length == 0) {
+
+            throw new Exception("the address of the JMX server is needed in format jmx://<host>:<port>");
+        }
+
+        String addressAsString = args[0];
+
+        JmxAddress address = new JmxAddress(addressAsString);
+
+        address.setJmxServiceUrlProtocol("remoting-jmx");
+
+        JmxClient client = new JmxClientImpl(address);
+
+        client.connect();
+
+        MBeanServerConnection mBeanServerConnection = client.getMBeanServerConnection();
+
+        int count = mBeanServerConnection.getMBeanCount();
+
+        System.out.println(count);
+
+        client.disconnect();
+    }
+
     // Attributes ------------------------------------------------------------------------------------------------------
 
     // Constructors ----------------------------------------------------------------------------------------------------
-
-    public JmxException(Throwable cause) {
-
-        super(cause);
-    }
-
-    public JmxException(String msg, Throwable cause) {
-
-        super(msg, cause);
-    }
-
 
     // Public ----------------------------------------------------------------------------------------------------------
 

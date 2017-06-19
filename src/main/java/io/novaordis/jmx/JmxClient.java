@@ -16,6 +16,8 @@
 
 package io.novaordis.jmx;
 
+import javax.management.MBeanServerConnection;
+
 /**
  * @author Ovidiu Feodorov <ovidiu@novaordis.com>
  * @since 6/16/17
@@ -32,6 +34,17 @@ public interface JmxClient {
      * @return the address of the corresponding remote JMX bus.
      */
     JmxAddress getAddress();
+
+    /**
+     * Configure the JmxClient to look up for the following ClientProvider class:
+     *
+     * <protocol-provider-package> + "." + <protocol-name> + "." + ClientProvider
+     *
+     * Some implementations, such a JBoss 6 remote JMX support, do not need this.
+     */
+    void setProtocolProviderPackage(String protocolProviderPackage);
+
+    // Lifecycle -------------------------------------------------------------------------------------------------------
 
     /**
      * Connects the client the corresponding remote JMX bus.
@@ -54,5 +67,12 @@ public interface JmxClient {
 
     boolean isConnected();
 
+    // Business --------------------------------------------------------------------------------------------------------
+
+    /**
+     *
+     * @throws IllegalStateException if invoked on an unconnected client.
+     */
+    MBeanServerConnection getMBeanServerConnection() throws JmxException;
 
 }

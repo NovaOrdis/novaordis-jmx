@@ -18,11 +18,13 @@ package io.novaordis.jmx;
 
 /**
  * @author Ovidiu Feodorov <ovidiu@novaordis.com>
- * @since 6/16/17
+ * @since 6/18/17
  */
-public class JmxException extends Exception {
+public class MockJmxAddress extends JmxAddress {
 
     // Constants -------------------------------------------------------------------------------------------------------
+
+    public static final String JMX_SERVICE_URL_PROTOCOL = "mockprotocol";
 
     // Static ----------------------------------------------------------------------------------------------------------
 
@@ -30,16 +32,12 @@ public class JmxException extends Exception {
 
     // Constructors ----------------------------------------------------------------------------------------------------
 
-    public JmxException(Throwable cause) {
+    public MockJmxAddress() {
 
-        super(cause);
+        setHost("mock-host");
+        setPort(1000);
+        setJmxServiceUrlProtocol(JMX_SERVICE_URL_PROTOCOL);
     }
-
-    public JmxException(String msg, Throwable cause) {
-
-        super(msg, cause);
-    }
-
 
     // Public ----------------------------------------------------------------------------------------------------------
 

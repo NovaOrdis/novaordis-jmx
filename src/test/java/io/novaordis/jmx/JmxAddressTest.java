@@ -126,7 +126,6 @@ public class JmxAddressTest {
         }
     }
 
-
     // copy() ----------------------------------------------------------------------------------------------------------
 
     @Test
@@ -215,6 +214,19 @@ public class JmxAddressTest {
         assertEquals("jmx", a.getProtocol());
     }
 
+    // getJmxServiceUrlProtocol()/setJmxServiceUrlProtocol() -----------------------------------------------------------
+
+    @Test
+    public void setJmxServiceUrlProtocol() throws Exception {
+
+        JmxAddress a = new JmxAddress("jmx://test:1000");
+
+        assertNull(a.getJmxServiceUrlProtocol());
+
+        a.setJmxServiceUrlProtocol("test-jmx-service-url-protocol");
+
+        assertEquals("test-jmx-service-url-protocol", a.getJmxServiceUrlProtocol());
+    }
 
     // Package protected -----------------------------------------------------------------------------------------------
 

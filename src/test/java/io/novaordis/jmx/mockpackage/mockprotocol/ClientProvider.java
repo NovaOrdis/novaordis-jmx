@@ -14,34 +14,80 @@
  * limitations under the License.
  */
 
-package io.novaordis.jmx;
+package io.novaordis.jmx.mockpackage.mockprotocol;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.management.remote.JMXConnector;
+import javax.management.remote.JMXConnectorProvider;
+import javax.management.remote.JMXServiceURL;
+import java.io.IOException;
+import java.net.ConnectException;
+import java.util.Map;
 
 /**
+ * Instantiated via reflection.
+ *
  * @author Ovidiu Feodorov <ovidiu@novaordis.com>
  * @since 6/16/17
  */
-public class JmxException extends Exception {
+@SuppressWarnings("unused")
+public class ClientProvider implements JMXConnectorProvider {
 
     // Constants -------------------------------------------------------------------------------------------------------
 
+    private static final Logger log = LoggerFactory.getLogger(ClientProvider.class);
+
     // Static ----------------------------------------------------------------------------------------------------------
+
+    private static boolean remoteJmxServerNotAvailable;
+
+    public static void setRemoteJmxServerNotAvailable(boolean b) {
+
+        remoteJmxServerNotAvailable = b;
+    }
+
+    /**
+     * Resets this provider to a state in which creates valid JMX connectors.
+     */
+    public static void clear() {
+
+        remoteJmxServerNotAvailable = false;
+    }
 
     // Attributes ------------------------------------------------------------------------------------------------------
 
     // Constructors ----------------------------------------------------------------------------------------------------
 
-    public JmxException(Throwable cause) {
+    // JMXConnectorProvider implementation -----------------------------------------------------------------------------
 
-        super(cause);
+    @Override
+    public JMXConnector newJMXConnector(JMXServiceURL serviceURL, Map<String, ?> environment) throws IOException {
+
+        log.info(this + " creating a new JMXConnector instance ...");
+
+        if (remoteJmxServerNotAvailable) {
+
+            log.info("simulating a remote JMX server that is not available");
+            throw new ConnectException("Connection refused");
+        }
+
+        //noinspection UnnecessaryLocalVariable
+        MockJMXConnector c = new MockJMXConnector(serviceURL, environment);
+
+        log.info(this + " created " + c);
+
+        return c;
     }
-
-    public JmxException(String msg, Throwable cause) {
-
-        super(msg, cause);
-    }
-
 
     // Public ----------------------------------------------------------------------------------------------------------
+
+    @Override
+    public String toString() {
+
+        return "Mock Client Provider[" + Integer.toHexString(System.identityHashCode(this)) + "]";
+    }
 
     // Package protected -----------------------------------------------------------------------------------------------
 

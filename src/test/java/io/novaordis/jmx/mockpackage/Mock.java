@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package io.novaordis.jmx;
+package io.novaordis.jmx.mockpackage;
 
 /**
  * @author Ovidiu Feodorov <ovidiu@novaordis.com>
  * @since 6/16/17
  */
-public class JmxException extends Exception {
+public class Mock {
 
     // Constants -------------------------------------------------------------------------------------------------------
 
@@ -29,17 +29,6 @@ public class JmxException extends Exception {
     // Attributes ------------------------------------------------------------------------------------------------------
 
     // Constructors ----------------------------------------------------------------------------------------------------
-
-    public JmxException(Throwable cause) {
-
-        super(cause);
-    }
-
-    public JmxException(String msg, Throwable cause) {
-
-        super(msg, cause);
-    }
-
 
     // Public ----------------------------------------------------------------------------------------------------------
 

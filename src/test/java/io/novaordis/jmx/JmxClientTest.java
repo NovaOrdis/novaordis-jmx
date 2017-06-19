@@ -16,9 +16,23 @@
 
 package io.novaordis.jmx;
 
+import io.novaordis.jmx.mockpackage.mockprotocol.ClientProvider;
+import io.novaordis.jmx.mockpackage.mockprotocol.MockMBeanServerConnection;
+import org.junit.After;
 import org.junit.Test;
 
+import javax.management.Attribute;
+import javax.management.AttributeList;
+import javax.management.MBeanServerConnection;
+import javax.management.ObjectName;
+
+import java.io.IOException;
+import java.net.ConnectException;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -39,14 +53,71 @@ public abstract class JmxClientTest {
 
     // Public ----------------------------------------------------------------------------------------------------------
 
+    @After
+    public void cleanup() {
+
+        //
+        // "clean" the mock remote MBean Server
+        //
+
+        MockMBeanServerConnection.clear();
+        ClientProvider.clear();
+    }
+
     // Tests -----------------------------------------------------------------------------------------------------------
+
+    @Test
+    public void defaults() throws Exception {
+
+        JmxAddress address = new JmxAddress("jmx://mock-server:1000");
+
+        JmxClient c = getJmxClientToTest(address);
+
+        assertEquals(address, c.getAddress());
+    }
+
+    // constructor -----------------------------------------------------------------------------------------------------
+
+    @Test
+    public void constructor_NullHostInAddress() throws Exception {
+
+        JmxAddress address = new JmxAddress(JmxAddress.PROTOCOL, null, 1000);
+
+        try {
+
+            getJmxClientToTest(address);
+            fail("should have thrown exception");
+        }
+        catch(IllegalArgumentException e) {
+
+            String msg = e.getMessage();
+            assertTrue(msg.contains("null host"));
+        }
+    }
+
+    @Test
+    public void constructor_NullPortInAddress() throws Exception {
+
+        JmxAddress address = new JmxAddress(JmxAddress.PROTOCOL, "test-host", null);
+
+        try {
+
+            getJmxClientToTest(address);
+            fail("should have thrown exception");
+        }
+        catch(IllegalArgumentException e) {
+
+            String msg = e.getMessage();
+            assertTrue(msg.contains("null port"));
+        }
+    }
 
     // connect() -------------------------------------------------------------------------------------------------------
 
     @Test
     public void connect_AddressNotSet() throws Exception {
 
-        JmxClient c = getJmxClientToTest();
+        JmxClient c = getJmxClientToTest(null);
 
         assertNull(c.getAddress());
 
@@ -58,8 +129,84 @@ public abstract class JmxClientTest {
         catch(IllegalStateException e) {
 
             String msg = e.getMessage();
-            assertTrue(msg.contains("improperly configured"));
-            assertTrue(msg.matches("not.*address"));
+            assertTrue(msg.contains("improperly initialized"));
+            assertTrue(msg.contains("address not set"));
+        }
+    }
+
+    @Test
+    public void connect_ServerNotAvailable() throws Exception {
+
+        MockJmxAddress ma = new MockJmxAddress();
+
+        JmxClient c = getJmxClientToTest(ma);
+
+        //
+        // configure jmx client for testing, io.novaordis.jmx.mockpackage.mockprotcol.ClientProvider
+        // builds a test JMXConnector
+        //
+
+        c.setProtocolProviderPackage("io.novaordis.jmx.mockpackage");
+
+        //
+        // configure the mock JMX server to "not be available"
+        //
+        ClientProvider.setRemoteJmxServerNotAvailable(true);
+
+        try {
+
+            c.connect();
+            fail("should have thrown exception");
+        }
+        catch(JmxException e) {
+
+            String msg = e.getMessage();
+
+            assertTrue(msg.contains("failed to create the underlying JMX remoting connector"));
+
+            Throwable cause = e.getCause();
+            assertNotNull(cause);
+            assertTrue(cause instanceof ConnectException);
+        }
+    }
+
+    @Test
+    public void connect_connectSuccessfulThenServerGoesDown() throws Exception {
+
+        MockJmxAddress ma = new MockJmxAddress();
+
+        JmxClient c = getJmxClientToTest(ma);
+
+        //
+        // configure jmx client for testing, io.novaordis.jmx.mockpackage.mockprotcol.ClientProvider
+        // builds a test JMXConnector
+        //
+
+        c.setProtocolProviderPackage("io.novaordis.jmx.mockpackage");
+
+        assertFalse(c.isConnected());
+
+        c.connect();
+
+        assertTrue(c.isConnected());
+
+        //
+        // configure the mock server to "go down" after connection
+        //
+
+        try {
+
+            c.getMBeanServerConnection();
+            fail("should have thrown Exception");
+        }
+        catch(JmxException e) {
+
+            String msg = e.getMessage();
+            assertTrue(msg.contains("failed to get the MBeanServerConnection"));
+
+            Throwable cause = e.getCause();
+            assertNotNull(cause);
+            assertTrue(cause instanceof IllegalAccessException);
         }
     }
 
@@ -68,7 +215,26 @@ public abstract class JmxClientTest {
     @Test
     public void lifecycle() throws Exception {
 
-        JmxClient c = getJmxClientToTest();
+        MockJmxAddress ma = new MockJmxAddress();
+
+        JmxClient c = getJmxClientToTest(ma);
+
+        //
+        // configure jmx client for testing, io.novaordis.jmx.mockpackage.mockprotcol.ClientProvider
+        // builds a test JMXConnector
+        //
+
+        c.setProtocolProviderPackage("io.novaordis.jmx.mockpackage");
+
+        //
+        // configure the remote server with a specific attribute
+        //
+
+        MockMBeanServerConnection.addAttribute(new ObjectName("test:service=Mock"), "TestAttribute", "blue");
+
+        //
+        // lifecycle
+        //
 
         assertFalse(c.isConnected());
 
@@ -84,6 +250,11 @@ public abstract class JmxClientTest {
 
         assertTrue(c.isConnected());
 
+        MBeanServerConnection sc = c.getMBeanServerConnection();
+
+        Object o = sc.getAttribute(new ObjectName("test:service=Mock"), "TestAttribute");
+        assertEquals("blue", o);
+
         c.disconnect();
 
         assertFalse(c.isConnected());
@@ -95,13 +266,131 @@ public abstract class JmxClientTest {
         c.disconnect();
 
         assertFalse(c.isConnected());
+
+        assertTrue(ma.equals(c.getAddress()));
+    }
+
+    // getMBeanServerConnection() --------------------------------------------------------------------------------------
+
+    @Test
+    public void getMBeanServerConnection_Unconnected() throws Exception {
+
+        JmxAddress a = new JmxAddress("jmx://mock-server:1000");
+        JmxClient c = getJmxClientToTest(a);
+
+        assertFalse(c.isConnected());
+
+        try {
+
+            c.getMBeanServerConnection();
+            fail("should have thrown exception");
+        }
+        catch(IllegalStateException e) {
+
+            String msg = e.getMessage();
+            assertTrue(msg.contains("not connected"));
+        }
+    }
+
+    @Test
+    public void getMBeanServerConnection_getAttribute() throws Exception {
+
+        //
+        // "populate" the remote server
+        //
+
+        MockMBeanServerConnection.addAttribute(new ObjectName("test:service=MockService"), "TestAttribute", "something");
+
+        MockMBeanServerConnection.addAttribute(new ObjectName("test:service=MockService"), "TestAttribute2", 7);
+
+        JmxAddress a = new JmxAddress("jmx://mock-server:1000");
+
+        JmxClient c = getJmxClientToTest(a);
+
+        c.connect();
+
+        MBeanServerConnection mBeanServer = c.getMBeanServerConnection();
+
+        ObjectName on = new ObjectName("test:service=MockService");
+
+        Object o = mBeanServer.getAttribute(on, "TestAttribute");
+
+        assertEquals("something", o);
+
+        Object o2 = mBeanServer.getAttribute(on, "TestAttribute2");
+
+        assertEquals(7, o2);
+
+        c.disconnect();
+    }
+
+    @Test
+    public void getMBeanServerConnection_getAttributes() throws Exception {
+
+        //
+        // "populate" the remote server
+        //
+
+        MockMBeanServerConnection.addAttribute(new ObjectName("test:service=MockService"), "TestAttribute", "something");
+
+        MockMBeanServerConnection.addAttribute(new ObjectName("test:service=MockService"), "TestAttribute2", 7);
+
+        JmxAddress a = new JmxAddress("jmx://mock-server:1000");
+
+        JmxClient c = getJmxClientToTest(a);
+
+        c.connect();
+
+        MBeanServerConnection mBeanServer = c.getMBeanServerConnection();
+
+        ObjectName on = new ObjectName("test:service=MockService");
+
+        AttributeList al = mBeanServer.getAttributes(on, new String[] {"TestAttribute", "TestAttribute2"});
+
+        List<Attribute> attributes = al.asList();
+
+        assertEquals(2, attributes.size());
+
+        Attribute jmxAttribute = attributes.get(0);
+
+        assertEquals("TestAttribute", jmxAttribute.getName());
+        assertEquals("something", jmxAttribute.getValue());
+
+        Attribute jmxAttribute2 = attributes.get(1);
+
+        assertEquals("TestAttribute2", jmxAttribute2.getName());
+        assertEquals(7, jmxAttribute2.getValue());
+
+        c.disconnect();
+    }
+
+
+    @Test
+    public void getMBeanServerConnection_getAttribute_ObjectNameDoesNotExist() throws Exception {
+
+        fail("RETURN HERE");
+    }
+
+    @Test
+    public void getMBeanServerConnection_getAttribute_AttributeDoesNotExist() throws Exception {
+
+        fail("RETURN HERE");
+    }
+
+    @Test
+    public void getMBeanServerConnection_NetworkFailure() throws Exception {
+
+        fail("RETURN HERE");
     }
 
     // Package protected -----------------------------------------------------------------------------------------------
 
     // Protected -------------------------------------------------------------------------------------------------------
 
-    protected abstract JmxClient getJmxClientToTest() throws Exception;
+    /**
+     * @param address may be null.
+     */
+    protected abstract JmxClient getJmxClientToTest(JmxAddress address) throws Exception;
 
     // Private ---------------------------------------------------------------------------------------------------------
 

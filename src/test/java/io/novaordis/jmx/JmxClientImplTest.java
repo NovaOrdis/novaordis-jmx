@@ -16,6 +16,10 @@
 
 package io.novaordis.jmx;
 
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+
 /**
  * @author Ovidiu Feodorov <ovidiu@novaordis.com>
  * @since 6/16/17
@@ -34,14 +38,34 @@ public class JmxClientImplTest extends JmxClientTest {
 
     // Tests -----------------------------------------------------------------------------------------------------------
 
+    @Test
+    public void constructor() throws Exception {
+
+        JmxAddress a = new JmxAddress("jmx://mock-host:1000");
+
+        JmxClientImpl c = new JmxClientImpl(a);
+
+        assertEquals(a, c.getAddress());
+    }
+
+    @Test
+    public void connect() throws Exception {
+
+        JmxAddress a = new JmxAddress("jmx://mock-host:1000");
+
+        JmxClientImpl c = new JmxClientImpl(a);
+
+        c.connect();
+    }
+
     // Package protected -----------------------------------------------------------------------------------------------
 
     // Protected -------------------------------------------------------------------------------------------------------
 
     @Override
-    protected JmxClient getJmxClientToTest() throws Exception {
+    protected JmxClientImpl getJmxClientToTest(JmxAddress address) throws Exception {
 
-        return new JmxClientImpl(new JmxAddress("jmx://mock-host:1000"));
+        return new JmxClientImpl(address);
     }
 
     // Private ---------------------------------------------------------------------------------------------------------
