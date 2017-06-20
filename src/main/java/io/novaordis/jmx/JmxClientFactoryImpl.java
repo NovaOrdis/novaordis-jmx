@@ -38,7 +38,6 @@ public class JmxClientFactoryImpl implements JmxClientFactory {
         return new JmxClientImpl(address);
     }
 
-
     // Public ----------------------------------------------------------------------------------------------------------
 
     // Package protected -----------------------------------------------------------------------------------------------

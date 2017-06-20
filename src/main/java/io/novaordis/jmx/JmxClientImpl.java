@@ -133,7 +133,7 @@ public class JmxClientImpl implements JmxClient {
             log.debug("using protocol provider package " + protocolProviderPackage);
         }
 
-        log.debug(this + " attempting to connect to " + jmxServiceURL);
+        log.debug("the jmx client instance attempting to connect to " + jmxServiceURL);
 
         try {
 

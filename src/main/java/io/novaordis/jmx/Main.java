@@ -42,7 +42,7 @@ public class Main {
 
         JmxAddress address = new JmxAddress(addressAsString);
 
-        address.setJmxServiceUrlProtocol("remoting-jmx");
+        address.setJmxServiceUrlProtocol(JmxAddress.EAP6_JMX_SERVICE_URL_PROTOCOL);
 
         JmxClient client = new JmxClientImpl(address);
 

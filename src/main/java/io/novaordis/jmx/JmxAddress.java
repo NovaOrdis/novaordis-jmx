@@ -29,6 +29,8 @@ public class JmxAddress extends AddressImpl {
 
     public static final String PROTOCOL = "jmx";
 
+    public static final String EAP6_JMX_SERVICE_URL_PROTOCOL = "remoting-jmx";
+
     // Static ----------------------------------------------------------------------------------------------------------
 
     // Attributes ------------------------------------------------------------------------------------------------------
@@ -132,6 +134,8 @@ public class JmxAddress extends AddressImpl {
      *     <li>"remoting-jmx" for JBoss 6</li>
      *     <li>"mock-jmx" for testing</li>
      * </ul>
+     *
+     * @see JmxAddress#EAP6_JMX_SERVICE_URL_PROTOCOL
      */
     public String getJmxServiceUrlProtocol() {
 
