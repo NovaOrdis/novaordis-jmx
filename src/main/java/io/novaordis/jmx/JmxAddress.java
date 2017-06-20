@@ -97,7 +97,9 @@ public class JmxAddress extends AddressImpl {
     @Override
     public JmxAddress copy() {
 
-        return (JmxAddress)super.copy();
+        JmxAddress copy = (JmxAddress)super.copy();
+        copy.setJmxServiceUrlProtocol(jmxServiceUrlProtocol);
+        return copy;
     }
 
     /**

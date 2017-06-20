@@ -175,6 +175,30 @@ public class JmxAddressTest {
         assertEquals(700, a2.getPort().intValue());
     }
 
+    @Test
+    public void copy_WithJmxServiceUrlProtocol() throws Exception {
+
+        JmxAddress a = new JmxAddress("jmx://admin:password@example.com:700/");
+
+        a.setJmxServiceUrlProtocol("test-jmx-service-url-protocol");
+
+        JmxAddress a2 = a.copy();
+
+        assertTrue(a.equals(a2));
+        assertTrue(a2.equals(a));
+
+        assertEquals("test-jmx-service-url-protocol", a2.getJmxServiceUrlProtocol());
+
+        //
+        // mutate stuff
+        //
+
+        a.setJmxServiceUrlProtocol("test-jmx-service-url-protocol-2");
+
+        assertEquals("test-jmx-service-url-protocol-2", a.getJmxServiceUrlProtocol());
+        assertEquals("test-jmx-service-url-protocol", a2.getJmxServiceUrlProtocol());
+    }
+
     // equals() --------------------------------------------------------------------------------------------------------
 
     /**
