@@ -126,6 +126,33 @@ public class JmxAddressTest {
         }
     }
 
+    @Test
+    public void constructor_Username_Password_Host_Port() throws Exception {
+
+        JmxAddress a = new JmxAddress("test-user", "test-password", "test-host", 1000);
+
+        assertEquals(JmxAddress.PROTOCOL, a.getProtocol());
+        assertEquals("test-user", a.getUsername());
+        assertEquals("test-password", new String(a.getPassword()));
+        assertEquals("test-host", a.getHost());
+        assertEquals(1000, a.getPort().intValue());
+    }
+
+    @Test
+    public void constructor_Username_Password_Host_Port_NoPort() throws Exception {
+
+        try {
+
+            new JmxAddress("test-user", "test-password", "test-host", null);
+            fail("should have thrown exception");
+        }
+        catch(AddressException a) {
+
+            String msg = a.getMessage();
+            assertTrue(msg.contains("missing port value"));
+        }
+    }
+
     // copy() ----------------------------------------------------------------------------------------------------------
 
     @Test

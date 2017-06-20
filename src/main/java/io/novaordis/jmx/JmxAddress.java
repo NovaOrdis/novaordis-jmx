@@ -72,6 +72,16 @@ public class JmxAddress extends AddressImpl {
         }
     }
 
+    public JmxAddress(String username, String password, String host, Integer port) throws AddressException {
+
+        super(PROTOCOL, username, password, host, port);
+
+        if (getPort() == null) {
+
+            throw new AddressException("missing port value");
+        }
+    }
+
     /**
      * Used for testing.
      */
