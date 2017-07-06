@@ -1,4 +1,19 @@
 #!/bin/bash
 
-[ -f $(dirname $0)/bash-wrapper-functions ] && .  $(dirname $0)/bash-wrapper-functions || { echo "$(dirname $0)/bash-wrapper-functions not found" 1>&2; exit 1; }
+[ -f $(dirname $0)/bash-wrapper-functions ] && .  $(dirname $0)/bash-wrapper-functions || { echo "[error]: $(dirname $0)/bash-wrapper-functions not found, the application was probably not installed correctly" 1>&2; exit 1; }
+
+MAIN_CLASS=io.novaordis.jmx.Main
+
+function main() {
+
+    local java_bin
+    java_bin=$(get-java-binary) || exit 1
+
+    local classpath
+    classpath=$(get-classpath-from-directory $(dirname $0)/../lib)
+
+    ${java_bin} -cp ${classpath} ${MAIN_CLASS} $@
+}
+
+main $@;
 
