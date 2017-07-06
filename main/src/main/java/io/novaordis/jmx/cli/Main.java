@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 
-package io.novaordis.jmx;
+package io.novaordis.jmx.cli;
 
-import javax.management.Attribute;
-import javax.management.AttributeList;
+import io.novaordis.jmx.JmxAddress;
+import io.novaordis.jmx.JmxClient;
+import io.novaordis.jmx.JmxClientImpl;
+import io.novaordis.jmx.tree.JmxTree;
+import io.novaordis.jmx.tree.JmxTreeImpl;
+
 import javax.management.MBeanServerConnection;
-import javax.management.ObjectName;
 
 /**
  * @author Ovidiu Feodorov <ovidiu@novaordis.com>
@@ -50,24 +53,11 @@ public class Main {
 
         MBeanServerConnection mBeanServerConnection = client.getMBeanServerConnection();
 
-        int count = mBeanServerConnection.getMBeanCount();
+        JmxTree jmxTree = new JmxTreeImpl(mBeanServerConnection);
 
-        System.out.println(count);
+        CLInt cli = new CLInt(jmxTree);
 
-//        ObjectName on = new ObjectName("jboss.as:subsystem=messaging,hornetq-server=default,jms-queue=DLQ");
-//
-//        Object o = mBeanServerConnection.getAttribute(on, "messageCount");
-//
-//        System.out.println(o);
-
-        ObjectName on = new ObjectName("jboss.as:subsystem=messaging,hornetq-server=default,jms-queue=DLQ");
-
-        AttributeList al = mBeanServerConnection.getAttributes(on, new String[]{"messageCount", "nosuchatt"});
-
-        for(Attribute a: al.asList()) {
-
-            System.out.println(a.getName() + ": " + a.getValue());
-        }
+        cli.loop();
 
         client.disconnect();
     }
