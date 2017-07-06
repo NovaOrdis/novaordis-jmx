@@ -33,6 +33,11 @@
             <outputDirectory>lib</outputDirectory>
             <filtered>true</filtered>
         </file>
+
+        <file>
+            <source>/Users/ovidiu/runtime/jboss-eap-6.4.15/bin/client/jboss-cli-client.jar</source>
+            <outputDirectory>lib</outputDirectory>
+        </file>
     </files>
 
     <dependencySets>
