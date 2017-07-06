@@ -10,6 +10,15 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="novaordis-jmx" />
+    <orderEntry type="module-library">
+      <library name="Maven: jboss-eap:jboss-cli-client:6.4.15">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/runtime/jboss-eap-6.4.15/bin/client/jboss-cli-client.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="library" name="Maven: io.novaordis.utilities:novaordis-utilities:4.7.5" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.16" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.12" level="project" />

@@ -16,7 +16,7 @@
             <fileMode>0755</fileMode>
         </file>
         <file>
-            <source>./src/main/bash/cljmx.shlib</source>
+            <source>./src/main/bash/bash-wrapper-functions</source>
             <outputDirectory>bin</outputDirectory>
         </file>
         <file>
