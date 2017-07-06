@@ -1,3 +1,6 @@
 #!/bin/bash
 
+[ -f $(dirname $0)/bash-wrapper-functions ] && .  $(dirname $0)/bash-wrapper-functions || { echo "$(dirname $0)/bash-wrapper-functions not found" 1>&2; exit 1; }
+
+
 

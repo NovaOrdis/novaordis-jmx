@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/main/novaordis-jmx.iml" filepath="$PROJECT_DIR$/main/novaordis-jmx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/release/novaordis-jmx-release.iml" filepath="$PROJECT_DIR$/release/novaordis-jmx-release.iml" />
+      <module fileurl="file://$PROJECT_DIR$/novaordis-jmx-root.iml" filepath="$PROJECT_DIR$/novaordis-jmx-root.iml" />
+    </modules>
+  </component>
+</project>
