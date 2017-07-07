@@ -17,12 +17,12 @@
 package io.novaordis.jmx.tree.nodes;
 
 import io.novaordis.jmx.mockpackage.mockprotocol.MockMBeanServerConnection;
-import org.junit.After;
 import org.junit.Test;
 
 import javax.management.MBeanServerConnection;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -53,6 +53,27 @@ public abstract class JmxContainerTest extends JmxNodeTest {
         List<String> childrenNames = c.getChildrenNames();
 
         assertNotNull(childrenNames);
+    }
+
+    @Test
+    public void getRelative_OneUp() throws Exception {
+
+        MockMBeanServerConnection mc = new MockMBeanServerConnection(true);
+
+        JmxContainer c = getJmxContainerToTest(mc);
+
+        JmxNode p = c.getParent();
+
+        if (p == null) {
+
+            JmxNode relative = c.getRelative("..");
+            assertEquals(c, relative);
+        }
+        else {
+
+            JmxNode relative = c.getRelative("..");
+            assertEquals(p, relative);
+        }
     }
 
     // Package protected -----------------------------------------------------------------------------------------------

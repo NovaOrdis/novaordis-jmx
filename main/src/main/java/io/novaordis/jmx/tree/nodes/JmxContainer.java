@@ -56,6 +56,47 @@ public abstract class JmxContainer extends JmxNodeBase {
     // Public ----------------------------------------------------------------------------------------------------------
 
     /**
+     * @return the JMX node situated in the given relative position to the current node. A valid node is returned
+     * or an UserErrorException is thrown.
+     *
+     * Only container nodes can have "relatives" because we can never set a non-container as a current node.
+     *
+     * The method is not supposed to cache data locally, but exercise the underlying MBean server connection every time
+     * it is invoked.
+     *
+     * This method handles common cases and sub-class specific situation are delegated to getRelativeNode().
+     *
+     * @exception io.novaordis.utilities.UserErrorException in case the relative location does not map on a valid node.
+     * @exception java.io.IOException on communication failure.
+     *
+     * @see JmxContainer#getRelativeNode(String)
+     */
+    public final JmxNode getRelative(String relativeLocation) throws IOException, UserErrorException {
+
+        //
+        // handle standard situation and message the subclass only if not in one of these standard situations.
+        //
+
+        if ("..".equals(relativeLocation)) {
+
+            //
+            // we go to parent, unless we're root, in which case we stay at root
+            //
+
+            JmxNode parent = getParent();
+
+            if (parent == null) {
+
+                return this;
+            }
+
+            return parent;
+        }
+
+        return getRelativeNode(relativeLocation);
+    }
+
+    /**
      * Return the names of its children, if any. If the node has not children, and empty list should be returned.
      *
      * The method is not supposed to cache data locally, but exercise the underlying MBean server connection every time
@@ -63,7 +104,14 @@ public abstract class JmxContainer extends JmxNodeBase {
      */
     public abstract List<String> getChildrenNames() throws IOException;
 
+    // Package protected -----------------------------------------------------------------------------------------------
+
+    // Protected -------------------------------------------------------------------------------------------------------
+
     /**
+     * A method to be implemented by subclasses. The entry point is getRelative(), which handles common cases and
+     * it was made final.
+     *
      * @return the JMX node situated in the given relative position to the current node. A valid node is returned
      * or an UserErrorException is thrown.
      *
@@ -74,12 +122,10 @@ public abstract class JmxContainer extends JmxNodeBase {
      *
      * @exception io.novaordis.utilities.UserErrorException in case the relative location does not map on a valid node.
      * @exception java.io.IOException on communication failure.
+     *
+     * @see JmxContainer#getRelative(String)
      */
-    public abstract JmxNode getRelative(String relativeLocation) throws IOException, UserErrorException;
-
-    // Package protected -----------------------------------------------------------------------------------------------
-
-    // Protected -------------------------------------------------------------------------------------------------------
+    protected abstract JmxNode getRelativeNode(String relativeLocation) throws IOException, UserErrorException;
 
     // Private ---------------------------------------------------------------------------------------------------------
 

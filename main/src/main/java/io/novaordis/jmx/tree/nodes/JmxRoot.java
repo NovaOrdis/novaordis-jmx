@@ -66,8 +66,14 @@ public class JmxRoot extends JmxContainer {
         return Arrays.asList(domains);
     }
 
+    // Public ----------------------------------------------------------------------------------------------------------
+
+    // Package protected -----------------------------------------------------------------------------------------------
+
+    // Protected -------------------------------------------------------------------------------------------------------
+
     @Override
-    public JmxNode getRelative(String relativeLocation) throws IOException, UserErrorException {
+    protected JmxNode getRelativeNode(String relativeLocation) throws IOException, UserErrorException {
 
         if (relativeLocation.startsWith("..")) {
 
@@ -95,12 +101,6 @@ public class JmxRoot extends JmxContainer {
 
         throw new UserErrorException(relativeLocation + ": no such location");
     }
-
-    // Public ----------------------------------------------------------------------------------------------------------
-
-    // Package protected -----------------------------------------------------------------------------------------------
-
-    // Protected -------------------------------------------------------------------------------------------------------
 
     // Private ---------------------------------------------------------------------------------------------------------
 

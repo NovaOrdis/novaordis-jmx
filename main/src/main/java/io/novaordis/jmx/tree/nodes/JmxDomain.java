@@ -85,12 +85,18 @@ public class JmxDomain extends JmxContainer {
         return result;
     }
 
+    // Public ----------------------------------------------------------------------------------------------------------
+
+    // Package protected -----------------------------------------------------------------------------------------------
+
+    // Protected -------------------------------------------------------------------------------------------------------
+
     /**
      * @param relativeLocation we expect a partial ObjectName, the key/value pair sequence without the domain name
      *                         and ":"
      */
     @Override
-    public JmxNode getRelative(String relativeLocation) throws IOException, UserErrorException {
+    protected JmxNode getRelativeNode(String relativeLocation) throws IOException, UserErrorException {
 
         //
         // we interpret the relative location as the key/value pair of an ObjectName for this domain and we query
@@ -141,12 +147,6 @@ public class JmxDomain extends JmxContainer {
             throw new UserErrorException("failed to query " + on.getCanonicalName());
         }
     }
-
-    // Public ----------------------------------------------------------------------------------------------------------
-
-    // Package protected -----------------------------------------------------------------------------------------------
-
-    // Protected -------------------------------------------------------------------------------------------------------
 
     // Private ---------------------------------------------------------------------------------------------------------
 

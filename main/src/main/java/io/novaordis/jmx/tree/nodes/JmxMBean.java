@@ -103,8 +103,19 @@ public class JmxMBean extends JmxContainer {
         }
     }
 
+    // Public ----------------------------------------------------------------------------------------------------------
+
+    public ObjectName getObjectName() {
+
+        return objectName;
+    }
+
+    // Package protected -----------------------------------------------------------------------------------------------
+
+    // Protected -------------------------------------------------------------------------------------------------------
+
     @Override
-    public JmxNode getRelative(String relativeLocation) throws IOException, UserErrorException {
+    protected JmxNode getRelativeNode(String relativeLocation) throws IOException, UserErrorException {
 
         //
         // the relative can only be an attribute, for the time being
@@ -126,17 +137,6 @@ public class JmxMBean extends JmxContainer {
 
         throw new UserErrorException(relativeLocation + ": no such attribute");
     }
-
-    // Public ----------------------------------------------------------------------------------------------------------
-
-    public ObjectName getObjectName() {
-
-        return objectName;
-    }
-
-    // Package protected -----------------------------------------------------------------------------------------------
-
-    // Protected -------------------------------------------------------------------------------------------------------
 
     // Private ---------------------------------------------------------------------------------------------------------
 
