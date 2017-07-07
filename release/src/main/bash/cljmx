@@ -25,7 +25,7 @@ function main() {
     java_bin=$(get-java-binary) || exit 1
 
     local classpath
-    classpath=$(get-classpath-from-directory $(dirname $0)/../lib)
+    classpath=$(get-classpath-from-directory $(dirname $0)/../lib true)
 
     ${java_bin} ${java_debug_args} -cp ${classpath} ${MAIN_CLASS} ${args}
 }
