@@ -92,6 +92,26 @@ public abstract class JmxContainer extends JmxNodeBase {
 
             return parent;
         }
+        else if ("/".equals(relativeLocation)) {
+
+            //
+            // go to root
+            //
+
+            JmxNode root = getParent();
+
+            if (root == null) {
+
+                return this;
+            }
+
+            while(root.getParent() != null) {
+
+                root = root.getParent();
+            }
+
+            return root;
+        }
 
         return getRelativeNode(relativeLocation);
     }

@@ -76,6 +76,36 @@ public abstract class JmxContainerTest extends JmxNodeTest {
         }
     }
 
+    @Test
+    public void getRelative_Root() throws Exception {
+
+        MockMBeanServerConnection mc = new MockMBeanServerConnection(true);
+
+        JmxContainer c = getJmxContainerToTest(mc);
+
+        //
+        // get to root
+        //
+
+        JmxNode root = c.getParent();
+
+        if (root == null) {
+
+            root = c;
+        }
+        else {
+
+            while (root.getParent() != null) {
+
+                root = root.getParent();
+            }
+        }
+
+        JmxNode n = c.getRelative("/");
+
+        assertEquals(root, n);
+    }
+
     // Package protected -----------------------------------------------------------------------------------------------
 
     // Protected -------------------------------------------------------------------------------------------------------
