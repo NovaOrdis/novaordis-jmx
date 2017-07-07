@@ -25,6 +25,8 @@ import javax.management.MBeanServerConnection;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -98,6 +100,23 @@ public class JmxRootTest extends JmxContainerTest {
         JmxRoot r = getJmxContainerToTest(mc);
 
         assertEquals("/", r.getName());
+    }
+
+    // getTree() -------------------------------------------------------------------------------------------------------
+
+    @Test
+    public void getTree() throws Exception {
+
+        MockMBeanServerConnection mc = new MockMBeanServerConnection();
+
+        JmxRoot n = getJmxContainerToTest(mc);
+
+        JmxTree t = n.getTree();
+
+        JmxNode n2 = t.getCurrent();
+
+        assertTrue(n2 instanceof JmxRoot);
+        assertNull(n2.getParent());
     }
 
     // Package protected -----------------------------------------------------------------------------------------------

@@ -17,6 +17,7 @@
 package io.novaordis.jmx.tree.nodes;
 
 import io.novaordis.jmx.mockpackage.mockprotocol.MockMBeanServerConnection;
+import io.novaordis.jmx.tree.JmxTree;
 import io.novaordis.jmx.tree.JmxTreeImpl;
 import io.novaordis.utilities.UserErrorException;
 import org.junit.Test;
@@ -27,6 +28,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -150,6 +152,23 @@ public class JmxDomainTest extends JmxContainerTest {
         JmxMBean mbean = (JmxMBean)d.getRelative("service=Mock,color=red");
 
         assertEquals("service=Mock,color=red", mbean.getName());
+    }
+
+    // getTree() -------------------------------------------------------------------------------------------------------
+
+    @Test
+    public void getTree() throws Exception {
+
+        MockMBeanServerConnection mc = new MockMBeanServerConnection();
+
+        JmxDomain n = getJmxContainerToTest(mc);
+
+        JmxTree t = n.getTree();
+
+        assertNotNull(t);
+
+        JmxRoot r = (JmxRoot)n.getParent();
+        assertNotNull(r);
     }
 
     // Tests -----------------------------------------------------------------------------------------------------------

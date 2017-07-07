@@ -46,12 +46,14 @@ public abstract class JmxNodeBase implements JmxNode {
     @Override
     public JmxTree getTree() {
 
-        while(parent.getParent() != null) {
+        JmxContainer p = parent;
 
-            parent = parent.getParent();
+        while(p.getParent() != null) {
+
+            p = p.getParent();
         }
 
-        return parent.getTree();
+        return p.getTree();
     }
 
     @Override

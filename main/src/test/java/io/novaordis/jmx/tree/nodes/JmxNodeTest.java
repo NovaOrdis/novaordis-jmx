@@ -87,6 +87,19 @@ public abstract class JmxNodeTest {
         assertEquals(mc, tree.getMBeanServerConnection());
     }
 
+    // getTree() -------------------------------------------------------------------------------------------------------
+
+    @Test
+    public void getTree() throws Exception {
+
+        MockMBeanServerConnection mc = new MockMBeanServerConnection();
+
+        JmxNode n = getJmxNodeToTest(mc);
+
+        JmxTree t = n.getTree();
+        assertNotNull(t);
+    }
+
     // Package protected -----------------------------------------------------------------------------------------------
 
     // Protected -------------------------------------------------------------------------------------------------------
