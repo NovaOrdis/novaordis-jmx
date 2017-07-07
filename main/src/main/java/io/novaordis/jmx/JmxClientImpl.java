@@ -233,7 +233,7 @@ public class JmxClientImpl implements JmxClient {
         //System.setProperty("remote.connection.default.connect.options.org.xnio.Options.SASL_DISALLOWED_MECHANISMS", "JBOSS-LOCAL-USER");
         System.setProperty("remote.connection.default.connect.options.org.xnio.Options.SASL_POLICY_NOPLAINTEXT", "false");
         System.setProperty("remote.connection.default.username", "blah");
-        System.setProperty("remote.connection.default.password", "blah");
+        System.setProperty("remote.connection.default.password", "blah123!");
     }
 
     // Inner classes ---------------------------------------------------------------------------------------------------
