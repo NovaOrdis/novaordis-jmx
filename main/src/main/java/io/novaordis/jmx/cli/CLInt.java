@@ -48,10 +48,13 @@ public class CLInt {
     public static void printHelp() {
 
         String help =
-                "A command line JMX browser. Use it to navigate the MBeanServer domain/MBean hierarchy as you\n" +
-                "would navigate a filesystem. Commands:\n" +
                 "\n" +
-                "   cd - go to a domain or MBean\n" +
+                "A command line JMX browser. Use it to navigate the MBeanServer domain/MBean hierarchy as you\n" +
+                "would navigate a filesystem.\n" +
+                "\n" +
+                "Commands:\n" +
+                "\n" +
+                "   cd - navigate to a domain or MBean\n" +
                 "\n" +
                 "   ls - list the content of a domain or an MBean\n" +
                 "\n" +
