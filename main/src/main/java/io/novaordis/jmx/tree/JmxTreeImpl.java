@@ -68,7 +68,15 @@ public class JmxTreeImpl implements JmxTree {
         }
 
         JmxContainer cnt = (JmxContainer)c;
-        this.current = cnt.getRelative(location);
+
+        JmxNode target = cnt.getRelative(location);
+
+        if (!target.isContainer()) {
+
+            throw new UserErrorException(target.getName() + ": not a location to be navigating into");
+        }
+
+        this.current = target;
     }
 
     @Override

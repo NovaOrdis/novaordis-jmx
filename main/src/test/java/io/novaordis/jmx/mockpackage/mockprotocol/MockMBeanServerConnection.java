@@ -332,17 +332,21 @@ public class MockMBeanServerConnection implements MBeanServerConnection {
     }
 
     @Override
-    public void setAttribute(ObjectName name, Attribute attribute) throws InstanceNotFoundException, AttributeNotFoundException, InvalidAttributeValueException, MBeanException, ReflectionException, IOException {
+    public void setAttribute(ObjectName name, Attribute attribute)
+            throws InstanceNotFoundException, AttributeNotFoundException, InvalidAttributeValueException,
+            MBeanException, ReflectionException, IOException {
         throw new RuntimeException("setAttribute() NOT YET IMPLEMENTED");
     }
 
     @Override
-    public AttributeList setAttributes(ObjectName name, AttributeList attributes) throws InstanceNotFoundException, ReflectionException, IOException {
+    public AttributeList setAttributes(ObjectName name, AttributeList attributes)
+            throws InstanceNotFoundException, ReflectionException, IOException {
         throw new RuntimeException("setAttributes() NOT YET IMPLEMENTED");
     }
 
     @Override
-    public Object invoke(ObjectName name, String operationName, Object[] params, String[] signature) throws InstanceNotFoundException, MBeanException, ReflectionException, IOException {
+    public Object invoke(ObjectName name, String operationName, Object[] params, String[] signature)
+            throws InstanceNotFoundException, MBeanException, ReflectionException, IOException {
         throw new RuntimeException("invoke() NOT YET IMPLEMENTED");
     }
 

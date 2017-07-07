@@ -16,7 +16,17 @@
 
 package io.novaordis.jmx.tree;
 
+import io.novaordis.jmx.mockpackage.mockprotocol.MockMBeanServerConnection;
+import io.novaordis.utilities.UserErrorException;
+import org.junit.After;
+import org.junit.Test;
+
 import javax.management.MBeanServerConnection;
+import javax.management.ObjectName;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 /**
  * @author Ovidiu Feodorov <ovidiu@novaordis.com>
@@ -34,7 +44,37 @@ public class JmxTreeImplTest extends JmxTreeTest {
 
     // Public ----------------------------------------------------------------------------------------------------------
 
+    @After
+    public void cleanup() {
+
+        MockMBeanServerConnection.clear();
+    }
+
     // Tests -----------------------------------------------------------------------------------------------------------
+
+    @Test
+    public void setCurrent_TargetIsNotAContainer() throws Exception {
+
+        MockMBeanServerConnection mc = new MockMBeanServerConnection();
+        JmxTree t = getJmxTreeToTest(mc);
+
+        MockMBeanServerConnection.addAttribute(
+                new ObjectName("mock-domain:service=Mock"), "MockAttribute", "something");
+
+        t.setCurrent("mock-domain");
+        t.setCurrent("service=Mock");
+
+        try {
+
+            t.setCurrent("MockAttribute");
+            fail("should have thrown exception");
+        }
+        catch(UserErrorException e) {
+
+            String msg = e.getMessage();
+            assertEquals("MockAttribute: not a location to be navigating into", msg);
+        }
+    }
 
     // Package protected -----------------------------------------------------------------------------------------------
 
