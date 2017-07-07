@@ -8,7 +8,7 @@
 #
 #
 
-bash_wrapper_functions_version=2-SNAPSHOT-1
+bash_wrapper_functions_version=2-SNAPSHOT-2
 
 #
 # Attempts to identify JAVA_HOME and returns the path to the java binary based on that, while verifying the presence
@@ -45,6 +45,11 @@ function get-java-binary() {
 # does NOT recursively descend in the sub-directories. The result is returned at stdout. If a failure of any kind is
 # encountered, the corresponding error message will be sent to stderr and the current shell will *exit* with 1.
 #
+# arg1 (mandatory) - the directory to scan
+# arg2 (optional, boolean) - whether to include the directory itself at the beginning of the classpath. By default
+#       the directory is not included in the classpath.
+#
+#
 # Usage:
 #
 # local classpath
@@ -55,11 +60,18 @@ function get-java-binary() {
 function get-classpath-from-directory() {
 
     local dir=$1
+    local include_directory_in_classpath=$2
 
-    [ -z "${dir}" ] && { echo "target directory not provided" 1>&2; exit 1; }
-    [ -d ${dir} ] || { echo "${dir} is not a valid directory" 1>&2; exit 1; }
+    [ -z "${dir}" ] && { echo "get-classpath-from-directory(): target directory not provided" 1>&2; exit 1; }
+    [ -d ${dir} ] || { echo "get-classpath-from-directory(): ${dir} is not a valid directory" 1>&2; exit 1; }
+    [ -z "${include_directory_in_classpath}" ] && include_directory_in_classpath=false
+    [ "${include_directory_in_classpath}" = "true" -o "${include_directory_in_classpath}" = "false" ] || \
+        { echo "get-classpath-from-directory(): the second argument must be true or false, but it is ${include_directory_in_classpath}" 1>&2; exit 1; }
 
     first=true
+
+    ${include_directory_in_classpath} && { echo -n ${dir}; first=false; }
+
     for i in $(find ${dir} -mindepth 1 -maxdepth 1 -name *.jar); do
         ${first} && first=false || echo -n ":"
         echo -n ${i}
