@@ -118,7 +118,18 @@ public class JmxDomain extends JmxContainer {
 
             log.debug("" + i);
 
-            return new JmxMBean(relativeLocation, this);
+            try {
+                
+                return new JmxMBean(relativeLocation, this);
+            }
+            catch(MalformedObjectNameException e) {
+
+                //
+                // we already performed this test, so it would be odd to fail now
+                //
+
+                throw new IllegalStateException(e);
+            }
         }
         catch(InstanceNotFoundException e) {
 
