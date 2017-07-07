@@ -102,6 +102,31 @@ public class CLIntTest {
         }
     }
 
+    @Test
+    public void cd_UpOneLevel() throws Exception {
+
+        MockMBeanServerConnection mc = new MockMBeanServerConnection();
+
+        mc.setDomains("mock-domain");
+
+        JmxTree mt = new JmxTreeImpl(mc);
+
+        CLInt c = new CLInt(mt);
+
+        String pwd = c.pwd();
+        assertEquals("/", pwd);
+
+        c.cd("mock-domain");
+
+        pwd = c.pwd() ;
+        assertEquals("mock-domain", pwd);
+
+        c.cd("..");
+
+        pwd = c.pwd() ;
+        assertEquals("/", pwd);
+    }
+
     // ls() ------------------------------------------------------------------------------------------------------------
 
     @Test
