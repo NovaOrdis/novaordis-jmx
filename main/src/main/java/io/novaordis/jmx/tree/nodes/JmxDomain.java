@@ -119,7 +119,7 @@ public class JmxDomain extends JmxContainer {
             log.debug("" + i);
 
             try {
-                
+
                 return new JmxMBean(relativeLocation, this);
             }
             catch(MalformedObjectNameException e) {
