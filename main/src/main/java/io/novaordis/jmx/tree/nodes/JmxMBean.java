@@ -82,7 +82,12 @@ public class JmxMBean extends JmxContainer {
 
             for(MBeanAttributeInfo ai: attributeInfos) {
 
-                result.add(ai.getName());
+                //
+                // TODO this is a hack, it will only work for attributes; we need another accessor that
+                // exposes more information about the children
+                //
+
+                result.add(ai.getName() + " (" + ai.getType() + ")");
 
             }
 
@@ -107,9 +112,16 @@ public class JmxMBean extends JmxContainer {
 
         List<String> attributeNames = getChildrenNames();
 
-        if (attributeNames.contains(relativeLocation)) {
+        for(String an: attributeNames) {
 
-            return new JmxAttribute(relativeLocation, this);
+            //
+            // TODO: currently we hackishly put the type in the attribute name, this needs to be fixed
+            //
+
+            if (an.startsWith(relativeLocation + " (")) {
+
+                return new JmxAttribute(relativeLocation, this);
+            }
         }
 
         throw new UserErrorException(relativeLocation + ": no such attribute");
