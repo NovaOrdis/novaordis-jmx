@@ -14,21 +14,20 @@
  * limitations under the License.
  */
 
-package io.novaordis.jmx.tree;
+package io.novaordis.jmx.tree.nodes;
 
-import io.novaordis.jmx.tree.nodes.JmxContainer;
-import io.novaordis.jmx.tree.nodes.JmxNode;
-import io.novaordis.jmx.tree.nodes.JmxRoot;
+import io.novaordis.jmx.tree.JmxTree;
 import io.novaordis.utilities.UserErrorException;
 
-import javax.management.MBeanServerConnection;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Ovidiu Feodorov <ovidiu@novaordis.com>
  * @since 7/6/17
  */
-public class JmxTreeImpl implements JmxTree {
+public class JmxRoot extends JmxContainer {
 
     // Constants -------------------------------------------------------------------------------------------------------
 
@@ -36,46 +35,68 @@ public class JmxTreeImpl implements JmxTree {
 
     // Attributes ------------------------------------------------------------------------------------------------------
 
-    private MBeanServerConnection c;
-
-    private JmxNode current;
+    private JmxTree tree;
 
     // Constructors ----------------------------------------------------------------------------------------------------
 
-    // Public ----------------------------------------------------------------------------------------------------------
+    public JmxRoot(JmxTree tree) {
 
-    public JmxTreeImpl(MBeanServerConnection c) {
+        super("/", null);
 
-        this.c = c;
-        current = new JmxRoot(this);
-    }
+        if (tree == null) {
 
-    @Override
-    public JmxNode getCurrent() throws IOException {
-
-        return current;
-    }
-
-    @Override
-    public void setCurrent(String location) throws IOException, UserErrorException {
-
-        JmxNode c = getCurrent();
-
-        if (!(c instanceof JmxContainer)) {
-
-            throw new IllegalStateException("the current node cannot be a non-container");
-
+            throw new IllegalArgumentException("null tree");
         }
 
-        JmxContainer cnt = (JmxContainer)c;
-        this.current = cnt.getRelative(location);
+        this.tree = tree;
+    }
+
+    // JmxNode overrides -----------------------------------------------------------------------------------------------
+
+    @Override
+    public JmxTree getTree() {
+
+        return tree;
     }
 
     @Override
-    public MBeanServerConnection getMBeanServerConnection() {
+    public List<String> getChildrenNames() throws IOException {
 
-        return c;
+        String[] domains = tree.getMBeanServerConnection().getDomains();
+        return Arrays.asList(domains);
     }
+
+    @Override
+    public JmxNode getRelative(String relativeLocation) throws IOException, UserErrorException {
+
+        if (relativeLocation.startsWith("..")) {
+
+            throw new RuntimeException("up location support NOT YET IMPLEMENTED");
+        }
+
+        if (relativeLocation.contains(":")) {
+
+            throw new RuntimeException("compound relative locations NOT YET IMPLEMENTED");
+        }
+
+        String[] domains = tree.getMBeanServerConnection().getDomains();
+
+        for(String s: domains) {
+
+            if (s.equals(relativeLocation)) {
+
+                return new JmxDomain(s, this);
+            }
+        }
+
+        //
+        // we did not find the domain
+        //
+
+        throw new UserErrorException(relativeLocation + ": no such location");
+    }
+
+    // Public ----------------------------------------------------------------------------------------------------------
 
     // Package protected -----------------------------------------------------------------------------------------------
 
@@ -84,6 +105,5 @@ public class JmxTreeImpl implements JmxTree {
     // Private ---------------------------------------------------------------------------------------------------------
 
     // Inner classes ---------------------------------------------------------------------------------------------------
-
 
 }

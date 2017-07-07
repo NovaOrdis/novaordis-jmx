@@ -27,8 +27,12 @@ import javax.management.InstanceNotFoundException;
 import javax.management.IntrospectionException;
 import javax.management.InvalidAttributeValueException;
 import javax.management.ListenerNotFoundException;
+import javax.management.MBeanAttributeInfo;
+import javax.management.MBeanConstructorInfo;
 import javax.management.MBeanException;
 import javax.management.MBeanInfo;
+import javax.management.MBeanNotificationInfo;
+import javax.management.MBeanOperationInfo;
 import javax.management.MBeanRegistrationException;
 import javax.management.MBeanServerConnection;
 import javax.management.NotCompliantMBeanException;
@@ -40,7 +44,9 @@ import javax.management.QueryExp;
 import javax.management.ReflectionException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -57,21 +63,39 @@ public class MockMBeanServerConnection implements MBeanServerConnection {
 
     // Static ----------------------------------------------------------------------------------------------------------
 
-    private static final Map<ObjectName, List<Attribute>> content = new HashMap<>();
+    private static final Map<String, Map<ObjectName, List<Attribute>>> content = new HashMap<>();
+
+    //
+    // domain-name - Map<ObjectName - List<Attribute>
+    //
 
     public static void clear() {
 
         content.clear();
+
+        log.info("static MockMBeanServerConnection content cleared");
     }
 
     public static void addAttribute(ObjectName on, String attributeName, Object value) {
 
-        List<Attribute> al = content.get(on);
+
+        String domain = on.getDomain();
+
+        Map<ObjectName, List<Attribute>> objectNamesForDomain = content.get(domain);
+
+        if (objectNamesForDomain == null) {
+
+            objectNamesForDomain = new HashMap<>();
+
+            content.put(domain, objectNamesForDomain);
+        }
+
+        List<Attribute> al = objectNamesForDomain.get(on);
 
         if (al == null) {
 
             al = new ArrayList<>();
-            content.put(on, al);
+            objectNamesForDomain.put(on, al);
         }
 
         Integer index = null;
@@ -102,30 +126,44 @@ public class MockMBeanServerConnection implements MBeanServerConnection {
 
     // Constructors ----------------------------------------------------------------------------------------------------
 
+    /**
+     * DOES NOT clean static data, so we can play reflection.
+     */
     public MockMBeanServerConnection() {
+
+        this(false);
+    }
+
+    public MockMBeanServerConnection(boolean clean) {
+
+        if (clean) {
+
+            clear();
+        }
 
         log.info(this + " constructed");
     }
 
+
     // MBeanServerConnection implementation ----------------------------------------------------------------------------
 
     @Override
-    public ObjectInstance createMBean(String className, ObjectName name) throws ReflectionException, InstanceAlreadyExistsException, MBeanRegistrationException, MBeanException, NotCompliantMBeanException, IOException {
+    public ObjectInstance createMBean(String className, ObjectName name) throws ReflectionException, InstanceAlreadyExistsException, MBeanException, NotCompliantMBeanException, IOException {
         throw new RuntimeException("createMBean() NOT YET IMPLEMENTED");
     }
 
     @Override
-    public ObjectInstance createMBean(String className, ObjectName name, ObjectName loaderName) throws ReflectionException, InstanceAlreadyExistsException, MBeanRegistrationException, MBeanException, NotCompliantMBeanException, InstanceNotFoundException, IOException {
+    public ObjectInstance createMBean(String className, ObjectName name, ObjectName loaderName) throws ReflectionException, InstanceAlreadyExistsException, MBeanException, NotCompliantMBeanException, InstanceNotFoundException, IOException {
         throw new RuntimeException("createMBean() NOT YET IMPLEMENTED");
     }
 
     @Override
-    public ObjectInstance createMBean(String className, ObjectName name, Object[] params, String[] signature) throws ReflectionException, InstanceAlreadyExistsException, MBeanRegistrationException, MBeanException, NotCompliantMBeanException, IOException {
+    public ObjectInstance createMBean(String className, ObjectName name, Object[] params, String[] signature) throws ReflectionException, InstanceAlreadyExistsException, MBeanException, NotCompliantMBeanException, IOException {
         throw new RuntimeException("createMBean() NOT YET IMPLEMENTED");
     }
 
     @Override
-    public ObjectInstance createMBean(String className, ObjectName name, ObjectName loaderName, Object[] params, String[] signature) throws ReflectionException, InstanceAlreadyExistsException, MBeanRegistrationException, MBeanException, NotCompliantMBeanException, InstanceNotFoundException, IOException {
+    public ObjectInstance createMBean(String className, ObjectName name, ObjectName loaderName, Object[] params, String[] signature) throws ReflectionException, InstanceAlreadyExistsException, MBeanException, NotCompliantMBeanException, InstanceNotFoundException, IOException {
         throw new RuntimeException("createMBean() NOT YET IMPLEMENTED");
     }
 
@@ -146,7 +184,44 @@ public class MockMBeanServerConnection implements MBeanServerConnection {
 
     @Override
     public Set<ObjectName> queryNames(ObjectName name, QueryExp query) throws IOException {
-        throw new RuntimeException("queryNames() NOT YET IMPLEMENTED");
+
+        //
+        // we "support" the following queries
+        //
+
+        //
+        // "domain-name:*"
+        //
+
+        String domainName = name.getDomain();
+        String keyValue = name.getCanonicalKeyPropertyListString();
+
+        if ("".equals(keyValue) && domainName != null) {
+
+            //
+            // we query for all MBeans in a specific domain
+            //
+
+            Map<ObjectName, List<Attribute>> mBeans = content.get(domainName);
+
+            if (mBeans == null) {
+
+                return Collections.emptySet();
+            }
+
+            Set<ObjectName> result = new HashSet<>();
+
+            //noinspection Convert2streamapi
+            for(ObjectName on: mBeans.keySet()) {
+
+                result.add(on);
+            }
+
+            return result;
+        }
+
+        throw new RuntimeException("this type of query support NOT YET IMPLEMENTED");
+
     }
 
     @Override
@@ -164,7 +239,20 @@ public class MockMBeanServerConnection implements MBeanServerConnection {
             throws MBeanException, AttributeNotFoundException,
             InstanceNotFoundException, ReflectionException, IOException {
 
-        List<Attribute> attributes = content.get(name);
+        String domain = name.getDomain();
+
+        Map<ObjectName, List<Attribute>> objectNamesPerDomain = content.get(domain);
+
+        if (objectNamesPerDomain == null) {
+
+            //
+            // this simulates a real response
+            //
+            throw new InstanceNotFoundException(name.toString());
+
+        }
+
+        List<Attribute> attributes = objectNamesPerDomain.get(name);
 
         if (attributes == null) {
 
@@ -189,7 +277,20 @@ public class MockMBeanServerConnection implements MBeanServerConnection {
     public AttributeList getAttributes(ObjectName name, String[] attributeNames)
             throws InstanceNotFoundException, ReflectionException, IOException {
 
-        List<Attribute> attributes = content.get(name);
+        String domain = name.getDomain();
+
+        Map<ObjectName, List<Attribute>> objectNamesPerDomain = content.get(domain);
+
+        if (objectNamesPerDomain == null) {
+
+            //
+            // this simulates a real response
+            //
+            throw new InstanceNotFoundException();
+
+        }
+
+        List<Attribute> attributes = objectNamesPerDomain.get(name);
 
         if (attributes == null) {
 
@@ -252,7 +353,19 @@ public class MockMBeanServerConnection implements MBeanServerConnection {
 
     @Override
     public String[] getDomains() throws IOException {
-        throw new RuntimeException("getDomains() NOT YET IMPLEMENTED");
+
+        Set<String> domains = content.keySet();
+
+        String[] result = new String[domains.size()];
+
+        int i = 0;
+
+        for(String s: domains) {
+
+            result[i ++] = s;
+        }
+
+        return result;
     }
 
     @Override
@@ -286,8 +399,45 @@ public class MockMBeanServerConnection implements MBeanServerConnection {
     }
 
     @Override
-    public MBeanInfo getMBeanInfo(ObjectName name) throws InstanceNotFoundException, IntrospectionException, ReflectionException, IOException {
-        throw new RuntimeException("getMBeanInfo() NOT YET IMPLEMENTED");
+    public MBeanInfo getMBeanInfo(ObjectName name)
+            throws InstanceNotFoundException, IntrospectionException, ReflectionException, IOException {
+
+        String domain = name.getDomain();
+
+        Map<ObjectName, List<Attribute>> objectNamesPerDomain = content.get(domain);
+
+        if (objectNamesPerDomain == null) {
+
+            //
+            // this simulates a real response
+            //
+            throw new InstanceNotFoundException();
+
+        }
+
+        List<Attribute> attributes = objectNamesPerDomain.get(name);
+
+        if (attributes == null) {
+
+            throw new InstanceNotFoundException();
+        }
+
+        MBeanAttributeInfo[] mBeanAttributeInfos = new MBeanAttributeInfo[attributes.size()];
+
+        int i = 0;
+
+        for(Attribute a: attributes) {
+
+            String type = a.getValue() == null ? null : a.getValue().getClass().getName();
+            mBeanAttributeInfos[i ++] = new MBeanAttributeInfo(a.getName(), type, "N/A", true, true, false);
+        }
+
+        return new MBeanInfo("N/A", "N/A",
+                mBeanAttributeInfos,
+                new MBeanConstructorInfo[0],
+                new MBeanOperationInfo[0],
+                new MBeanNotificationInfo[0]);
+
     }
 
     @Override
@@ -301,6 +451,20 @@ public class MockMBeanServerConnection implements MBeanServerConnection {
     public String toString() {
 
         return "MockMBeanServerConnection[" + Integer.toHexString(System.identityHashCode(this)) + "]";
+    }
+
+    /**
+     * Initializes the internal storage with empty maps if the domains do not exist, otherwise noops.
+     */
+    public void setDomains(String... domains) {
+
+        for(String s: domains) {
+
+            if (content.get(s) == null) {
+
+                content.put(s, new HashMap<>());
+            }
+        }
     }
 
     // Package protected -----------------------------------------------------------------------------------------------

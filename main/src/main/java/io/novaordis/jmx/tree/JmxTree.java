@@ -16,6 +16,12 @@
 
 package io.novaordis.jmx.tree;
 
+import io.novaordis.jmx.tree.nodes.JmxNode;
+import io.novaordis.utilities.UserErrorException;
+
+import javax.management.MBeanServerConnection;
+import java.io.IOException;
+
 /**
  * @author Ovidiu Feodorov <ovidiu@novaordis.com>
  * @since 7/6/17
@@ -27,5 +33,24 @@ public interface JmxTree {
     // Static ----------------------------------------------------------------------------------------------------------
 
     // Public ----------------------------------------------------------------------------------------------------------
+
+    /**
+     * @return the current node of the tree. If no set() method was used on the tree, the current node is the tree's
+     * root
+     *
+     * @exception IOException if communication with the underlying MBean server fails in some way.
+     */
+    JmxNode getCurrent() throws IOException;
+
+    /**
+     * Sets the new location relative to the current one.
+     *
+     * @exception IOException if communication with the underlying MBean server fails in some way.
+     *
+     * @exception UserErrorException if the operation cannot be performed because it does not make sense.
+     */
+    void setCurrent(String location) throws IOException, UserErrorException;
+
+    MBeanServerConnection getMBeanServerConnection();
 
 }

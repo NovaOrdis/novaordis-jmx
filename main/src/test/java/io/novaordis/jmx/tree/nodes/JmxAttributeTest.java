@@ -14,21 +14,19 @@
  * limitations under the License.
  */
 
-package io.novaordis.jmx.tree;
+package io.novaordis.jmx.tree.nodes;
 
-import io.novaordis.jmx.tree.nodes.JmxContainer;
-import io.novaordis.jmx.tree.nodes.JmxNode;
-import io.novaordis.jmx.tree.nodes.JmxRoot;
-import io.novaordis.utilities.UserErrorException;
+import io.novaordis.jmx.mockpackage.mockprotocol.MockMBeanServerConnection;
+import io.novaordis.jmx.tree.JmxTreeImpl;
 
 import javax.management.MBeanServerConnection;
-import java.io.IOException;
+import javax.management.ObjectName;
 
 /**
  * @author Ovidiu Feodorov <ovidiu@novaordis.com>
  * @since 7/6/17
  */
-public class JmxTreeImpl implements JmxTree {
+public class JmxAttributeTest extends JmxNodeTest {
 
     // Constants -------------------------------------------------------------------------------------------------------
 
@@ -36,54 +34,36 @@ public class JmxTreeImpl implements JmxTree {
 
     // Attributes ------------------------------------------------------------------------------------------------------
 
-    private MBeanServerConnection c;
-
-    private JmxNode current;
-
     // Constructors ----------------------------------------------------------------------------------------------------
 
     // Public ----------------------------------------------------------------------------------------------------------
 
-    public JmxTreeImpl(MBeanServerConnection c) {
-
-        this.c = c;
-        current = new JmxRoot(this);
-    }
-
-    @Override
-    public JmxNode getCurrent() throws IOException {
-
-        return current;
-    }
-
-    @Override
-    public void setCurrent(String location) throws IOException, UserErrorException {
-
-        JmxNode c = getCurrent();
-
-        if (!(c instanceof JmxContainer)) {
-
-            throw new IllegalStateException("the current node cannot be a non-container");
-
-        }
-
-        JmxContainer cnt = (JmxContainer)c;
-        this.current = cnt.getRelative(location);
-    }
-
-    @Override
-    public MBeanServerConnection getMBeanServerConnection() {
-
-        return c;
-    }
+    // Tests -----------------------------------------------------------------------------------------------------------
 
     // Package protected -----------------------------------------------------------------------------------------------
 
     // Protected -------------------------------------------------------------------------------------------------------
 
+    @Override
+    protected JmxAttribute getJmxNodeToTest(MBeanServerConnection c) throws Exception {
+
+        JmxRoot r = new JmxRoot(new JmxTreeImpl(c));
+        JmxDomain d = new JmxDomain("mock-domain", r);
+        String name = "service=Mock,color=Blue";
+
+        //
+        // "populate" the MBeanServer with the corresponding instance
+        //
+
+        MockMBeanServerConnection.addAttribute(
+                new ObjectName("mock-domain:service=Mock,color=Blue"), "mock-attribute", 1);
+
+        JmxMBean b = new JmxMBean(name, d);
+        return new JmxAttribute("mock-attribute", b);
+    }
+
     // Private ---------------------------------------------------------------------------------------------------------
 
     // Inner classes ---------------------------------------------------------------------------------------------------
-
 
 }

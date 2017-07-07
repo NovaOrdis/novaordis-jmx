@@ -14,21 +14,15 @@
  * limitations under the License.
  */
 
-package io.novaordis.jmx.tree;
+package io.novaordis.jmx.tree.nodes;
 
-import io.novaordis.jmx.tree.nodes.JmxContainer;
-import io.novaordis.jmx.tree.nodes.JmxNode;
-import io.novaordis.jmx.tree.nodes.JmxRoot;
-import io.novaordis.utilities.UserErrorException;
-
-import javax.management.MBeanServerConnection;
-import java.io.IOException;
+import io.novaordis.jmx.tree.JmxTree;
 
 /**
  * @author Ovidiu Feodorov <ovidiu@novaordis.com>
  * @since 7/6/17
  */
-public class JmxTreeImpl implements JmxTree {
+public abstract class JmxNodeBase implements JmxNode {
 
     // Constants -------------------------------------------------------------------------------------------------------
 
@@ -36,45 +30,48 @@ public class JmxTreeImpl implements JmxTree {
 
     // Attributes ------------------------------------------------------------------------------------------------------
 
-    private MBeanServerConnection c;
-
-    private JmxNode current;
+    private JmxContainer parent;
+    private String name;
 
     // Constructors ----------------------------------------------------------------------------------------------------
 
-    // Public ----------------------------------------------------------------------------------------------------------
+    protected JmxNodeBase(String name, JmxContainer parent) {
 
-    public JmxTreeImpl(MBeanServerConnection c) {
-
-        this.c = c;
-        current = new JmxRoot(this);
+        this.name = name;
+        this.parent = parent;
     }
 
-    @Override
-    public JmxNode getCurrent() throws IOException {
-
-        return current;
-    }
+    // JmxNode implementation ------------------------------------------------------------------------------------------
 
     @Override
-    public void setCurrent(String location) throws IOException, UserErrorException {
+    public JmxTree getTree() {
 
-        JmxNode c = getCurrent();
+        while(parent.getParent() != null) {
 
-        if (!(c instanceof JmxContainer)) {
-
-            throw new IllegalStateException("the current node cannot be a non-container");
-
+            parent = parent.getParent();
         }
 
-        JmxContainer cnt = (JmxContainer)c;
-        this.current = cnt.getRelative(location);
+        return parent.getTree();
     }
 
     @Override
-    public MBeanServerConnection getMBeanServerConnection() {
+    public String getName() {
 
-        return c;
+        return name;
+    }
+
+    @Override
+    public JmxContainer getParent() {
+
+        return parent;
+    }
+
+    // Public ----------------------------------------------------------------------------------------------------------
+
+    @Override
+    public String toString() {
+
+        return name == null ? "UNINITIALIZED" : name;
     }
 
     // Package protected -----------------------------------------------------------------------------------------------
@@ -84,6 +81,5 @@ public class JmxTreeImpl implements JmxTree {
     // Private ---------------------------------------------------------------------------------------------------------
 
     // Inner classes ---------------------------------------------------------------------------------------------------
-
 
 }

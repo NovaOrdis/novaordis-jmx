@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 
-package io.novaordis.jmx.tree;
+package io.novaordis.jmx.tree.nodes;
 
 import io.novaordis.jmx.mockpackage.mockprotocol.MockMBeanServerConnection;
-import io.novaordis.jmx.tree.nodes.JmxRoot;
-import io.novaordis.utilities.UserErrorException;
+import io.novaordis.jmx.tree.JmxTree;
+import io.novaordis.jmx.tree.JmxTreeImpl;
 import org.junit.Test;
 
 import javax.management.MBeanServerConnection;
-
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -35,7 +33,7 @@ import static org.junit.Assert.fail;
  * @author Ovidiu Feodorov <ovidiu@novaordis.com>
  * @since 7/6/17
  */
-public abstract class JmxTreeTest {
+public class JmxRootTest extends JmxContainerTest {
 
     // Constants -------------------------------------------------------------------------------------------------------
 
@@ -49,90 +47,69 @@ public abstract class JmxTreeTest {
 
     // Tests -----------------------------------------------------------------------------------------------------------
 
-    @Test
-    public void identity() throws Exception {
-
-        MockMBeanServerConnection mc = new MockMBeanServerConnection(true);
-
-        JmxTree t = getJmxTreeToTest(mc);
-
-        assertEquals(mc, t.getMBeanServerConnection());
-
-        JmxRoot r = (JmxRoot)t.getCurrent();
-        assertEquals("/", r.getName());
-        assertNull(r.getParent());
-
-        List<String> cns = r.getChildrenNames();
-        assertTrue(cns.isEmpty());
-    }
+    // constructors ----------------------------------------------------------------------------------------------------
 
     @Test
-    public void getCurrent() throws Exception {
-
-        MockMBeanServerConnection mc = new MockMBeanServerConnection(true);
-
-        mc.setDomains("mock-domain1", "mock-domain2");
-
-        JmxTree t = getJmxTreeToTest(mc);
-
-        JmxRoot r = (JmxRoot)t.getCurrent();
-
-        assertEquals("/", r.getName());
-
-        assertNull(r.getParent());
-
-        List<String> cns = r.getChildrenNames();
-        assertEquals(2, cns.size());
-        assertTrue(cns.contains("mock-domain1"));
-        assertTrue(cns.contains("mock-domain2"));
-    }
-
-    @Test
-    public void setCurrent_NoSuchLocation() throws Exception {
-
-        MockMBeanServerConnection mc = new MockMBeanServerConnection(true);
-
-        mc.setDomains("mock-domain1", "mock-domain2");
-
-        JmxTree t = getJmxTreeToTest(mc);
-
-        JmxRoot r = (JmxRoot)t.getCurrent();
-        assertNotNull(r);
+    public void nullArgumentConstructor() throws Exception {
 
         try {
 
-            t.setCurrent("does-not-exist");
+            new JmxRoot(null);
             fail("should have thrown exception");
         }
-        catch(UserErrorException e) {
+        catch(IllegalArgumentException e) {
 
             String msg = e.getMessage();
-            assertEquals("does-not-exist: no such location", msg);
+            assertTrue(msg.contains("null"));
         }
     }
 
     @Test
-    public void setCurrent() throws Exception {
+    public void jmxRootConstructor() throws Exception {
 
-        MockMBeanServerConnection mc = new MockMBeanServerConnection(true);
+        MockMBeanServerConnection mc = new MockMBeanServerConnection();
 
-        mc.setDomains("mock-domain1", "mock-domain2");
+        mc.setDomains("mock-domain1");
 
-        JmxTree t = getJmxTreeToTest(mc);
+        JmxTree t = new JmxTreeImpl(mc);
 
-        JmxRoot r = (JmxRoot)t.getCurrent();
-        assertNotNull(r);
+        JmxRoot r = new JmxRoot(t);
 
-        t.setCurrent("mock-domain1");
+        List<String> cn = r.getChildrenNames();
+        assertEquals(1, cn.size());
+        assertEquals("mock-domain1", cn.get(0));
+    }
 
-        //JmxDomain d = (JmxDomain)t.getCurrent();
+    @Test
+    public void getParent() throws Exception {
+
+        MockMBeanServerConnection mc = new MockMBeanServerConnection();
+
+        JmxRoot r = getJmxContainerToTest(mc);
+
+        assertNull(r.getParent());
+    }
+
+    @Test
+    public void getName() throws Exception {
+
+        MockMBeanServerConnection mc = new MockMBeanServerConnection();
+
+        JmxRoot r = getJmxContainerToTest(mc);
+
+        assertEquals("/", r.getName());
     }
 
     // Package protected -----------------------------------------------------------------------------------------------
 
     // Protected -------------------------------------------------------------------------------------------------------
 
-    protected abstract JmxTree getJmxTreeToTest(MBeanServerConnection c) throws Exception;
+    @Override
+    protected JmxRoot getJmxContainerToTest(MBeanServerConnection c) throws Exception {
+
+        JmxTree t = new JmxTreeImpl(c);
+        return new JmxRoot(t);
+    }
 
     // Private ---------------------------------------------------------------------------------------------------------
 

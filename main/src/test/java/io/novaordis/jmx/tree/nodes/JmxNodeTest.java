@@ -14,23 +14,25 @@
  * limitations under the License.
  */
 
-package io.novaordis.jmx.cli;
+package io.novaordis.jmx.tree.nodes;
 
 import io.novaordis.jmx.mockpackage.mockprotocol.MockMBeanServerConnection;
 import io.novaordis.jmx.tree.JmxTree;
-import io.novaordis.jmx.tree.JmxTreeImpl;
-import io.novaordis.utilities.UserErrorException;
 import org.junit.After;
 import org.junit.Test;
 
+import javax.management.MBeanServerConnection;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 /**
  * @author Ovidiu Feodorov <ovidiu@novaordis.com>
  * @since 7/6/17
  */
-public class CLIntTest {
+public abstract class JmxNodeTest {
 
     // Constants -------------------------------------------------------------------------------------------------------
 
@@ -50,79 +52,46 @@ public class CLIntTest {
 
     // Tests -----------------------------------------------------------------------------------------------------------
 
-    // cd() ------------------------------------------------------------------------------------------------------------
+    // constructors ----------------------------------------------------------------------------------------------------
 
     @Test
-    public void cd_GoingDown_ChildDoesNotExist() throws Exception {
-
-        // no domains
-        MockMBeanServerConnection mc = new MockMBeanServerConnection();
-
-        JmxTree mt = new JmxTreeImpl(mc);
-
-        CLInt c = new CLInt(mt);
-
-        String s = c.pwd();
-        assertEquals("/", s);
-
-        try {
-
-            c.cd("something");
-            fail("should have thrown exception");
-        }
-        catch(UserErrorException e) {
-
-            String msg = e.getMessage();
-            assertEquals("cd: something: no such location", msg);
-        }
-    }
-
-    @Test
-    public void cd_GoingDown_ChildDoesExist() throws Exception {
-
-        // no domains
-        MockMBeanServerConnection mc = new MockMBeanServerConnection();
-
-        JmxTree mt = new JmxTreeImpl(mc);
-
-        CLInt c = new CLInt(mt);
-
-        String s = c.pwd();
-        assertEquals("/", s);
-
-        try {
-
-            c.cd("something");
-            fail("should have thrown exception");
-        }
-        catch(UserErrorException e) {
-
-            String msg = e.getMessage();
-            assertEquals("cd: something: no such location", msg);
-        }
-    }
-
-    // ls() ------------------------------------------------------------------------------------------------------------
-
-    @Test
-    public void ls_NamesInAlphabeticalOrder() throws Exception {
+    public void identity() throws Exception {
 
         MockMBeanServerConnection mc = new MockMBeanServerConnection();
 
-        mc.setDomains("kia", "jaguar", "infiniti", "honda", "gmc", "fiat", "dodge", "chrysler", "bmw", "acura");
+        JmxNode n = getJmxNodeToTest(mc);
 
-        JmxTree mt = new JmxTreeImpl(mc);
+        if (n instanceof JmxRoot) {
 
-        CLInt c = new CLInt(mt);
+            assertNull(n.getParent());
+        }
+        else {
 
-        String s = c.ls("");
+            assertNotNull(n.getParent());
+        }
 
-        assertEquals("acura\nbmw\nchrysler\ndodge\nfiat\ngmc\nhonda\ninfiniti\njaguar\nkia", s);
+        assertNotNull(n.getName());
+
+        boolean container = n.isContainer();
+
+        if (container) {
+
+            JmxContainer c = (JmxContainer)n;
+            List<String> cns = c.getChildrenNames();
+            assertNotNull(cns);
+        }
+
+        JmxTree tree = n.getTree();
+        assertNotNull(tree);
+
+        assertEquals(mc, tree.getMBeanServerConnection());
     }
 
     // Package protected -----------------------------------------------------------------------------------------------
 
     // Protected -------------------------------------------------------------------------------------------------------
+
+    protected abstract JmxNode getJmxNodeToTest(MBeanServerConnection c) throws Exception;
 
     // Private ---------------------------------------------------------------------------------------------------------
 

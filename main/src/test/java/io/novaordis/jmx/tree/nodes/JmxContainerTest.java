@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
-package io.novaordis.jmx.tree;
+package io.novaordis.jmx.tree.nodes;
 
-import io.novaordis.jmx.tree.nodes.JmxContainer;
-import io.novaordis.jmx.tree.nodes.JmxNode;
-import io.novaordis.jmx.tree.nodes.JmxRoot;
-import io.novaordis.utilities.UserErrorException;
+import io.novaordis.jmx.mockpackage.mockprotocol.MockMBeanServerConnection;
+import org.junit.After;
+import org.junit.Test;
 
 import javax.management.MBeanServerConnection;
-import java.io.IOException;
+import java.util.List;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  * @author Ovidiu Feodorov <ovidiu@novaordis.com>
  * @since 7/6/17
  */
-public class JmxTreeImpl implements JmxTree {
+public abstract class JmxContainerTest extends JmxNodeTest {
 
     // Constants -------------------------------------------------------------------------------------------------------
 
@@ -36,54 +37,38 @@ public class JmxTreeImpl implements JmxTree {
 
     // Attributes ------------------------------------------------------------------------------------------------------
 
-    private MBeanServerConnection c;
-
-    private JmxNode current;
-
     // Constructors ----------------------------------------------------------------------------------------------------
 
     // Public ----------------------------------------------------------------------------------------------------------
 
-    public JmxTreeImpl(MBeanServerConnection c) {
+    // Tests -----------------------------------------------------------------------------------------------------------
 
-        this.c = c;
-        current = new JmxRoot(this);
-    }
+    @Test
+    public void getChildren() throws Exception {
 
-    @Override
-    public JmxNode getCurrent() throws IOException {
+        MockMBeanServerConnection mc = new MockMBeanServerConnection(true);
 
-        return current;
-    }
+        JmxContainer c = getJmxContainerToTest(mc);
 
-    @Override
-    public void setCurrent(String location) throws IOException, UserErrorException {
+        List<String> childrenNames = c.getChildrenNames();
 
-        JmxNode c = getCurrent();
-
-        if (!(c instanceof JmxContainer)) {
-
-            throw new IllegalStateException("the current node cannot be a non-container");
-
-        }
-
-        JmxContainer cnt = (JmxContainer)c;
-        this.current = cnt.getRelative(location);
-    }
-
-    @Override
-    public MBeanServerConnection getMBeanServerConnection() {
-
-        return c;
+        assertNotNull(childrenNames);
     }
 
     // Package protected -----------------------------------------------------------------------------------------------
 
     // Protected -------------------------------------------------------------------------------------------------------
 
+    protected abstract JmxContainer getJmxContainerToTest(MBeanServerConnection c) throws Exception;
+
+    @Override
+    protected JmxNode getJmxNodeToTest(MBeanServerConnection c) throws Exception {
+
+        return getJmxContainerToTest(c);
+    }
+
     // Private ---------------------------------------------------------------------------------------------------------
 
     // Inner classes ---------------------------------------------------------------------------------------------------
-
 
 }

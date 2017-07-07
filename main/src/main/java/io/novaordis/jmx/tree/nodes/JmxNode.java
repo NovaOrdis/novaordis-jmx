@@ -14,9 +14,15 @@
  * limitations under the License.
  */
 
-package io.novaordis.jmx.tree;
+package io.novaordis.jmx.tree.nodes;
+
+import io.novaordis.jmx.tree.JmxTree;
 
 /**
+ * A location in the JMX tree.
+ *
+ * A node does not cache data locally, except its name and its parent.
+ *
  * @author Ovidiu Feodorov <ovidiu@novaordis.com>
  * @since 7/6/17
  */
@@ -27,5 +33,31 @@ public interface JmxNode {
     // Static ----------------------------------------------------------------------------------------------------------
 
     // Public ----------------------------------------------------------------------------------------------------------
+
+    /**
+     * The JMX tree we belong to.
+     */
+    JmxTree getTree();
+
+    /**
+     * The node name. It can be "/" if the node is the root of the JMX tree, a domain, an MBeanName, an attribute name,
+     * etc.
+     */
+    String getName();
+
+    /**
+     * May return null if this node is the root.
+     */
+    JmxContainer getParent();
+
+    /**
+     * Whether this node is a container or not. If the method returns true, the instance can be safely cast to
+     * JmxContainer.
+
+     * @see JmxContainer
+     */
+    boolean isContainer();
+
+
 
 }

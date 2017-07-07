@@ -16,13 +16,19 @@
 
 package io.novaordis.jmx.cli;
 
+import io.novaordis.jmx.tree.nodes.JmxContainer;
+import io.novaordis.jmx.tree.nodes.JmxNode;
 import io.novaordis.jmx.tree.JmxTree;
 import io.novaordis.utilities.UserErrorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * @author Ovidiu Feodorov <ovidiu@novaordis.com>
@@ -36,11 +42,20 @@ public class CLInt {
 
     // Static ----------------------------------------------------------------------------------------------------------
 
+    public static void printHelp() {
+
+        System.out.println("> ls cd");
+    }
+
     // Attributes ------------------------------------------------------------------------------------------------------
+
+    private JmxTree jmxTree;
 
     // Constructors ----------------------------------------------------------------------------------------------------
 
     public CLInt(JmxTree jmxTree) {
+
+        this.jmxTree = jmxTree;
     }
 
     // Public ----------------------------------------------------------------------------------------------------------
@@ -68,10 +83,11 @@ public class CLInt {
 
                     break;
                 }
+
             }
             catch(UserErrorException e) {
 
-                System.err.print("> " + e.getMessage());
+                System.err.println("> " + e.getMessage());
             }
             catch(Throwable t) {
 
@@ -101,9 +117,135 @@ public class CLInt {
      */
     boolean processLine(String line) throws UserErrorException {
 
-        System.out.println(line);
+        line = line.trim();
+
+        //
+        // if the line is empty, just loop
+        //
+        if (!line.isEmpty()) {
+
+            try {
+
+                if ("exit".equalsIgnoreCase(line)) {
+
+                    return false;
+                }
+                else if ("help".equalsIgnoreCase(line)) {
+
+                    printHelp();
+                }
+                else if ("ls".equals(line) || line.startsWith("ls ")) {
+
+                    String args = line.substring("ls".length()).trim();
+                    String s = ls(args);
+                    System.out.println(s);
+                }
+                else if ("pwd".equalsIgnoreCase(line)) {
+
+                    String s = pwd();
+                    System.out.println(s);
+                }
+                else if ("cd".equals(line) || line.startsWith("cd ")) {
+
+                    String args = line.substring("cd".length()).trim();
+                    cd(args);
+                }
+                else {
+
+                    throw new UserErrorException("unknown command '" + line + "'");
+                }
+            }
+            catch(IOException e) {
+
+                String msg = "failed to query the MBeanServer";
+
+                if (e.getMessage() != null) {
+
+                    msg = msg + ": " + e.getMessage();
+                }
+
+                throw new UserErrorException(msg);
+            }
+        }
 
         return true;
+    }
+
+    /**
+     * List the current node of the JMX tree.
+     *
+     * @param args command line options/arguments.
+     */
+    String ls(String args) throws IOException, UserErrorException {
+
+        String result = "";
+
+        args = args.trim();
+
+        if (!args.isEmpty()) {
+
+            throw new UserErrorException("unknown option(s): " + args);
+        }
+
+        JmxNode n = jmxTree.getCurrent();
+
+        if (!n.isContainer()) {
+
+            //
+            // we are not supposed to be in this situation, the navigation logic failed somehow
+            //
+
+            throw new IllegalStateException("cannot be in a non-container node, let alone list it from inside");
+        }
+
+        JmxContainer c = (JmxContainer)n;
+        List<String> cns = c.getChildrenNames();
+
+        //
+        // sort alphanumerically
+        //
+
+        Collections.sort(cns);
+
+        for(Iterator<String> i = cns.iterator(); i.hasNext(); ) {
+
+            result += i.next();
+
+            if (i.hasNext()) {
+
+                result += "\n";
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * @return the current position in tree, which is the name of the current node.
+     */
+    String pwd() throws IOException {
+
+        JmxNode n = jmxTree.getCurrent();
+        return n.getName();
+    }
+
+    /**
+     * Resets the current position in the tree.
+     *
+     * @param args command line options/arguments.
+     */
+    void cd(String args) throws IOException, UserErrorException {
+
+        String newLocation = args.trim();
+
+        try {
+
+            jmxTree.setCurrent(newLocation);
+        }
+        catch(UserErrorException e) {
+
+            throw new UserErrorException("cd: " + e.getMessage());
+        }
     }
 
     // Private ---------------------------------------------------------------------------------------------------------
