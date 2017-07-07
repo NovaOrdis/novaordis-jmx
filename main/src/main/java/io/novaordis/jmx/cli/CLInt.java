@@ -17,8 +17,11 @@
 package io.novaordis.jmx.cli;
 
 import io.novaordis.jmx.tree.nodes.JmxContainer;
+import io.novaordis.jmx.tree.nodes.JmxDomain;
+import io.novaordis.jmx.tree.nodes.JmxMBean;
 import io.novaordis.jmx.tree.nodes.JmxNode;
 import io.novaordis.jmx.tree.JmxTree;
+import io.novaordis.jmx.tree.nodes.JmxRoot;
 import io.novaordis.utilities.UserErrorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -226,7 +229,23 @@ public class CLInt {
     String pwd() throws IOException {
 
         JmxNode n = jmxTree.getCurrent();
-        return n.getName();
+
+        if (n instanceof JmxRoot) {
+
+            return n.getName();
+        }
+        else if (n instanceof JmxDomain) {
+
+            return "/" + n.getName() + ":";
+        }
+        else if (n instanceof JmxMBean) {
+
+            return "/" + n.getParent().getName() + ":" + n.getName();
+        }
+        else {
+
+            throw new IllegalStateException("current node not a JmxRoot/JmxDomain/JmxMBean but a " + n.getClass());
+        }
     }
 
     /**

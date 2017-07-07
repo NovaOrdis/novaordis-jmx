@@ -23,6 +23,8 @@ import io.novaordis.utilities.UserErrorException;
 import org.junit.After;
 import org.junit.Test;
 
+import javax.management.ObjectName;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -119,7 +121,7 @@ public class CLIntTest {
         c.cd("mock-domain");
 
         pwd = c.pwd() ;
-        assertEquals("mock-domain", pwd);
+        assertEquals("/mock-domain:", pwd);
 
         c.cd("..");
 
@@ -143,6 +145,30 @@ public class CLIntTest {
         String s = c.ls("");
 
         assertEquals("acura\nbmw\nchrysler\ndodge\nfiat\ngmc\nhonda\ninfiniti\njaguar\nkia", s);
+    }
+
+    // pwd() -----------------------------------------------------------------------------------------------------------
+
+    @Test
+    public void pwd_Root_Domain_MBean() throws Exception {
+
+        MockMBeanServerConnection mc = new MockMBeanServerConnection();
+        MockMBeanServerConnection.addAttribute(
+                new ObjectName("mock-domain:service=Mock"), "MockAttribute", "something");
+
+        JmxTree t = new JmxTreeImpl(mc);
+        CLInt c = new CLInt(t);
+
+        String s = c.pwd();
+        assertEquals("/", s);
+
+        c.cd("mock-domain");
+        s = c.pwd();
+        assertEquals("/mock-domain:", s);
+
+        c.cd("service=Mock");
+        s = c.pwd();
+        assertEquals("/mock-domain:service=Mock", s);
     }
 
     // Package protected -----------------------------------------------------------------------------------------------
