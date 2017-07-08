@@ -45,7 +45,7 @@ public class CLInt {
 
     // Static ----------------------------------------------------------------------------------------------------------
 
-    public static void printHelp() {
+    public static void displayHelp() {
 
         String help =
                 "\n" +
@@ -149,7 +149,7 @@ public class CLInt {
                 }
                 else if ("help".equalsIgnoreCase(line)) {
 
-                    printHelp();
+                    displayHelp();
                 }
                 else if ("ls".equals(line) || line.startsWith("ls ")) {
 

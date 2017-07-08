@@ -8,7 +8,7 @@
 
     <groupId>io.novaordis.jmx</groupId>
     <artifactId>novaordis-jmx-root</artifactId>
-    <version>1.1.1-SNAPSHOT-8</version>
+    <version>1.1.1-SNAPSHOT-9</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -17,7 +17,7 @@
             Dependencies
         -->
 
-        <novaordis.utilities.version>4.7.5</novaordis.utilities.version>
+        <novaordis.utilities.version>4.7.7-SNAPSHOT-1</novaordis.utilities.version>
         <slf4j.version>1.7.12</slf4j.version>
         <junit.version>4.12</junit.version>
 
