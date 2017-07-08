@@ -124,7 +124,7 @@ public class JmxClientImpl implements JmxClient {
             throw new IllegalStateException(this + " was improperly initialized: address not set");
         }
 
-        Map<String, String> environment = null;
+        Map<String, Object> environment = null;
 
         if (protocolProviderPackage != null) {
 
@@ -134,6 +134,19 @@ public class JmxClientImpl implements JmxClient {
         }
 
         log.debug("the jmx client instance attempting to connect to " + jmxServiceURL);
+
+        //
+        // if we're using an underlying JBoss Remoting connection, this is where we pass the authentication credentials
+        // down into the machinery
+        //
+        {
+            if (environment == null) {
+
+                environment = new HashMap<>();
+            }
+
+            environment.put("jmx.remote.credentials", new String[] { "blah", "blah123!"} );
+        }
 
         try {
 

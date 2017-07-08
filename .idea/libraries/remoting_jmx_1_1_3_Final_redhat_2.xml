@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="remoting-jmx-1.1.3.Final-redhat-2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/runtime/jboss-eap-6.4.0.GA-maven-repository/org/jboss/remotingjmx/remoting-jmx/1.1.3.Final-redhat-2/remoting-jmx-1.1.3.Final-redhat-2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/runtime/jboss-eap-6.4.0.GA-maven-repository/org/jboss/remotingjmx/remoting-jmx/1.1.3.Final-redhat-2/remoting-jmx-1.1.3.Final-redhat-2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
