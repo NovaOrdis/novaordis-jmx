@@ -135,8 +135,6 @@ public class JmxClientImpl implements JmxClient {
 
         log.debug("the jmx client instance attempting to connect to " + jmxServiceURL);
 
-        experimental();
-
         try {
 
             if (environment == null) {
@@ -226,15 +224,15 @@ public class JmxClientImpl implements JmxClient {
 
     // Private ---------------------------------------------------------------------------------------------------------
 
-    private void experimental() {
-
-        System.setProperty("remote.connectionprovider.create.options.org.xnio.Options.SSL_ENABLED", "false");
-        System.setProperty("remote.connection.default.connect.options.org.xnio.Options.SASL_POLICY_NOANONYMOUS", "false");
-        //System.setProperty("remote.connection.default.connect.options.org.xnio.Options.SASL_DISALLOWED_MECHANISMS", "JBOSS-LOCAL-USER");
-        System.setProperty("remote.connection.default.connect.options.org.xnio.Options.SASL_POLICY_NOPLAINTEXT", "false");
-        System.setProperty("remote.connection.default.username", "blah");
-        System.setProperty("remote.connection.default.password", "blah123!");
-    }
+//    private void experimental() {
+//
+//        System.setProperty("remote.connectionprovider.create.options.org.xnio.Options.SSL_ENABLED", "false");
+//        System.setProperty("remote.connection.default.connect.options.org.xnio.Options.SASL_POLICY_NOANONYMOUS", "false");
+//        //System.setProperty("remote.connection.default.connect.options.org.xnio.Options.SASL_DISALLOWED_MECHANISMS", "JBOSS-LOCAL-USER");
+//        System.setProperty("remote.connection.default.connect.options.org.xnio.Options.SASL_POLICY_NOPLAINTEXT", "false");
+//        System.setProperty("remote.connection.default.username", "blah");
+//        System.setProperty("remote.connection.default.password", "blah123!");
+//    }
 
     // Inner classes ---------------------------------------------------------------------------------------------------
 

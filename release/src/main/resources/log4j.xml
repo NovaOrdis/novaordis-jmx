@@ -14,11 +14,11 @@
     <appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">
         <errorHandler class="org.apache.log4j.helpers.OnlyOnceErrorHandler"/>
         <param name="Threshold" value="TRACE"/>
-        <param name="File" value="./client.log"/>
+        <param name="File" value="./cljmx.log"/>
         <param name="DatePattern" value="'.'yyyy-MM-dd"/>
         <param name="Append" value="false"/>
         <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="@%t %d{ABSOLUTE} %-5p [%c{1}] %m%n"/>
+            <param name="ConversionPattern" value="@%t %d{ABSOLUTE} %-5p [%c{10}] %m%n"/>
         </layout>
     </appender>
 
