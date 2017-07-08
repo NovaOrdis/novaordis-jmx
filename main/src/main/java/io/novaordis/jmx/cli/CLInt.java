@@ -175,7 +175,8 @@ public class CLInt {
                 else if ("get".equals(line) || line.startsWith("get ")) {
 
                     String args = line.substring("get".length()).trim();
-                    get(args);
+                    String s = get(args);
+                    System.out.println(s);
                 }
                 else {
 
