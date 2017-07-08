@@ -16,9 +16,14 @@
 
 package io.novaordis.jmx;
 
+import io.novaordis.jmx.mockpackage.mockprotocol.MockJMXConnector;
 import org.junit.Test;
 
+import javax.management.remote.JMXConnector;
+import java.util.Map;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -66,6 +71,55 @@ public class JmxClientImplTest extends JmxClientTest {
         c.connect();
 
         assertTrue(c.isConnected());
+    }
+
+    @Test
+    public void testThatAuthenticationCredentialsArePassedInEnvironment() throws Exception {
+
+        MockJmxAddress a = new MockJmxAddress();
+
+        a.setUsername("test-username");
+        a.setPassword("test-password".toCharArray());
+
+        JmxClientImpl c = new JmxClientImpl(a);
+
+        //
+        // configure jmx client for testing, io.novaordis.jmx.mockpackage.mockprotcol.ClientProvider
+        // builds a test JMXConnector
+        //
+
+        c.setProtocolProviderPackage("io.novaordis.jmx.mockpackage");
+
+        c.connect();
+
+        //
+        // Make sure the environment that was provided to the MockJMXConnector constructor by the ClientProvider
+        // contains authentication credentials.
+        //
+
+        MockJMXConnector mc = (MockJMXConnector)c.getJmxConnector();
+
+        Map<String, ?> environmentCopyInConstructor = mc.getEnvironmentCopyInConstructor();
+
+        Object o = environmentCopyInConstructor.get(JMXConnector.CREDENTIALS);
+        assertNotNull(o);
+        String[] credentials = (String[]) o;
+        assertEquals(2, credentials.length);
+        assertEquals("test-username", credentials[0]);
+        assertEquals("test-password", credentials[1]);
+
+        //
+        // Also make the environment content was also provided to connect()
+        //
+
+        Map<String, ?> environmentCopyInConnect = mc.getEnvironmentCopyInConnect();
+
+        Object o2 = environmentCopyInConnect.get(JMXConnector.CREDENTIALS);
+        assertNotNull(o2);
+        String[] credentials2 = (String[]) o;
+        assertEquals(2, credentials2.length);
+        assertEquals("test-username", credentials2[0]);
+        assertEquals("test-password", credentials2[1]);
     }
 
     // Package protected -----------------------------------------------------------------------------------------------

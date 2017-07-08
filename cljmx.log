@@ -1,220 +1,569 @@
-@main 21:22:06,133 DEBUG [io.novaordis.jmx.JmxClientImpl] the jmx client instance attempting to connect to service:jmx:remoting-jmx://localhost:4447
-@main 21:22:06,145 DEBUG [org.jboss.logging] Logging Provider: org.jboss.logging.Log4jLoggerProvider
-@main 21:25:54,053 TRACE [org.jboss.remotingjmx.RemotingConnectorServer] connect(null)
-@main 21:25:54,064 INFO  [org.xnio] XNIO Version 3.0.16.GA-redhat-1
-@main 21:25:54,075 INFO  [org.xnio.nio] XNIO NIO Implementation Version 3.0.16.GA-redhat-1
-@main 21:25:54,076 TRACE [org.xnio.nio] NIO.2 detected
-@main 21:25:54,081 TRACE [org.xnio.nio] Starting up with selector provider sun.nio.ch.KQueueSelectorProvider@4d3167f4
-@main 21:25:54,090 TRACE [org.xnio.safe-close] Closing resource sun.nio.ch.PollSelectorImpl@42607a4f
-@main 21:25:54,090 TRACE [org.xnio.nio] Using Default system selector creator for provider class sun.nio.ch.KQueueSelectorProvider for main selectors and Selector creator class sun.nio.ch.PollSelectorImpl for provider class sun.nio.ch.KQueueSelectorProvider for temp selectors
-@main 21:25:54,097 TRACE [org.xnio.safe-close] Closing resource java.io.InputStreamReader@4fcd19b3
-@main 21:25:54,097 TRACE [org.xnio.safe-close] Closing resource sun.net.www.protocol.jar.JarURLConnection$JarURLInputStream@376b4233
-@main 21:25:54,097 INFO  [org.jboss.remoting] JBoss Remoting version 3.3.9.Final-redhat-1
-@main 21:25:54,111 TRACE [org.xnio.nio] CAS org.xnio.nio.NioXnioWorker@76a4d6c 00000001 -> 00000002
-@main 21:25:54,111 TRACE [org.xnio.nio] CAS org.xnio.nio.NioXnioWorker@76a4d6c 00000002 -> 00000003
-@Remoting "endpoint" read-1 21:25:54,111 TRACE [org.xnio.nio] Starting worker thread Thread[Remoting "endpoint" read-1,5,main]
-@Remoting "endpoint" write-1 21:25:54,111 TRACE [org.xnio.nio] Starting worker thread Thread[Remoting "endpoint" write-1,5,main]
-@Remoting "endpoint" read-1 21:25:54,111 DEBUG [org.xnio.nio] Started channel thread 'Remoting "endpoint" read-1', selector sun.nio.ch.KQueueSelectorImpl@2dc0e0d5
-@Remoting "endpoint" write-1 21:25:54,111 DEBUG [org.xnio.nio] Started channel thread 'Remoting "endpoint" write-1', selector sun.nio.ch.KQueueSelectorImpl@98bebfc
-@Remoting "endpoint" read-1 21:25:54,112 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@2dc0e0d5
-@Remoting "endpoint" write-1 21:25:54,112 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@98bebfc
-@main 21:25:54,115 TRACE [org.jboss.remoting.endpoint] Completed open of endpoint "endpoint" <3ffcd140>
-@main 21:25:54,116 TRACE [org.jboss.remoting.endpoint] Allocated tick to 1 of endpoint "endpoint" <3ffcd140> (opened Connection provider for remote)
-@main 21:25:54,162 TRACE [org.jboss.remoting.endpoint] Adding connection provider registration named 'remote': Remoting remote connection provider 60dcc9fe for endpoint "endpoint" <3ffcd140>
-@main 21:25:54,171 TRACE [org.jboss.remoting.endpoint] Allocated tick to 2 of endpoint "endpoint" <3ffcd140> (opened Connection to localhost/127.0.0.1:4447)
-@main 21:25:54,179 TRACE [org.jboss.remoting.remote] Attempting to connect to "localhost/127.0.0.1:4447" with options {org.xnio.Options.SSL_ENABLED=>true,org.xnio.Options.SASL_POLICY_NOPLAINTEXT=>false,org.xnio.Options.SSL_STARTTLS=>true,org.xnio.Options.SASL_POLICY_NOANONYMOUS=>false,org.xnio.Options.SASL_PROPERTIES=>[(jboss.sasl.local-user.quiet-auth=>true)]}
-@main 21:25:54,263 TRACE [org.xnio.nio] Adding channel java.nio.channels.SocketChannel[unconnected local=/0:0:0:0:0:0:0:0:60489] to Thread[Remoting "endpoint" read-1,5,main] for XNIO channel TCP socket channel (NIO) <477b4cdf> (other thread)
-@Remoting "endpoint" read-1 21:25:54,264 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@2dc0e0d5
-@Remoting "endpoint" read-1 21:25:54,264 TRACE [org.xnio.nio] Running task org.xnio.nio.WorkerThread$SynchTask@215fe69
-@Remoting "endpoint" read-1 21:25:54,264 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@2dc0e0d5
-@main 21:25:54,265 TRACE [org.xnio.nio] Adding channel java.nio.channels.SocketChannel[unconnected local=/0:0:0:0:0:0:0:0:60489] to Thread[Remoting "endpoint" write-1,5,main] for XNIO channel TCP socket channel (NIO) <477b4cdf> (other thread)
-@Remoting "endpoint" write-1 21:25:54,265 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@98bebfc
-@Remoting "endpoint" write-1 21:25:54,265 TRACE [org.xnio.nio] Running task org.xnio.nio.WorkerThread$SynchTask@373808c
-@Remoting "endpoint" write-1 21:25:54,265 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@98bebfc
-@main 21:25:54,268 TRACE [org.xnio.listener] Setting channel listener to Connection finisher for java.nio.channels.SocketChannel[connection-pending local=/0:0:0:0:0:0:0:0:60489 remote=localhost/127.0.0.1:4447]
-@main 21:25:54,269 TRACE [org.xnio.nio] Setting operations of key sun.nio.ch.SelectionKeyImpl@6f03482 of java.nio.channels.SocketChannel[connection-pending local=/0:0:0:0:0:0:0:0:60489 remote=localhost/127.0.0.1:4447] to 08 (other thread)
-@Remoting "endpoint" read-1 21:25:54,269 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@2dc0e0d5
-@Remoting "endpoint" read-1 21:25:54,269 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@2dc0e0d5
-@Remoting "endpoint" read-1 21:25:54,269 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@2dc0e0d5
-@Remoting "endpoint" read-1 21:25:54,269 TRACE [org.xnio.nio.selector] Selected key sun.nio.ch.SelectionKeyImpl@6f03482 for java.nio.channels.SocketChannel[connection-pending local=/0:0:0:0:0:0:0:0:60489 remote=localhost/127.0.0.1:4447]
-@Remoting "endpoint" read-1 21:25:54,269 TRACE [org.xnio.listener] Invoking listener Connection finisher for java.nio.channels.SocketChannel[connection-pending local=/0:0:0:0:0:0:0:0:60489 remote=localhost/127.0.0.1:4447] on channel TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,270 TRACE [org.xnio.nio] Setting operations of key sun.nio.ch.SelectionKeyImpl@6f03482 of java.nio.channels.SocketChannel[connected local=/127.0.0.1:60489 remote=localhost/127.0.0.1:4447] to 00 (same thread)
-@Remoting "endpoint" read-1 21:25:54,270 TRACE [org.xnio.listener] Setting channel listener to null
-@Remoting "endpoint" read-1 21:25:54,272 TRACE [org.xnio.listener] Invoking listener org.xnio.ssl.JsseXnioSsl$2@464d5d1c on channel TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,364 TRACE [org.xnio.listener] Setting channel listener to Read listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,365 TRACE [org.xnio.listener] Setting channel listener to Write listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,365 TRACE [org.xnio.listener] Setting channel listener to Close listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,366 TRACE [org.xnio.listener] Invoking listener org.jboss.remoting3.remote.RemoteConnectionProvider$3@23f0e941 on channel org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,396 TRACE [org.xnio.listener] Setting channel listener to Read listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,396 TRACE [org.xnio.listener] Setting channel listener to Write listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,396 TRACE [org.xnio.listener] Setting channel listener to Close listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,398 TRACE [org.xnio.channels.framed] Created new framed message channel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>, receive buffer java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196], transmit buffer java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
-@Remoting "endpoint" read-1 21:25:54,400 TRACE [org.jboss.remoting.remote.connection] Initialized connection from localhost/127.0.0.1:4447 to /127.0.0.1:60489 with options {org.xnio.Options.SSL_ENABLED=>true,org.xnio.Options.SASL_POLICY_NOPLAINTEXT=>false,org.xnio.Options.SSL_STARTTLS=>true,org.xnio.Options.SASL_POLICY_NOANONYMOUS=>false,org.xnio.Options.SASL_PROPERTIES=>[(jboss.sasl.local-user.quiet-auth=>true)]}
-@Remoting "endpoint" read-1 21:25:54,401 TRACE [org.xnio.listener] Setting channel listener to org.jboss.remoting3.remote.RemoteConnection$RemoteWriteListener@75e83a04
-@Remoting "endpoint" read-1 21:25:54,402 TRACE [org.jboss.remoting.remote] Setting read listener to org.jboss.remoting3.remote.ClientConnectionOpenListener$Greeting@15a4a219
-@Remoting "endpoint" read-1 21:25:54,402 TRACE [org.xnio.listener] Setting channel listener to org.jboss.remoting3.remote.ClientConnectionOpenListener$Greeting@15a4a219
-@Remoting "endpoint" read-1 21:25:54,402 TRACE [org.xnio.nio] Resume reads on TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,402 TRACE [org.xnio.nio] Setting operations of key sun.nio.ch.SelectionKeyImpl@6f03482 of java.nio.channels.SocketChannel[connected local=/127.0.0.1:60489 remote=localhost/127.0.0.1:4447] to 01 (same thread)
-@Remoting "endpoint" read-1 21:25:54,402 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@2dc0e0d5
-@Remoting "endpoint" read-1 21:25:54,402 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@2dc0e0d5
-@Remoting "endpoint" read-1 21:25:54,402 TRACE [org.xnio.nio.selector] Selected key sun.nio.ch.SelectionKeyImpl@6f03482 for java.nio.channels.SocketChannel[connected local=/127.0.0.1:60489 remote=localhost/127.0.0.1:4447]
-@Remoting "endpoint" read-1 21:25:54,402 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf> on channel TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,402 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf> on channel org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,403 TRACE [org.xnio.listener] Invoking listener org.jboss.remoting3.remote.ClientConnectionOpenListener$Greeting@15a4a219 on channel org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,405 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=16 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
-@Remoting "endpoint" read-1 21:25:54,405 TRACE [org.jboss.remoting.remote.client] Received java.nio.DirectByteBuffer[pos=12 lim=8192 cap=8192]
-@Remoting "endpoint" read-1 21:25:54,405 TRACE [org.jboss.remoting.remote.client] Client received greeting
-@Remoting "endpoint" read-1 21:25:54,405 TRACE [org.jboss.remoting.remote.client] Client received server name: localhost
-@Remoting "endpoint" read-1 21:25:54,405 TRACE [org.jboss.remoting.remote.client] Client sending capabilities request
-@Remoting "endpoint" read-1 21:25:54,407 TRACE [org.jboss.remoting.remote] Setting read listener to org.jboss.remoting3.remote.ClientConnectionOpenListener$Capabilities@3f9cbc1b
-@Remoting "endpoint" read-1 21:25:54,407 TRACE [org.xnio.listener] Setting channel listener to org.jboss.remoting3.remote.ClientConnectionOpenListener$Capabilities@3f9cbc1b
-@Remoting "endpoint" read-1 21:25:54,408 TRACE [org.xnio.channels.framed] Accepting java.nio.DirectByteBuffer[pos=0 lim=50 cap=8192] into java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
-@Remoting "endpoint" read-1 21:25:54,408 TRACE [org.xnio.channels.framed] Accepted a message into java.nio.HeapByteBuffer[pos=54 lim=8196 cap=8196]
-@Remoting "endpoint" read-1 21:25:54,408 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,408 TRACE [org.jboss.remoting.remote.connection] Sent message java.nio.DirectByteBuffer[pos=50 lim=50 cap=8192] (direct)
-@Remoting "endpoint" read-1 21:25:54,408 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,408 TRACE [org.jboss.remoting.remote.connection] Flushed channel (direct)
-@Remoting "endpoint" read-1 21:25:54,409 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@2dc0e0d5
-@Remoting "endpoint" write-1 21:25:54,409 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@98bebfc
-@Remoting "endpoint" write-1 21:25:54,409 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@98bebfc (with timeout)
-@Remoting "endpoint" read-1 21:25:54,409 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@2dc0e0d5
-@Remoting "endpoint" read-1 21:25:54,409 TRACE [org.xnio.nio.selector] Selected key sun.nio.ch.SelectionKeyImpl@6f03482 for java.nio.channels.SocketChannel[connected local=/127.0.0.1:60489 remote=localhost/127.0.0.1:4447]
-@Remoting "endpoint" read-1 21:25:54,409 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf> on channel TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,409 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf> on channel org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,409 TRACE [org.xnio.listener] Invoking listener org.jboss.remoting3.remote.ClientConnectionOpenListener$Capabilities@3f9cbc1b on channel org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,410 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=78 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
-@Remoting "endpoint" read-1 21:25:54,410 TRACE [org.jboss.remoting.remote.client] Client received capabilities response
-@Remoting "endpoint" read-1 21:25:54,410 TRACE [org.jboss.remoting.remote.client] Client received capability: version 1
-@Remoting "endpoint" read-1 21:25:54,410 TRACE [org.jboss.remoting.remote.client] Client received capability: remote endpoint name "master:blue-instance"
-@Remoting "endpoint" read-1 21:25:54,410 TRACE [org.jboss.remoting.remote.client] Client received capability: SASL mechanism DIGEST-MD5
-@Remoting "endpoint" read-1 21:25:54,410 TRACE [org.jboss.remoting.remote.client] SASL mechanism DIGEST-MD5 added to allowed set
-@Remoting "endpoint" read-1 21:25:54,410 TRACE [org.jboss.remoting.remote.client] Client received capability: message close protocol supported
-@Remoting "endpoint" read-1 21:25:54,410 TRACE [org.jboss.remoting.remote.client] Client received capability: remote version is "3.3.9.Final-redhat-1"
-@Remoting "endpoint" read-1 21:25:54,410 TRACE [org.jboss.remoting.remote.client] Client received capability: remote channels in is "40"
-@Remoting "endpoint" read-1 21:25:54,410 TRACE [org.jboss.remoting.remote.client] Client received capability: remote channels out is "40"
-@Remoting "endpoint" read-1 21:25:54,419 TRACE [org.jboss.sasl.digest] Preferred qop property: null
-@Remoting "endpoint" read-1 21:25:54,419 TRACE [org.jboss.sasl.digest] Preferred qop mask: 1
-@Remoting "endpoint" read-1 21:25:54,419 TRACE [org.jboss.sasl.digest] Preferred QOPs : 1 
-@Remoting "endpoint" read-1 21:25:54,419 TRACE [org.jboss.sasl.digest] Preferred strength: null
-@Remoting "endpoint" read-1 21:25:54,419 TRACE [org.jboss.sasl.digest] Cipher strengths: 4 2 1 
-@Remoting "endpoint" read-1 21:25:54,419 TRACE [org.jboss.sasl.digest.client] DIGEST60:Explicitly specified cipher: null
-@Remoting "endpoint" read-1 21:25:54,419 TRACE [org.jboss.remoting.remote.client] Client initiating authentication using mechanism DIGEST-MD5
-@Remoting "endpoint" read-1 21:25:54,421 TRACE [org.jboss.remoting.endpoint] Allocated tick to 3 of endpoint "endpoint" <3ffcd140> (opened org.jboss.remoting3.EndpointImpl$TrackingExecutor@242711fc)
-@Remoting "endpoint" read-1 21:25:54,421 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@2dc0e0d5
-@Remoting "endpoint" task-1 21:25:54,422 TRACE [org.xnio.channels.framed] Accepting java.nio.DirectByteBuffer[pos=0 lim=12 cap=8192] into java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
-@Remoting "endpoint" task-1 21:25:54,422 TRACE [org.xnio.channels.framed] Accepted a message into java.nio.HeapByteBuffer[pos=16 lim=8196 cap=8196]
-@Remoting "endpoint" task-1 21:25:54,422 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" task-1 21:25:54,422 TRACE [org.jboss.remoting.remote.connection] Sent message java.nio.DirectByteBuffer[pos=12 lim=12 cap=8192] (direct)
-@Remoting "endpoint" task-1 21:25:54,422 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" task-1 21:25:54,422 TRACE [org.jboss.remoting.remote.connection] Flushed channel (direct)
-@Remoting "endpoint" task-1 21:25:54,422 TRACE [org.jboss.remoting.remote] Setting read listener to org.jboss.remoting3.remote.ClientConnectionOpenListener$Authentication@1e6bb7a9
-@Remoting "endpoint" write-1 21:25:54,422 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@98bebfc
-@Remoting "endpoint" task-1 21:25:54,422 TRACE [org.xnio.listener] Setting channel listener to org.jboss.remoting3.remote.ClientConnectionOpenListener$Authentication@1e6bb7a9
-@Remoting "endpoint" write-1 21:25:54,422 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@98bebfc (with timeout)
-@Remoting "endpoint" task-1 21:25:54,422 TRACE [org.jboss.remoting.endpoint] Resource closed count 00000002 of endpoint "endpoint" <3ffcd140> (closed org.jboss.remoting3.EndpointImpl$TrackingExecutor@242711fc)
-@Remoting "endpoint" read-1 21:25:54,423 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@2dc0e0d5
-@Remoting "endpoint" read-1 21:25:54,423 TRACE [org.xnio.nio.selector] Selected key sun.nio.ch.SelectionKeyImpl@6f03482 for java.nio.channels.SocketChannel[connected local=/127.0.0.1:60489 remote=localhost/127.0.0.1:4447]
-@Remoting "endpoint" read-1 21:25:54,423 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf> on channel TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,423 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf> on channel org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,423 TRACE [org.xnio.listener] Invoking listener org.jboss.remoting3.remote.ClientConnectionOpenListener$Authentication@1e6bb7a9 on channel org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,423 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=111 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
-@Remoting "endpoint" read-1 21:25:54,423 TRACE [org.jboss.remoting.remote.client] Client received authentication challenge
-@Remoting "endpoint" read-1 21:25:54,424 TRACE [org.jboss.remoting.endpoint] Allocated tick to 3 of endpoint "endpoint" <3ffcd140> (opened org.jboss.remoting3.EndpointImpl$TrackingExecutor@242711fc)
-@Remoting "endpoint" read-1 21:25:54,424 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@2dc0e0d5
-@Remoting "endpoint" task-2 21:25:54,425 TRACE [org.jboss.sasl.digest] DIGEST11:Directive realm = ApplicationRealm
-@Remoting "endpoint" task-2 21:25:54,426 TRACE [org.jboss.sasl.digest] DIGEST11:Directive nonce = 44iDOt2ecX5SY1ZddboH3XLI5eYkEb+6pLSAxHtl
-@Remoting "endpoint" task-2 21:25:54,426 TRACE [org.jboss.sasl.digest] DIGEST11:Directive charset = utf-8
-@Remoting "endpoint" task-2 21:25:54,426 TRACE [org.jboss.sasl.digest] DIGEST11:Directive algorithm = md5-sess
-@Remoting "endpoint" task-2 21:25:54,427 DEBUG [org.jboss.remoting.remote.client] Client authentication failed for mechanism DIGEST-MD5: javax.security.sasl.SaslException: DIGEST-MD5: Cannot perform callback to acquire realm, authentication ID or password [Caused by javax.security.auth.callback.UnsupportedCallbackException]
-@Remoting "endpoint" task-2 21:25:54,427 TRACE [org.jboss.remoting.remote.client] Client sending capabilities request
-@Remoting "endpoint" task-2 21:25:54,427 TRACE [org.jboss.remoting.remote] Setting read listener to org.jboss.remoting3.remote.ClientConnectionOpenListener$Capabilities@cebee91
-@Remoting "endpoint" task-2 21:25:54,427 TRACE [org.xnio.listener] Setting channel listener to org.jboss.remoting3.remote.ClientConnectionOpenListener$Capabilities@cebee91
-@Remoting "endpoint" task-2 21:25:54,427 TRACE [org.xnio.channels.framed] Accepting java.nio.DirectByteBuffer[pos=0 lim=50 cap=8192] into java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
-@Remoting "endpoint" task-2 21:25:54,428 TRACE [org.xnio.channels.framed] Accepted a message into java.nio.HeapByteBuffer[pos=54 lim=8196 cap=8196]
-@Remoting "endpoint" task-2 21:25:54,428 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" task-2 21:25:54,428 TRACE [org.jboss.remoting.remote.connection] Sent message java.nio.DirectByteBuffer[pos=50 lim=50 cap=8192] (direct)
-@Remoting "endpoint" task-2 21:25:54,428 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" task-2 21:25:54,428 TRACE [org.jboss.remoting.remote.connection] Flushed channel (direct)
-@Remoting "endpoint" write-1 21:25:54,428 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@98bebfc
-@Remoting "endpoint" task-2 21:25:54,428 TRACE [org.jboss.remoting.endpoint] Resource closed count 00000002 of endpoint "endpoint" <3ffcd140> (closed org.jboss.remoting3.EndpointImpl$TrackingExecutor@242711fc)
-@Remoting "endpoint" write-1 21:25:54,428 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@98bebfc (with timeout)
-@Remoting "endpoint" read-1 21:25:54,429 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@2dc0e0d5
-@Remoting "endpoint" read-1 21:25:54,429 TRACE [org.xnio.nio.selector] Selected key sun.nio.ch.SelectionKeyImpl@6f03482 for java.nio.channels.SocketChannel[connected local=/127.0.0.1:60489 remote=localhost/127.0.0.1:4447]
-@Remoting "endpoint" read-1 21:25:54,429 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf> on channel TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,429 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf> on channel org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,429 TRACE [org.xnio.listener] Invoking listener org.jboss.remoting3.remote.ClientConnectionOpenListener$Capabilities@cebee91 on channel org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,429 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=78 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
-@Remoting "endpoint" read-1 21:25:54,429 TRACE [org.jboss.remoting.remote.client] Client received capabilities response
-@Remoting "endpoint" read-1 21:25:54,429 TRACE [org.jboss.remoting.remote.client] Client received capability: version 1
-@Remoting "endpoint" read-1 21:25:54,429 TRACE [org.jboss.remoting.remote.client] Client received capability: remote endpoint name "master:blue-instance"
-@Remoting "endpoint" read-1 21:25:54,429 TRACE [org.jboss.remoting.remote.client] Client received capability: SASL mechanism DIGEST-MD5
-@Remoting "endpoint" read-1 21:25:54,429 TRACE [org.jboss.remoting.remote.client] Client received capability: message close protocol supported
-@Remoting "endpoint" read-1 21:25:54,429 TRACE [org.jboss.remoting.remote.client] Client received capability: remote version is "3.3.9.Final-redhat-1"
-@Remoting "endpoint" read-1 21:25:54,429 TRACE [org.jboss.remoting.remote.client] Client received capability: remote channels in is "40"
-@Remoting "endpoint" read-1 21:25:54,429 TRACE [org.jboss.remoting.remote.client] Client received capability: remote channels out is "40"
-@Remoting "endpoint" read-1 21:25:54,430 TRACE [org.jboss.remoting.remote.connection] Connection error detail
-javax.security.sasl.SaslException: Authentication failed: the server presented no authentication mechanisms
-	at org.jboss.remoting3.remote.ClientConnectionOpenListener$Capabilities.handleEvent(ClientConnectionOpenListener.java:389)
-	at org.jboss.remoting3.remote.ClientConnectionOpenListener$Capabilities.handleEvent(ClientConnectionOpenListener.java:243)
-	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:72)
-	at org.xnio.channels.TranslatingSuspendableChannel.handleReadable(TranslatingSuspendableChannel.java:189)
-	at org.xnio.channels.TranslatingSuspendableChannel$1.handleEvent(TranslatingSuspendableChannel.java:103)
-	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:72)
-	at org.xnio.channels.TranslatingSuspendableChannel.handleReadable(TranslatingSuspendableChannel.java:189)
-	at org.xnio.ssl.JsseConnectedSslStreamChannel.handleReadable(JsseConnectedSslStreamChannel.java:183)
-	at org.xnio.channels.TranslatingSuspendableChannel$1.handleEvent(TranslatingSuspendableChannel.java:103)
-	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:72)
-	at org.xnio.nio.NioHandle.run(NioHandle.java:90)
-	at org.xnio.nio.WorkerThread.run(WorkerThread.java:198)
-@Remoting "endpoint" read-1 21:25:54,432 DEBUG [org.jboss.remoting.remote.connection] JBREM000200: Remote connection failed: javax.security.sasl.SaslException: Authentication failed: the server presented no authentication mechanisms
-@Remoting "endpoint" read-1 21:25:54,432 TRACE [org.xnio.safe-close] Closing resource org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,432 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,432 TRACE [org.xnio.nio.tcp.channel] Closing TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,433 TRACE [org.xnio.nio] Cancelling key sun.nio.ch.SelectionKeyImpl@6f03482 of java.nio.channels.SocketChannel[closed] (same thread)
-@Remoting "endpoint" read-1 21:25:54,433 TRACE [org.xnio.nio] Cancelling key sun.nio.ch.SelectionKeyImpl@3cd3e762 of java.nio.channels.SocketChannel[closed] (other thread)
-@Remoting "endpoint" read-1 21:25:54,433 TRACE [org.xnio.listener] Invoking listener Close listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf> on channel TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,433 TRACE [org.xnio.safe-close] Closing resource org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,433 TRACE [org.xnio.safe-close] Closing resource TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,433 TRACE [org.xnio.listener] Invoking listener Close listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf> on channel org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,433 TRACE [org.xnio.safe-close] Closing resource org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" read-1 21:25:54,433 TRACE [org.xnio.safe-close] Closing resource org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <477b4cdf>
-@Remoting "endpoint" write-1 21:25:54,433 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@98bebfc
-@Remoting "endpoint" write-1 21:25:54,433 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@98bebfc
-@Remoting "endpoint" read-1 21:25:54,433 TRACE [org.jboss.remoting.endpoint] Registered exception result
-javax.security.sasl.SaslException: Authentication failed: the server presented no authentication mechanisms
-	at org.jboss.remoting3.remote.ClientConnectionOpenListener$Capabilities.handleEvent(ClientConnectionOpenListener.java:389)
-	at org.jboss.remoting3.remote.ClientConnectionOpenListener$Capabilities.handleEvent(ClientConnectionOpenListener.java:243)
-	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:72)
-	at org.xnio.channels.TranslatingSuspendableChannel.handleReadable(TranslatingSuspendableChannel.java:189)
-	at org.xnio.channels.TranslatingSuspendableChannel$1.handleEvent(TranslatingSuspendableChannel.java:103)
-	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:72)
-	at org.xnio.channels.TranslatingSuspendableChannel.handleReadable(TranslatingSuspendableChannel.java:189)
-	at org.xnio.ssl.JsseConnectedSslStreamChannel.handleReadable(JsseConnectedSslStreamChannel.java:183)
-	at org.xnio.channels.TranslatingSuspendableChannel$1.handleEvent(TranslatingSuspendableChannel.java:103)
-	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:72)
-	at org.xnio.nio.NioHandle.run(NioHandle.java:90)
-	at org.xnio.nio.WorkerThread.run(WorkerThread.java:198)
-@Remoting "endpoint" read-1 21:25:54,434 TRACE [org.jboss.remoting.endpoint] Resource closed count 00000001 of endpoint "endpoint" <3ffcd140> (closed a failed connection (2))
-@Remoting "endpoint" read-1 21:25:54,434 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@2dc0e0d5
-@main 21:25:54,434 TRACE [org.jboss.remotingjmx.RemotingConnectorServer] close()
-@main 21:25:54,434 TRACE [org.jboss.remoting.resource] Closing endpoint "endpoint" <3ffcd140> synchronously
-@main 21:25:54,435 TRACE [org.jboss.remoting.resource] Closing Remoting remote connection provider 60dcc9fe for endpoint "endpoint" <3ffcd140> asynchronously
-@main 21:25:54,435 TRACE [org.jboss.remoting.resource] Completed close of Remoting remote connection provider 60dcc9fe for endpoint "endpoint" <3ffcd140>
-@main 21:25:54,436 TRACE [org.jboss.remoting.resource] Closing Registration of 'remote': Remoting remote connection provider 60dcc9fe for endpoint "endpoint" <3ffcd140> asynchronously
-@main 21:25:54,436 TRACE [org.jboss.remoting.resource] Closing Remoting remote connection provider 60dcc9fe for endpoint "endpoint" <3ffcd140> asynchronously
-@main 21:25:54,436 TRACE [org.jboss.remoting.resource] Completed close of Registration of 'remote': Remoting remote connection provider 60dcc9fe for endpoint "endpoint" <3ffcd140>
-@main 21:25:54,436 TRACE [org.jboss.remoting.endpoint] Finished phase 1 shutdown of endpoint "endpoint" <3ffcd140>
-@main 21:25:54,436 TRACE [org.xnio.nio] Initiating shutdown of org.xnio.nio.NioXnioWorker@76a4d6c
-@Remoting "endpoint" write-1 21:25:54,436 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@98bebfc
-@Remoting "endpoint" read-1 21:25:54,436 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@2dc0e0d5
-@Remoting "endpoint" write-1 21:25:54,436 TRACE [org.xnio.nio] Shutting down channel thread "Thread[Remoting "endpoint" write-1,5,main]"
-@Remoting "endpoint" read-1 21:25:54,436 TRACE [org.xnio.nio] Shutting down channel thread "Thread[Remoting "endpoint" read-1,5,main]"
-@Remoting "endpoint" write-1 21:25:54,436 TRACE [org.xnio.safe-close] Closing resource sun.nio.ch.KQueueSelectorImpl@98bebfc
-@Remoting "endpoint" read-1 21:25:54,436 TRACE [org.xnio.safe-close] Closing resource sun.nio.ch.KQueueSelectorImpl@2dc0e0d5
-@Remoting "endpoint" write-1 21:25:54,436 TRACE [org.xnio.nio] CAS org.xnio.nio.NioXnioWorker@76a4d6c 80000003 -> 80000002
-@Remoting "endpoint" read-1 21:25:54,437 TRACE [org.xnio.nio] CAS org.xnio.nio.NioXnioWorker@76a4d6c 80000002 -> 80000001
-@Remoting "endpoint" task-1 21:25:54,437 TRACE [org.xnio.nio] CAS org.xnio.nio.NioXnioWorker@76a4d6c 80000001 -> 80000000
-@Remoting "endpoint" task-1 21:25:54,437 TRACE [org.xnio.nio] CAS org.xnio.nio.NioXnioWorker@76a4d6c 80000000 -> c0000000 (close complete)
-@main 21:25:54,437 TRACE [org.jboss.remoting.resource] Closing Remoting local connection provider 5e5d171f for endpoint "endpoint" <3ffcd140> asynchronously
-@Remoting "endpoint" task-1 21:25:54,437 TRACE [org.jboss.remoting.resource] Completed close of endpoint "endpoint" <3ffcd140>
-@main 21:25:54,437 TRACE [org.jboss.remoting.resource] Completed close of Remoting local connection provider 5e5d171f for endpoint "endpoint" <3ffcd140>
+@main 22:25:25,280 DEBUG [io.novaordis.jmx.JmxClientImpl] the jmx client instance attempting to connect to service:jmx:remoting-jmx://localhost:4447
+@main 22:36:38,815 DEBUG [org.jboss.logging] Logging Provider: org.jboss.logging.Log4jLoggerProvider
+@main 22:36:38,817 TRACE [org.jboss.remotingjmx.RemotingConnectorServer] connect({jmx.remote.credentials,[username=blah,password=blah123!]})
+@main 22:36:38,825 INFO  [org.xnio] XNIO Version 3.0.16.GA-redhat-1
+@main 22:36:38,836 INFO  [org.xnio.nio] XNIO NIO Implementation Version 3.0.16.GA-redhat-1
+@main 22:36:38,836 TRACE [org.xnio.nio] NIO.2 detected
+@main 22:36:38,842 TRACE [org.xnio.nio] Starting up with selector provider sun.nio.ch.KQueueSelectorProvider@1060b431
+@main 22:36:38,852 TRACE [org.xnio.safe-close] Closing resource sun.nio.ch.PollSelectorImpl@544a2ea6
+@main 22:36:38,853 TRACE [org.xnio.nio] Using Default system selector creator for provider class sun.nio.ch.KQueueSelectorProvider for main selectors and Selector creator class sun.nio.ch.PollSelectorImpl for provider class sun.nio.ch.KQueueSelectorProvider for temp selectors
+@main 22:36:38,865 TRACE [org.xnio.safe-close] Closing resource java.io.InputStreamReader@5fdba6f9
+@main 22:36:38,865 TRACE [org.xnio.safe-close] Closing resource sun.net.www.protocol.jar.JarURLConnection$JarURLInputStream@10d59286
+@main 22:36:38,865 INFO  [org.jboss.remoting] JBoss Remoting version 3.3.9.Final-redhat-1
+@main 22:36:38,877 TRACE [org.xnio.nio] CAS org.xnio.nio.NioXnioWorker@679b62af 00000001 -> 00000002
+@main 22:36:38,878 TRACE [org.xnio.nio] CAS org.xnio.nio.NioXnioWorker@679b62af 00000002 -> 00000003
+@Remoting "endpoint" read-1 22:36:38,878 TRACE [org.xnio.nio] Starting worker thread Thread[Remoting "endpoint" read-1,5,main]
+@Remoting "endpoint" write-1 22:36:38,878 TRACE [org.xnio.nio] Starting worker thread Thread[Remoting "endpoint" write-1,5,main]
+@Remoting "endpoint" read-1 22:36:38,879 DEBUG [org.xnio.nio] Started channel thread 'Remoting "endpoint" read-1', selector sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" write-1 22:36:38,879 DEBUG [org.xnio.nio] Started channel thread 'Remoting "endpoint" write-1', selector sun.nio.ch.KQueueSelectorImpl@45e30c08
+@Remoting "endpoint" write-1 22:36:38,879 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@Remoting "endpoint" read-1 22:36:38,879 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@43f47969
+@main 22:36:38,882 TRACE [org.jboss.remoting.endpoint] Completed open of endpoint "endpoint" <4ba2ca36>
+@main 22:36:38,883 TRACE [org.jboss.remoting.endpoint] Allocated tick to 1 of endpoint "endpoint" <4ba2ca36> (opened Connection provider for remote)
+@main 22:36:38,935 TRACE [org.jboss.remoting.endpoint] Adding connection provider registration named 'remote': Remoting remote connection provider 3b07a0d6 for endpoint "endpoint" <4ba2ca36>
+@main 22:36:38,943 TRACE [org.jboss.remoting.endpoint] Allocated tick to 2 of endpoint "endpoint" <4ba2ca36> (opened Connection to localhost/127.0.0.1:4447)
+@main 22:36:38,951 TRACE [org.jboss.remoting.remote] Attempting to connect to "localhost/127.0.0.1:4447" with options {org.xnio.Options.SASL_POLICY_NOPLAINTEXT=>false,org.xnio.Options.SASL_PROPERTIES=>[(jboss.sasl.local-user.quiet-auth=>true)],org.xnio.Options.SSL_STARTTLS=>true,org.xnio.Options.SASL_POLICY_NOANONYMOUS=>false,org.xnio.Options.SSL_ENABLED=>true,org.xnio.Options.SASL_DISALLOWED_MECHANISMS=>[JBOSS-LOCAL-USER]}
+@main 22:36:39,038 TRACE [org.xnio.nio] Adding channel java.nio.channels.SocketChannel[unconnected local=/0:0:0:0:0:0:0:0:61065] to Thread[Remoting "endpoint" read-1,5,main] for XNIO channel TCP socket channel (NIO) <5bda8e08> (other thread)
+@Remoting "endpoint" read-1 22:36:39,039 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" read-1 22:36:39,039 TRACE [org.xnio.nio] Running task org.xnio.nio.WorkerThread$SynchTask@6c519a85
+@Remoting "endpoint" read-1 22:36:39,039 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@43f47969
+@main 22:36:39,040 TRACE [org.xnio.nio] Adding channel java.nio.channels.SocketChannel[unconnected local=/0:0:0:0:0:0:0:0:61065] to Thread[Remoting "endpoint" write-1,5,main] for XNIO channel TCP socket channel (NIO) <5bda8e08> (other thread)
+@Remoting "endpoint" write-1 22:36:39,040 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@Remoting "endpoint" write-1 22:36:39,040 TRACE [org.xnio.nio] Running task org.xnio.nio.WorkerThread$SynchTask@3bd91c1e
+@Remoting "endpoint" write-1 22:36:39,040 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@main 22:36:39,044 TRACE [org.xnio.listener] Setting channel listener to Connection finisher for java.nio.channels.SocketChannel[connection-pending local=/0:0:0:0:0:0:0:0:61065 remote=localhost/127.0.0.1:4447]
+@main 22:36:39,044 TRACE [org.xnio.nio] Setting operations of key sun.nio.ch.SelectionKeyImpl@1fa121e2 of java.nio.channels.SocketChannel[connection-pending local=/0:0:0:0:0:0:0:0:61065 remote=localhost/127.0.0.1:4447] to 08 (other thread)
+@Remoting "endpoint" read-1 22:36:39,044 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" read-1 22:36:39,044 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" read-1 22:36:39,045 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" read-1 22:36:39,045 TRACE [org.xnio.nio.selector] Selected key sun.nio.ch.SelectionKeyImpl@1fa121e2 for java.nio.channels.SocketChannel[connection-pending local=/0:0:0:0:0:0:0:0:61065 remote=localhost/127.0.0.1:4447]
+@Remoting "endpoint" read-1 22:36:39,045 TRACE [org.xnio.listener] Invoking listener Connection finisher for java.nio.channels.SocketChannel[connection-pending local=/0:0:0:0:0:0:0:0:61065 remote=localhost/127.0.0.1:4447] on channel TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,045 TRACE [org.xnio.nio] Setting operations of key sun.nio.ch.SelectionKeyImpl@1fa121e2 of java.nio.channels.SocketChannel[connected local=/127.0.0.1:61065 remote=localhost/127.0.0.1:4447] to 00 (same thread)
+@Remoting "endpoint" read-1 22:36:39,045 TRACE [org.xnio.listener] Setting channel listener to null
+@Remoting "endpoint" read-1 22:36:39,047 TRACE [org.xnio.listener] Invoking listener org.xnio.ssl.JsseXnioSsl$2@20d81758 on channel TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,140 TRACE [org.xnio.listener] Setting channel listener to Read listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,140 TRACE [org.xnio.listener] Setting channel listener to Write listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,140 TRACE [org.xnio.listener] Setting channel listener to Close listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,141 TRACE [org.xnio.listener] Invoking listener org.jboss.remoting3.remote.RemoteConnectionProvider$3@60a5c457 on channel org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,170 TRACE [org.xnio.listener] Setting channel listener to Read listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,170 TRACE [org.xnio.listener] Setting channel listener to Write listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,170 TRACE [org.xnio.listener] Setting channel listener to Close listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,172 TRACE [org.xnio.channels.framed] Created new framed message channel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>, receive buffer java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196], transmit buffer java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
+@Remoting "endpoint" read-1 22:36:39,174 TRACE [org.jboss.remoting.remote.connection] Initialized connection from localhost/127.0.0.1:4447 to /127.0.0.1:61065 with options {org.xnio.Options.SASL_POLICY_NOPLAINTEXT=>false,org.xnio.Options.SASL_PROPERTIES=>[(jboss.sasl.local-user.quiet-auth=>true)],org.xnio.Options.SSL_STARTTLS=>true,org.xnio.Options.SASL_POLICY_NOANONYMOUS=>false,org.xnio.Options.SSL_ENABLED=>true,org.xnio.Options.SASL_DISALLOWED_MECHANISMS=>[JBOSS-LOCAL-USER]}
+@Remoting "endpoint" read-1 22:36:39,175 TRACE [org.xnio.listener] Setting channel listener to org.jboss.remoting3.remote.RemoteConnection$RemoteWriteListener@240be5c9
+@Remoting "endpoint" read-1 22:36:39,176 TRACE [org.jboss.remoting.remote] Setting read listener to org.jboss.remoting3.remote.ClientConnectionOpenListener$Greeting@1397f5bd
+@Remoting "endpoint" read-1 22:36:39,176 TRACE [org.xnio.listener] Setting channel listener to org.jboss.remoting3.remote.ClientConnectionOpenListener$Greeting@1397f5bd
+@Remoting "endpoint" read-1 22:36:39,176 TRACE [org.xnio.nio] Resume reads on TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,176 TRACE [org.xnio.nio] Setting operations of key sun.nio.ch.SelectionKeyImpl@1fa121e2 of java.nio.channels.SocketChannel[connected local=/127.0.0.1:61065 remote=localhost/127.0.0.1:4447] to 01 (same thread)
+@Remoting "endpoint" read-1 22:36:39,176 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" read-1 22:36:39,177 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" read-1 22:36:39,177 TRACE [org.xnio.nio.selector] Selected key sun.nio.ch.SelectionKeyImpl@1fa121e2 for java.nio.channels.SocketChannel[connected local=/127.0.0.1:61065 remote=localhost/127.0.0.1:4447]
+@Remoting "endpoint" read-1 22:36:39,177 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,177 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,177 TRACE [org.xnio.listener] Invoking listener org.jboss.remoting3.remote.ClientConnectionOpenListener$Greeting@1397f5bd on channel org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,179 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=16 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
+@Remoting "endpoint" read-1 22:36:39,179 TRACE [org.jboss.remoting.remote.client] Received java.nio.DirectByteBuffer[pos=12 lim=8192 cap=8192]
+@Remoting "endpoint" read-1 22:36:39,179 TRACE [org.jboss.remoting.remote.client] Client received greeting
+@Remoting "endpoint" read-1 22:36:39,180 TRACE [org.jboss.remoting.remote.client] Client received server name: localhost
+@Remoting "endpoint" read-1 22:36:39,180 TRACE [org.jboss.remoting.remote.client] Client sending capabilities request
+@Remoting "endpoint" read-1 22:36:39,183 TRACE [org.jboss.remoting.remote] Setting read listener to org.jboss.remoting3.remote.ClientConnectionOpenListener$Capabilities@6b40fc4b
+@Remoting "endpoint" read-1 22:36:39,183 TRACE [org.xnio.listener] Setting channel listener to org.jboss.remoting3.remote.ClientConnectionOpenListener$Capabilities@6b40fc4b
+@Remoting "endpoint" read-1 22:36:39,183 TRACE [org.xnio.channels.framed] Accepting java.nio.DirectByteBuffer[pos=0 lim=50 cap=8192] into java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
+@Remoting "endpoint" read-1 22:36:39,183 TRACE [org.xnio.channels.framed] Accepted a message into java.nio.HeapByteBuffer[pos=54 lim=8196 cap=8196]
+@Remoting "endpoint" read-1 22:36:39,183 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,184 TRACE [org.jboss.remoting.remote.connection] Sent message java.nio.DirectByteBuffer[pos=50 lim=50 cap=8192] (direct)
+@Remoting "endpoint" read-1 22:36:39,184 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,184 TRACE [org.jboss.remoting.remote.connection] Flushed channel (direct)
+@Remoting "endpoint" read-1 22:36:39,184 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" write-1 22:36:39,184 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@Remoting "endpoint" write-1 22:36:39,184 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@45e30c08 (with timeout)
+@Remoting "endpoint" read-1 22:36:39,184 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" read-1 22:36:39,184 TRACE [org.xnio.nio.selector] Selected key sun.nio.ch.SelectionKeyImpl@1fa121e2 for java.nio.channels.SocketChannel[connected local=/127.0.0.1:61065 remote=localhost/127.0.0.1:4447]
+@Remoting "endpoint" read-1 22:36:39,185 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,185 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,185 TRACE [org.xnio.listener] Invoking listener org.jboss.remoting3.remote.ClientConnectionOpenListener$Capabilities@6b40fc4b on channel org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,185 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=78 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
+@Remoting "endpoint" read-1 22:36:39,185 TRACE [org.jboss.remoting.remote.client] Client received capabilities response
+@Remoting "endpoint" read-1 22:36:39,185 TRACE [org.jboss.remoting.remote.client] Client received capability: version 1
+@Remoting "endpoint" read-1 22:36:39,185 TRACE [org.jboss.remoting.remote.client] Client received capability: remote endpoint name "master:blue-instance"
+@Remoting "endpoint" read-1 22:36:39,185 TRACE [org.jboss.remoting.remote.client] Client received capability: SASL mechanism DIGEST-MD5
+@Remoting "endpoint" read-1 22:36:39,185 TRACE [org.jboss.remoting.remote.client] SASL mechanism DIGEST-MD5 added to allowed set
+@Remoting "endpoint" read-1 22:36:39,185 TRACE [org.jboss.remoting.remote.client] Client received capability: message close protocol supported
+@Remoting "endpoint" read-1 22:36:39,186 TRACE [org.jboss.remoting.remote.client] Client received capability: remote version is "3.3.9.Final-redhat-1"
+@Remoting "endpoint" read-1 22:36:39,186 TRACE [org.jboss.remoting.remote.client] Client received capability: remote channels in is "40"
+@Remoting "endpoint" read-1 22:36:39,186 TRACE [org.jboss.remoting.remote.client] Client received capability: remote channels out is "40"
+@Remoting "endpoint" read-1 22:36:39,195 TRACE [org.jboss.sasl.digest] Preferred qop property: null
+@Remoting "endpoint" read-1 22:36:39,196 TRACE [org.jboss.sasl.digest] Preferred qop mask: 1
+@Remoting "endpoint" read-1 22:36:39,196 TRACE [org.jboss.sasl.digest] Preferred QOPs : 1 
+@Remoting "endpoint" read-1 22:36:39,196 TRACE [org.jboss.sasl.digest] Preferred strength: null
+@Remoting "endpoint" read-1 22:36:39,196 TRACE [org.jboss.sasl.digest] Cipher strengths: 4 2 1 
+@Remoting "endpoint" read-1 22:36:39,196 TRACE [org.jboss.sasl.digest.client] DIGEST60:Explicitly specified cipher: null
+@Remoting "endpoint" read-1 22:36:39,196 TRACE [org.jboss.remoting.remote.client] Client initiating authentication using mechanism DIGEST-MD5
+@Remoting "endpoint" read-1 22:36:39,197 TRACE [org.jboss.remoting.endpoint] Allocated tick to 3 of endpoint "endpoint" <4ba2ca36> (opened org.jboss.remoting3.EndpointImpl$TrackingExecutor@55682515)
+@Remoting "endpoint" read-1 22:36:39,198 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" task-1 22:36:39,199 TRACE [org.xnio.channels.framed] Accepting java.nio.DirectByteBuffer[pos=0 lim=12 cap=8192] into java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
+@Remoting "endpoint" task-1 22:36:39,199 TRACE [org.xnio.channels.framed] Accepted a message into java.nio.HeapByteBuffer[pos=16 lim=8196 cap=8196]
+@Remoting "endpoint" task-1 22:36:39,199 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" task-1 22:36:39,199 TRACE [org.jboss.remoting.remote.connection] Sent message java.nio.DirectByteBuffer[pos=12 lim=12 cap=8192] (direct)
+@Remoting "endpoint" task-1 22:36:39,199 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" task-1 22:36:39,199 TRACE [org.jboss.remoting.remote.connection] Flushed channel (direct)
+@Remoting "endpoint" write-1 22:36:39,199 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@Remoting "endpoint" task-1 22:36:39,199 TRACE [org.jboss.remoting.remote] Setting read listener to org.jboss.remoting3.remote.ClientConnectionOpenListener$Authentication@2b6a33b
+@Remoting "endpoint" write-1 22:36:39,199 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@45e30c08 (with timeout)
+@Remoting "endpoint" task-1 22:36:39,199 TRACE [org.xnio.listener] Setting channel listener to org.jboss.remoting3.remote.ClientConnectionOpenListener$Authentication@2b6a33b
+@Remoting "endpoint" task-1 22:36:39,200 TRACE [org.jboss.remoting.endpoint] Resource closed count 00000002 of endpoint "endpoint" <4ba2ca36> (closed org.jboss.remoting3.EndpointImpl$TrackingExecutor@55682515)
+@Remoting "endpoint" read-1 22:36:39,200 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" read-1 22:36:39,200 TRACE [org.xnio.nio.selector] Selected key sun.nio.ch.SelectionKeyImpl@1fa121e2 for java.nio.channels.SocketChannel[connected local=/127.0.0.1:61065 remote=localhost/127.0.0.1:4447]
+@Remoting "endpoint" read-1 22:36:39,200 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,200 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,200 TRACE [org.xnio.listener] Invoking listener org.jboss.remoting3.remote.ClientConnectionOpenListener$Authentication@2b6a33b on channel org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,200 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=111 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
+@Remoting "endpoint" read-1 22:36:39,201 TRACE [org.jboss.remoting.remote.client] Client received authentication challenge
+@Remoting "endpoint" read-1 22:36:39,201 TRACE [org.jboss.remoting.endpoint] Allocated tick to 3 of endpoint "endpoint" <4ba2ca36> (opened org.jboss.remoting3.EndpointImpl$TrackingExecutor@55682515)
+@Remoting "endpoint" read-1 22:36:39,201 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" task-2 22:36:39,201 TRACE [org.jboss.sasl.digest] DIGEST11:Directive realm = ApplicationRealm
+@Remoting "endpoint" task-2 22:36:39,203 TRACE [org.jboss.sasl.digest] DIGEST11:Directive nonce = tf8LoUqPMJdvidgsFfRu1T+ZzapHHtuFpfG1gEKE
+@Remoting "endpoint" task-2 22:36:39,203 TRACE [org.jboss.sasl.digest] DIGEST11:Directive charset = utf-8
+@Remoting "endpoint" task-2 22:36:39,203 TRACE [org.jboss.sasl.digest] DIGEST11:Directive algorithm = md5-sess
+@Remoting "endpoint" task-2 22:36:39,204 TRACE [org.jboss.sasl.digest.client] DIGEST61:Raw send size: 0
+@Remoting "endpoint" task-2 22:36:39,205 TRACE [org.jboss.sasl.digest] A2: AUTHENTICATE:remote/localhost
+@Remoting "endpoint" task-2 22:36:39,205 TRACE [org.jboss.sasl.digest] HEX(H(A2)): ac0d6afa7ddc1fb3861dfdba49003bfd
+@Remoting "endpoint" task-2 22:36:39,205 TRACE [org.jboss.sasl.digest] H(|���Sj����9���) = 7cf7a992536a9eac950ff3073980dfd2
+@Remoting "endpoint" task-2 22:36:39,205 TRACE [org.jboss.sasl.digest] H(A1): 79dc27ff6429bed569c745ae89dc4762
+@Remoting "endpoint" task-2 22:36:39,205 TRACE [org.jboss.sasl.digest] KD: 79dc27ff6429bed569c745ae89dc4762:tf8LoUqPMJdvidgsFfRu1T+ZzapHHtuFpfG1gEKE:00000001:SElWXQLvRhp7MbHFkEreLV3ndB0TtmSgTsJwbq4B:auth:ac0d6afa7ddc1fb3861dfdba49003bfd
+@Remoting "endpoint" task-2 22:36:39,205 TRACE [org.jboss.sasl.digest] response-value: 1dc2d05d948bdf8285643199691b406b
+@Remoting "endpoint" task-2 22:36:39,205 TRACE [org.jboss.remoting.remote.client] Client sending authentication response
+@Remoting "endpoint" task-2 22:36:39,205 TRACE [org.xnio.channels.framed] Accepting java.nio.DirectByteBuffer[pos=0 lim=260 cap=8192] into java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
+@Remoting "endpoint" task-2 22:36:39,205 TRACE [org.xnio.channels.framed] Accepted a message into java.nio.HeapByteBuffer[pos=264 lim=8196 cap=8196]
+@Remoting "endpoint" task-2 22:36:39,206 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" task-2 22:36:39,206 TRACE [org.jboss.remoting.remote.connection] Sent message java.nio.DirectByteBuffer[pos=260 lim=260 cap=8192] (direct)
+@Remoting "endpoint" task-2 22:36:39,206 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" task-2 22:36:39,206 TRACE [org.jboss.remoting.remote.connection] Flushed channel (direct)
+@Remoting "endpoint" write-1 22:36:39,206 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@Remoting "endpoint" task-2 22:36:39,206 TRACE [org.jboss.remoting.endpoint] Resource closed count 00000002 of endpoint "endpoint" <4ba2ca36> (closed org.jboss.remoting3.EndpointImpl$TrackingExecutor@55682515)
+@Remoting "endpoint" write-1 22:36:39,206 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@45e30c08 (with timeout)
+@Remoting "endpoint" read-1 22:36:39,207 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" read-1 22:36:39,207 TRACE [org.xnio.nio.selector] Selected key sun.nio.ch.SelectionKeyImpl@1fa121e2 for java.nio.channels.SocketChannel[connected local=/127.0.0.1:61065 remote=localhost/127.0.0.1:4447]
+@Remoting "endpoint" read-1 22:36:39,207 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,207 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,207 TRACE [org.xnio.listener] Invoking listener org.jboss.remoting3.remote.ClientConnectionOpenListener$Authentication@2b6a33b on channel org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,207 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=45 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
+@Remoting "endpoint" read-1 22:36:39,207 TRACE [org.jboss.remoting.remote.client] Client received authentication complete
+@Remoting "endpoint" read-1 22:36:39,208 TRACE [org.jboss.remoting.endpoint] Allocated tick to 3 of endpoint "endpoint" <4ba2ca36> (opened org.jboss.remoting3.EndpointImpl$TrackingExecutor@55682515)
+@Remoting "endpoint" read-1 22:36:39,208 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" task-3 22:36:39,208 TRACE [org.jboss.sasl.digest] DIGEST11:Directive rspauth = 3ea95342991455b4a5862dadd8b2c1b7
+@Remoting "endpoint" task-3 22:36:39,208 TRACE [org.jboss.sasl.digest] A2: :remote/localhost
+@Remoting "endpoint" task-3 22:36:39,208 TRACE [org.jboss.sasl.digest] HEX(H(A2)): 3f55121bf13b9e878f644515a9a55003
+@Remoting "endpoint" task-3 22:36:39,208 TRACE [org.jboss.sasl.digest] H(|���Sj����9���) = 7cf7a992536a9eac950ff3073980dfd2
+@Remoting "endpoint" task-3 22:36:39,208 TRACE [org.jboss.sasl.digest] H(A1): 79dc27ff6429bed569c745ae89dc4762
+@Remoting "endpoint" task-3 22:36:39,208 TRACE [org.jboss.sasl.digest] KD: 79dc27ff6429bed569c745ae89dc4762:tf8LoUqPMJdvidgsFfRu1T+ZzapHHtuFpfG1gEKE:00000001:SElWXQLvRhp7MbHFkEreLV3ndB0TtmSgTsJwbq4B:auth:3f55121bf13b9e878f644515a9a55003
+@Remoting "endpoint" task-3 22:36:39,208 TRACE [org.jboss.sasl.digest] response-value: 3ea95342991455b4a5862dadd8b2c1b7
+@Remoting "endpoint" task-3 22:36:39,210 TRACE [org.jboss.remoting.endpoint] Resource closed count 00000002 of endpoint "endpoint" <4ba2ca36> (closed org.jboss.remoting3.EndpointImpl$TrackingExecutor@55682515)
+@Remoting "endpoint" task-4 22:36:39,210 TRACE [org.jboss.remoting.endpoint] Registered successful result org.jboss.remoting3.remote.ClientConnectionOpenListener$Authentication$2$1@6950020
+@Remoting "endpoint" task-4 22:36:39,221 TRACE [org.xnio.listener] Setting channel listener to org.jboss.remoting3.remote.RemoteReadListener$1@2a3fb808
+@Remoting "endpoint" task-4 22:36:39,221 TRACE [org.jboss.remoting.remote] Setting read listener to org.jboss.remoting3.remote.RemoteReadListener@601b1a35
+@Remoting "endpoint" task-4 22:36:39,221 TRACE [org.xnio.listener] Setting channel listener to org.jboss.remoting3.remote.RemoteReadListener@601b1a35
+@main 22:36:39,221 TRACE [org.jboss.remoting.remote] Requesting service open of type jmx on Connection handler for Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@main 22:36:39,222 TRACE [org.jboss.remoting.remote] CAS Connection handler for Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+	old: RS=false WS=false IC=0 OC=0
+	new: RS=false WS=false IC=0 OC=1
+@main 22:36:39,222 TRACE [org.jboss.remoting.remote] Opened outbound channel on Connection handler for Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@main 22:36:39,222 TRACE [org.jboss.remoting.remote] Outbound service request for channel 9cf7a53a is configured as follows:
+  outbound window:  option 2147483647, req 2147483647
+  inbound window:   option     131072, req     131072
+  outbound msgs:    option      65535, req      65535
+  inbound msgs:     option         80, req         80
+  outbound msgsize: option 9223372036854775807, req 9223372036854775807
+  inbound msgsize:  option 9223372036854775807, req 9223372036854775807
+@main 22:36:39,222 TRACE [org.xnio.channels.framed] Accepting java.nio.DirectByteBuffer[pos=0 lim=31 cap=8192] into java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
+@main 22:36:39,222 TRACE [org.xnio.channels.framed] Accepted a message into java.nio.HeapByteBuffer[pos=35 lim=8196 cap=8196]
+@main 22:36:39,222 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@main 22:36:39,223 TRACE [org.jboss.remoting.remote.connection] Sent message java.nio.DirectByteBuffer[pos=31 lim=31 cap=8192] (direct)
+@main 22:36:39,223 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@main 22:36:39,223 TRACE [org.jboss.remoting.remote.connection] Flushed channel (direct)
+@main 22:36:39,223 TRACE [org.jboss.remoting.remote] Completed initiation of service open of type jmx on Connection handler for Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@Remoting "endpoint" write-1 22:36:39,223 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@Remoting "endpoint" write-1 22:36:39,223 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@45e30c08 (with timeout)
+@Remoting "endpoint" read-1 22:36:39,223 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" read-1 22:36:39,223 TRACE [org.xnio.nio.selector] Selected key sun.nio.ch.SelectionKeyImpl@1fa121e2 for java.nio.channels.SocketChannel[connected local=/127.0.0.1:61065 remote=localhost/127.0.0.1:4447]
+@Remoting "endpoint" read-1 22:36:39,223 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,223 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,223 TRACE [org.xnio.listener] Invoking listener org.jboss.remoting3.remote.RemoteReadListener@601b1a35 on channel org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,224 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=64 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
+@Remoting "endpoint" read-1 22:36:39,224 TRACE [org.jboss.remoting.remote] Received channel open ack
+@Remoting "endpoint" read-1 22:36:39,224 TRACE [org.jboss.remoting.remote] Inbound service acknowledgement for channel 9cf7a53a is configured as follows:
+  outbound window:  req 2147483647, use     131072
+  inbound window:   req     131072, use     131072
+  outbound msgs:    req      65535, use         80
+  inbound msgs:     req         80, use         80
+  outbound msgsize: req 9223372036854775807, use 9223372036854775807
+  inbound msgsize:  req 9223372036854775807, use 9223372036854775807
+@Remoting "endpoint" read-1 22:36:39,226 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=34 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
+@Remoting "endpoint" read-1 22:36:39,226 TRACE [org.jboss.remoting.remote] Received message data
+@Remoting "endpoint" read-1 22:36:39,227 TRACE [org.jboss.remoting.remote] CAS Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+	old: RS=false WS=false IM=0 OM=0
+	new: RS=false WS=false IM=1 OM=0
+@Remoting "endpoint" read-1 22:36:39,227 TRACE [org.jboss.remoting.remote] Opened inbound message on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@Remoting "endpoint" read-1 22:36:39,228 TRACE [org.jboss.remoting.endpoint] Allocated tick to 3 of endpoint "endpoint" <4ba2ca36> (opened org.jboss.remoting3.EndpointImpl$TrackingExecutor@651698c9)
+@Remoting "endpoint" read-1 22:36:39,229 TRACE [org.jboss.remoting.remote] Received message (chan 9cf7a53a msg 8332) (131072-10=131062 remaining)
+@Remoting "endpoint" read-1 22:36:39,229 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=12 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
+@Remoting "endpoint" read-1 22:36:39,229 TRACE [org.jboss.remoting.remote] Received message data
+@Remoting "endpoint" task-5 22:36:39,229 TRACE [org.jboss.remotingjmx.VersionedConectionFactory] Bytes Available 10
+@Remoting "endpoint" read-1 22:36:39,229 TRACE [org.jboss.remoting.remote] Received message (chan 9cf7a53a msg 8332) (131062-0=131062 remaining)
+@Remoting "endpoint" read-1 22:36:39,229 TRACE [org.jboss.remoting.remote] CAS Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+	old: RS=false WS=false IM=1 OM=0
+	new: RS=false WS=false IM=0 OM=0
+@Remoting "endpoint" read-1 22:36:39,229 TRACE [org.jboss.remoting.remote] Closed inbound message on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@Remoting "endpoint" read-1 22:36:39,229 TRACE [org.xnio.channels.framed] Accepting java.nio.DirectByteBuffer[pos=0 lim=7 cap=8192] into java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
+@Remoting "endpoint" read-1 22:36:39,230 TRACE [org.xnio.channels.framed] Accepted a message into java.nio.HeapByteBuffer[pos=11 lim=8196 cap=8196]
+@Remoting "endpoint" read-1 22:36:39,230 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,230 TRACE [org.jboss.remoting.remote.connection] Sent message java.nio.DirectByteBuffer[pos=7 lim=7 cap=8192] (direct)
+@Remoting "endpoint" read-1 22:36:39,230 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,230 TRACE [org.jboss.remoting.remote.connection] Flushed channel (direct)
+@Remoting "endpoint" write-1 22:36:39,230 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@Remoting "endpoint" read-1 22:36:39,230 TRACE [org.xnio.channels.framed] Did not read a length
+@Remoting "endpoint" write-1 22:36:39,230 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@45e30c08 (with timeout)
+@Remoting "endpoint" task-5 22:36:39,230 TRACE [org.jboss.remotingjmx.VersionedConectionFactory] First Three JMX
+@Remoting "endpoint" read-1 22:36:39,230 TRACE [org.jboss.remoting.remote] No message ready; returning
+@Remoting "endpoint" read-1 22:36:39,230 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" task-5 22:36:39,230 TRACE [org.jboss.remotingjmx.VersionedConectionFactory] Bytes Available 7
+@Remoting "endpoint" task-5 22:36:39,230 TRACE [org.jboss.remotingjmx.VersionedConectionFactory] Expecting 2 versions
+@Remoting "endpoint" task-5 22:36:39,231 DEBUG [org.jboss.remotingjmx.VersionedConectionFactory] Available version (Versions  0x00 0x01)
+@Remoting "endpoint" task-5 22:36:39,231 DEBUG [org.jboss.remotingjmx.VersionedConectionFactory] Calling a stable server
+@Remoting "endpoint" task-5 22:36:39,231 DEBUG [org.jboss.remotingjmx.VersionedConectionFactory] Selecting version 0x00 to receive full version list.
+@Remoting "endpoint" task-5 22:36:39,231 TRACE [org.jboss.remoting.remote] CAS Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+	old: RS=false WS=false IM=0 OM=0
+	new: RS=false WS=false IM=0 OM=1
+@Remoting "endpoint" task-5 22:36:39,231 TRACE [org.jboss.remoting.remote] Opened outbound message on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@Remoting "endpoint" task-5 22:36:39,233 TRACE [org.xnio.safe-close] Closing resource org.jboss.remotingjmx.protocol.CancellableDataOutputStream@1e387dce
+@Remoting "endpoint" task-5 22:36:39,233 TRACE [org.jboss.remoting.remote] Message window is open (131072-28=131044 remaining), proceeding with send
+@Remoting "endpoint" task-5 22:36:39,233 TRACE [org.xnio.channels.framed] Accepting java.nio.DirectByteBuffer[pos=0 lim=36 cap=8192] into java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
+@Remoting "endpoint" task-5 22:36:39,233 TRACE [org.xnio.channels.framed] Accepted a message into java.nio.HeapByteBuffer[pos=40 lim=8196 cap=8196]
+@Remoting "endpoint" task-5 22:36:39,233 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" task-5 22:36:39,233 TRACE [org.jboss.remoting.remote.connection] Sent message java.nio.DirectByteBuffer[pos=36 lim=36 cap=8192] (direct)
+@Remoting "endpoint" task-5 22:36:39,233 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" task-5 22:36:39,233 TRACE [org.jboss.remoting.remote.connection] Flushed channel (direct)
+@Remoting "endpoint" task-5 22:36:39,233 TRACE [org.jboss.remoting.remote] Flushing message channel
+@Remoting "endpoint" write-1 22:36:39,233 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@Remoting "endpoint" task-5 22:36:39,234 TRACE [org.jboss.remoting.remote] Sending message (with EOF) (java.nio.DirectByteBuffer[pos=0 lim=8 cap=8192]) to org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" write-1 22:36:39,234 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@45e30c08 (with timeout)
+@Remoting "endpoint" task-5 22:36:39,234 TRACE [org.jboss.remoting.remote] CAS Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+	old: RS=false WS=false IM=0 OM=1
+	new: RS=false WS=false IM=0 OM=0
+@Remoting "endpoint" task-5 22:36:39,234 TRACE [org.jboss.remoting.remote] Closed outbound message on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@Remoting "endpoint" task-5 22:36:39,234 TRACE [org.xnio.channels.framed] Accepting java.nio.DirectByteBuffer[pos=0 lim=8 cap=8192] into java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
+@Remoting "endpoint" task-5 22:36:39,234 TRACE [org.xnio.channels.framed] Accepted a message into java.nio.HeapByteBuffer[pos=12 lim=8196 cap=8196]
+@Remoting "endpoint" read-1 22:36:39,234 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" task-5 22:36:39,234 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,234 TRACE [org.xnio.nio.selector] Selected key sun.nio.ch.SelectionKeyImpl@1fa121e2 for java.nio.channels.SocketChannel[connected local=/127.0.0.1:61065 remote=localhost/127.0.0.1:4447]
+@Remoting "endpoint" task-5 22:36:39,234 TRACE [org.jboss.remoting.remote.connection] Sent message java.nio.DirectByteBuffer[pos=8 lim=8 cap=8192] (direct)
+@Remoting "endpoint" read-1 22:36:39,234 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,234 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" task-5 22:36:39,234 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" task-5 22:36:39,234 TRACE [org.jboss.remoting.remote.connection] Flushed channel (direct)
+@Remoting "endpoint" read-1 22:36:39,234 TRACE [org.xnio.listener] Invoking listener org.jboss.remoting3.remote.RemoteReadListener@601b1a35 on channel org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" task-5 22:36:39,234 TRACE [org.jboss.remoting.remote] Flushing message channel
+@Remoting "endpoint" write-1 22:36:39,234 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@Remoting "endpoint" read-1 22:36:39,234 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=72 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
+@Remoting "endpoint" write-1 22:36:39,234 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@45e30c08 (with timeout)
+@Remoting "endpoint" read-1 22:36:39,234 TRACE [org.jboss.remoting.remote] Received message window open
+@Remoting "endpoint" task-5 22:36:39,235 TRACE [org.xnio.safe-close] Closing resource java.io.DataInputStream@753d889f
+@Remoting "endpoint" task-5 22:36:39,235 TRACE [org.jboss.remoting.endpoint] Resource closed count 00000002 of endpoint "endpoint" <4ba2ca36> (closed org.jboss.remoting3.EndpointImpl$TrackingExecutor@651698c9)
+@Remoting "endpoint" read-1 22:36:39,235 TRACE [org.jboss.remoting.remote] Acknowledged 28 bytes on Outbound message ID dc9c on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@Remoting "endpoint" read-1 22:36:39,235 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=69 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
+@Remoting "endpoint" read-1 22:36:39,235 TRACE [org.jboss.remoting.remote] Received message data
+@Remoting "endpoint" read-1 22:36:39,235 TRACE [org.jboss.remoting.remote] CAS Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+	old: RS=false WS=false IM=0 OM=0
+	new: RS=false WS=false IM=1 OM=0
+@Remoting "endpoint" read-1 22:36:39,235 TRACE [org.jboss.remoting.remote] Opened inbound message on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@Remoting "endpoint" read-1 22:36:39,235 TRACE [org.jboss.remoting.endpoint] Allocated tick to 3 of endpoint "endpoint" <4ba2ca36> (opened org.jboss.remoting3.EndpointImpl$TrackingExecutor@651698c9)
+@Remoting "endpoint" read-1 22:36:39,235 TRACE [org.jboss.remoting.remote] Received message (chan 9cf7a53a msg ce90) (131072-34=131038 remaining)
+@Remoting "endpoint" task-6 22:36:39,235 TRACE [org.jboss.remotingjmx.VersionedConectionFactory] Bytes Available 34
+@Remoting "endpoint" read-1 22:36:39,236 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=23 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
+@Remoting "endpoint" task-6 22:36:39,236 TRACE [org.jboss.remotingjmx.VersionedConectionFactory] First Three JMX
+@Remoting "endpoint" read-1 22:36:39,236 TRACE [org.jboss.remoting.remote] Received message async close
+@Remoting "endpoint" task-6 22:36:39,236 TRACE [org.jboss.remotingjmx.VersionedConectionFactory] Bytes Available 31
+@Remoting "endpoint" task-6 22:36:39,236 TRACE [org.jboss.remotingjmx.VersionedConectionFactory] Expecting 2 versions
+@Remoting "endpoint" task-6 22:36:39,236 DEBUG [org.jboss.remotingjmx.VersionedConectionFactory] Available version (Versions  0x01 0x02)
+@Remoting "endpoint" task-6 22:36:39,236 DEBUG [org.jboss.remotingjmx.VersionedConectionFactory] Calling a stable server
+@Remoting "endpoint" read-1 22:36:39,236 TRACE [org.jboss.remoting.remote] Removed Outbound message ID dc9c on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@Remoting "endpoint" read-1 22:36:39,236 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=12 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
+@Remoting "endpoint" read-1 22:36:39,236 TRACE [org.jboss.remoting.remote] Received message data
+@Remoting "endpoint" task-6 22:36:39,236 TRACE [org.xnio.channels.framed] Accepting java.nio.DirectByteBuffer[pos=0 lim=11 cap=8192] into java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
+@Remoting "endpoint" task-6 22:36:39,236 TRACE [org.xnio.channels.framed] Accepted a message into java.nio.HeapByteBuffer[pos=15 lim=8196 cap=8196]
+@Remoting "endpoint" task-6 22:36:39,236 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" task-6 22:36:39,236 TRACE [org.jboss.remoting.remote.connection] Sent message java.nio.DirectByteBuffer[pos=11 lim=11 cap=8192] (direct)
+@Remoting "endpoint" task-6 22:36:39,236 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" task-6 22:36:39,236 TRACE [org.jboss.remoting.remote.connection] Flushed channel (direct)
+@Remoting "endpoint" write-1 22:36:39,236 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@Remoting "endpoint" task-6 22:36:39,236 DEBUG [org.jboss.remotingjmx.VersionedConectionFactory] Server version 1.1.3.Final-redhat-2
+@Remoting "endpoint" read-1 22:36:39,236 TRACE [org.jboss.remoting.remote] Received message (chan 9cf7a53a msg ce90) (131072-0=131072 remaining)
+@Remoting "endpoint" write-1 22:36:39,236 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@45e30c08 (with timeout)
+@Remoting "endpoint" read-1 22:36:39,236 TRACE [org.jboss.remoting.remote] CAS Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+	old: RS=false WS=false IM=1 OM=0
+	new: RS=false WS=false IM=0 OM=0
+@Remoting "endpoint" read-1 22:36:39,236 TRACE [org.jboss.remoting.remote] Closed inbound message on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@Remoting "endpoint" read-1 22:36:39,236 TRACE [org.xnio.channels.framed] Accepting java.nio.DirectByteBuffer[pos=0 lim=7 cap=8192] into java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
+@Remoting "endpoint" read-1 22:36:39,237 TRACE [org.xnio.channels.framed] Accepted a message into java.nio.HeapByteBuffer[pos=11 lim=8196 cap=8196]
+@Remoting "endpoint" read-1 22:36:39,237 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" task-6 22:36:39,237 TRACE [org.xnio.safe-close] Closing resource java.io.DataInputStream@13a68922
+@Remoting "endpoint" read-1 22:36:39,237 TRACE [org.jboss.remoting.remote.connection] Sent message java.nio.DirectByteBuffer[pos=7 lim=7 cap=8192] (direct)
+@Remoting "endpoint" read-1 22:36:39,237 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,237 TRACE [org.jboss.remoting.remote.connection] Flushed channel (direct)
+@Remoting "endpoint" read-1 22:36:39,237 TRACE [org.xnio.channels.framed] Did not read a length
+@Remoting "endpoint" write-1 22:36:39,237 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@Remoting "endpoint" task-6 22:36:39,237 TRACE [org.jboss.remoting.endpoint] Resource closed count 00000002 of endpoint "endpoint" <4ba2ca36> (closed org.jboss.remoting3.EndpointImpl$TrackingExecutor@651698c9)
+@Remoting "endpoint" read-1 22:36:39,237 TRACE [org.jboss.remoting.remote] No message ready; returning
+@Remoting "endpoint" write-1 22:36:39,237 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@45e30c08 (with timeout)
+@Remoting "endpoint" read-1 22:36:39,237 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@43f47969
+@main 22:36:39,254 TRACE [org.jboss.remoting.remote] CAS Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+	old: RS=false WS=false IM=0 OM=0
+	new: RS=false WS=false IM=0 OM=1
+@main 22:36:39,254 TRACE [org.jboss.remoting.remote] Opened outbound message on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@main 22:36:39,254 TRACE [org.xnio.safe-close] Closing resource org.jboss.remotingjmx.protocol.CancellableDataOutputStream@5f16132a
+@main 22:36:39,254 TRACE [org.jboss.remoting.remote] Message window is open (131072-4=131068 remaining), proceeding with send
+@main 22:36:39,254 TRACE [org.xnio.channels.framed] Accepting java.nio.DirectByteBuffer[pos=0 lim=12 cap=8192] into java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
+@main 22:36:39,254 TRACE [org.xnio.channels.framed] Accepted a message into java.nio.HeapByteBuffer[pos=16 lim=8196 cap=8196]
+@main 22:36:39,255 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@main 22:36:39,255 TRACE [org.jboss.remoting.remote.connection] Sent message java.nio.DirectByteBuffer[pos=12 lim=12 cap=8192] (direct)
+@main 22:36:39,255 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@main 22:36:39,255 TRACE [org.jboss.remoting.remote.connection] Flushed channel (direct)
+@main 22:36:39,255 TRACE [org.jboss.remoting.remote] Flushing message channel
+@Remoting "endpoint" write-1 22:36:39,255 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@main 22:36:39,255 TRACE [org.jboss.remoting.remote] Sending message (with EOF) (java.nio.DirectByteBuffer[pos=0 lim=8 cap=8192]) to org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" write-1 22:36:39,255 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@45e30c08 (with timeout)
+@main 22:36:39,255 TRACE [org.jboss.remoting.remote] CAS Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+	old: RS=false WS=false IM=0 OM=1
+	new: RS=false WS=false IM=0 OM=0
+@Remoting "endpoint" read-1 22:36:39,255 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@43f47969
+@main 22:36:39,255 TRACE [org.jboss.remoting.remote] Closed outbound message on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@Remoting "endpoint" read-1 22:36:39,255 TRACE [org.xnio.nio.selector] Selected key sun.nio.ch.SelectionKeyImpl@1fa121e2 for java.nio.channels.SocketChannel[connected local=/127.0.0.1:61065 remote=localhost/127.0.0.1:4447]
+@main 22:36:39,255 TRACE [org.xnio.channels.framed] Accepting java.nio.DirectByteBuffer[pos=0 lim=8 cap=8192] into java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
+@main 22:36:39,255 TRACE [org.xnio.channels.framed] Accepted a message into java.nio.HeapByteBuffer[pos=12 lim=8196 cap=8196]
+@Remoting "endpoint" read-1 22:36:39,255 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel TCP socket channel (NIO) <5bda8e08>
+@main 22:36:39,255 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,255 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@main 22:36:39,255 TRACE [org.jboss.remoting.remote.connection] Sent message java.nio.DirectByteBuffer[pos=8 lim=8 cap=8192] (direct)
+@Remoting "endpoint" read-1 22:36:39,256 TRACE [org.xnio.listener] Invoking listener org.jboss.remoting3.remote.RemoteReadListener@601b1a35 on channel org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@main 22:36:39,256 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@main 22:36:39,256 TRACE [org.jboss.remoting.remote.connection] Flushed channel (direct)
+@main 22:36:39,256 TRACE [org.jboss.remoting.remote] Flushing message channel
+@Remoting "endpoint" read-1 22:36:39,256 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=15 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
+@Remoting "endpoint" write-1 22:36:39,256 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@Remoting "endpoint" read-1 22:36:39,256 TRACE [org.jboss.remoting.remote] Received message window open
+@Remoting "endpoint" write-1 22:36:39,256 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@45e30c08 (with timeout)
+@Remoting "endpoint" read-1 22:36:39,256 TRACE [org.jboss.remoting.remote] Acknowledged 4 bytes on Outbound message ID 0562 on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@Remoting "endpoint" read-1 22:36:39,256 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=26 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
+@Remoting "endpoint" read-1 22:36:39,256 TRACE [org.jboss.remoting.remote] Received message async close
+@Remoting "endpoint" read-1 22:36:39,256 TRACE [org.jboss.remoting.remote] Removed Outbound message ID 0562 on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@Remoting "endpoint" read-1 22:36:39,256 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=27 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
+@Remoting "endpoint" read-1 22:36:39,256 TRACE [org.jboss.remoting.remote] Received message data
+@Remoting "endpoint" read-1 22:36:39,257 TRACE [org.jboss.remoting.remote] CAS Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+	old: RS=false WS=false IM=0 OM=0
+	new: RS=false WS=false IM=1 OM=0
+@Remoting "endpoint" read-1 22:36:39,257 TRACE [org.jboss.remoting.remote] Opened inbound message on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@Remoting "endpoint" read-1 22:36:39,257 TRACE [org.jboss.remoting.remote] Received message (chan 9cf7a53a msg 7e04) (131072-3=131069 remaining)
+@Remoting "endpoint" read-1 22:36:39,257 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=12 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
+@Remoting "endpoint" read-1 22:36:39,257 TRACE [org.jboss.remoting.remote] Received message data
+@Remoting "endpoint" read-1 22:36:39,257 TRACE [org.jboss.remoting.remote] Received message (chan 9cf7a53a msg 7e04) (131069-0=131069 remaining)
+@Remoting "endpoint" read-1 22:36:39,257 TRACE [org.jboss.remoting.remote] CAS Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+	old: RS=false WS=false IM=1 OM=0
+	new: RS=false WS=false IM=0 OM=0
+@Remoting "endpoint" read-1 22:36:39,257 TRACE [org.jboss.remoting.remote] Closed inbound message on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@Remoting "endpoint" read-1 22:36:39,258 TRACE [org.xnio.channels.framed] Accepting java.nio.DirectByteBuffer[pos=0 lim=7 cap=8192] into java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
+@Remoting "endpoint" read-1 22:36:39,258 TRACE [org.xnio.channels.framed] Accepted a message into java.nio.HeapByteBuffer[pos=11 lim=8196 cap=8196]
+@Remoting "endpoint" read-1 22:36:39,258 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,258 TRACE [org.jboss.remoting.remote.connection] Sent message java.nio.DirectByteBuffer[pos=7 lim=7 cap=8192] (direct)
+@Remoting "endpoint" read-1 22:36:39,258 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,258 TRACE [org.jboss.remoting.remote.connection] Flushed channel (direct)
+@Remoting "endpoint" read-1 22:36:39,258 TRACE [org.xnio.channels.framed] Did not read a length
+@Remoting "endpoint" read-1 22:36:39,258 TRACE [org.jboss.remoting.remote] No message ready; returning
+@Remoting "endpoint" read-1 22:36:39,259 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" write-1 22:36:39,259 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@Remoting "endpoint" write-1 22:36:39,259 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@45e30c08 (with timeout)
+@main 22:36:39,260 TRACE [org.jboss.remoting.endpoint] Allocated tick to 3 of endpoint "endpoint" <4ba2ca36> (opened org.jboss.remoting3.EndpointImpl$TrackingExecutor@651698c9)
+@Remoting "endpoint" task-7 22:36:39,260 TRACE [org.jboss.remotingjmx.protocol.v2.WelcomeMessageReceiver] Bytes Available 3
+@Remoting "endpoint" task-7 22:36:39,260 TRACE [org.jboss.remotingjmx.protocol.v2.WelcomeMessageReceiver] First Three JMX
+@Remoting "endpoint" task-7 22:36:39,260 TRACE [org.xnio.safe-close] Closing resource java.io.DataInputStream@26220165
+@Remoting "endpoint" task-7 22:36:39,260 TRACE [org.jboss.remoting.endpoint] Resource closed count 00000002 of endpoint "endpoint" <4ba2ca36> (closed org.jboss.remoting3.EndpointImpl$TrackingExecutor@651698c9)
+@main 22:36:39,262 TRACE [org.jboss.remoting.remote] CAS Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+	old: RS=false WS=false IM=0 OM=0
+	new: RS=false WS=false IM=0 OM=1
+@main 22:36:39,262 TRACE [org.jboss.remoting.remote] Opened outbound message on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@main 22:36:39,262 TRACE [org.xnio.safe-close] Closing resource org.jboss.remotingjmx.protocol.CancellableDataOutputStream@78ffe6dc
+@main 22:36:39,262 TRACE [org.jboss.remoting.remote] Message window is open (131072-5=131067 remaining), proceeding with send
+@main 22:36:39,262 TRACE [org.xnio.channels.framed] Accepting java.nio.DirectByteBuffer[pos=0 lim=13 cap=8192] into java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
+@main 22:36:39,262 TRACE [org.xnio.channels.framed] Accepted a message into java.nio.HeapByteBuffer[pos=17 lim=8196 cap=8196]
+@main 22:36:39,262 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@main 22:36:39,262 TRACE [org.jboss.remoting.remote.connection] Sent message java.nio.DirectByteBuffer[pos=13 lim=13 cap=8192] (direct)
+@main 22:36:39,262 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@main 22:36:39,262 TRACE [org.jboss.remoting.remote.connection] Flushed channel (direct)
+@main 22:36:39,262 TRACE [org.jboss.remoting.remote] Flushing message channel
+@Remoting "endpoint" write-1 22:36:39,262 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@Remoting "endpoint" write-1 22:36:39,263 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@45e30c08 (with timeout)
+@main 22:36:39,263 TRACE [org.jboss.remoting.remote] Sending message (with EOF) (java.nio.DirectByteBuffer[pos=0 lim=8 cap=8192]) to org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@main 22:36:39,263 TRACE [org.jboss.remoting.remote] CAS Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+	old: RS=false WS=false IM=0 OM=1
+	new: RS=false WS=false IM=0 OM=0
+@main 22:36:39,263 TRACE [org.jboss.remoting.remote] Closed outbound message on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@main 22:36:39,263 TRACE [org.xnio.channels.framed] Accepting java.nio.DirectByteBuffer[pos=0 lim=8 cap=8192] into java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
+@main 22:36:39,263 TRACE [org.xnio.channels.framed] Accepted a message into java.nio.HeapByteBuffer[pos=12 lim=8196 cap=8196]
+@main 22:36:39,263 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@main 22:36:39,263 TRACE [org.jboss.remoting.remote.connection] Sent message java.nio.DirectByteBuffer[pos=8 lim=8 cap=8192] (direct)
+@main 22:36:39,263 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@main 22:36:39,263 TRACE [org.jboss.remoting.remote.connection] Flushed channel (direct)
+@main 22:36:39,263 TRACE [org.jboss.remoting.remote] Flushing message channel
+@Remoting "endpoint" write-1 22:36:39,263 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@Remoting "endpoint" read-1 22:36:39,263 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" read-1 22:36:39,263 TRACE [org.xnio.nio.selector] Selected key sun.nio.ch.SelectionKeyImpl@1fa121e2 for java.nio.channels.SocketChannel[connected local=/127.0.0.1:61065 remote=localhost/127.0.0.1:4447]
+@Remoting "endpoint" read-1 22:36:39,263 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,264 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,264 TRACE [org.xnio.listener] Invoking listener org.jboss.remoting3.remote.RemoteReadListener@601b1a35 on channel org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@main 22:36:39,263 TRACE [org.jboss.remotingjmx.protocol.v2.ParameterConnection] [1] begin - Request Sent
+@Remoting "endpoint" read-1 22:36:39,264 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=26 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
+@Remoting "endpoint" write-1 22:36:39,263 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@45e30c08 (with timeout)
+@Remoting "endpoint" read-1 22:36:39,264 TRACE [org.jboss.remoting.remote] Received message window open
+@Remoting "endpoint" read-1 22:36:39,264 TRACE [org.jboss.remoting.remote] Acknowledged 5 bytes on Outbound message ID 926c on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@Remoting "endpoint" read-1 22:36:39,264 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=11 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
+@Remoting "endpoint" read-1 22:36:39,264 TRACE [org.jboss.remoting.remote] Received message async close
+@Remoting "endpoint" read-1 22:36:39,264 TRACE [org.jboss.remoting.remote] Removed Outbound message ID 926c on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@Remoting "endpoint" read-1 22:36:39,264 TRACE [org.xnio.channels.framed] Did not read a length
+@Remoting "endpoint" read-1 22:36:39,264 TRACE [org.jboss.remoting.remote] No message ready; returning
+@Remoting "endpoint" read-1 22:36:39,264 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" read-1 22:36:39,264 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" read-1 22:36:39,264 TRACE [org.xnio.nio.selector] Selected key sun.nio.ch.SelectionKeyImpl@1fa121e2 for java.nio.channels.SocketChannel[connected local=/127.0.0.1:61065 remote=localhost/127.0.0.1:4447]
+@Remoting "endpoint" read-1 22:36:39,265 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,265 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,265 TRACE [org.xnio.listener] Invoking listener org.jboss.remoting3.remote.RemoteReadListener@601b1a35 on channel org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,265 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=69 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
+@Remoting "endpoint" read-1 22:36:39,265 TRACE [org.jboss.remoting.remote] Received message data
+@Remoting "endpoint" read-1 22:36:39,265 TRACE [org.jboss.remoting.remote] CAS Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+	old: RS=false WS=false IM=0 OM=0
+	new: RS=false WS=false IM=1 OM=0
+@Remoting "endpoint" read-1 22:36:39,265 TRACE [org.jboss.remoting.remote] Opened inbound message on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@Remoting "endpoint" read-1 22:36:39,265 TRACE [org.jboss.remoting.endpoint] Allocated tick to 3 of endpoint "endpoint" <4ba2ca36> (opened org.jboss.remoting3.EndpointImpl$TrackingExecutor@651698c9)
+@Remoting "endpoint" read-1 22:36:39,265 TRACE [org.jboss.remoting.remote] Received message (chan 9cf7a53a msg 51c2) (131072-45=131027 remaining)
+@Remoting "endpoint" read-1 22:36:39,265 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=12 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
+@Remoting "endpoint" task-8 22:36:39,265 TRACE [org.jboss.remotingjmx.protocol.v2.ClientCommon] Message Received id(fffffff1), correlationId(1)
+@Remoting "endpoint" read-1 22:36:39,266 TRACE [org.jboss.remoting.remote] Received message data
+@Remoting "endpoint" read-1 22:36:39,266 TRACE [org.jboss.remoting.remote] Received message (chan 9cf7a53a msg 51c2) (131027-0=131027 remaining)
+@Remoting "endpoint" read-1 22:36:39,266 TRACE [org.jboss.remoting.remote] CAS Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+	old: RS=false WS=false IM=1 OM=0
+	new: RS=false WS=false IM=0 OM=0
+@Remoting "endpoint" read-1 22:36:39,266 TRACE [org.jboss.remoting.remote] Closed inbound message on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@Remoting "endpoint" read-1 22:36:39,266 TRACE [org.xnio.channels.framed] Accepting java.nio.DirectByteBuffer[pos=0 lim=7 cap=8192] into java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
+@Remoting "endpoint" read-1 22:36:39,266 TRACE [org.xnio.channels.framed] Accepted a message into java.nio.HeapByteBuffer[pos=11 lim=8196 cap=8196]
+@Remoting "endpoint" read-1 22:36:39,266 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,266 TRACE [org.jboss.remoting.remote.connection] Sent message java.nio.DirectByteBuffer[pos=7 lim=7 cap=8192] (direct)
+@Remoting "endpoint" read-1 22:36:39,266 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:36:39,266 TRACE [org.jboss.remoting.remote.connection] Flushed channel (direct)
+@Remoting "endpoint" read-1 22:36:39,266 TRACE [org.xnio.channels.framed] Did not read a length
+@Remoting "endpoint" read-1 22:36:39,266 TRACE [org.jboss.remoting.remote] No message ready; returning
+@Remoting "endpoint" read-1 22:36:39,266 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" write-1 22:36:39,266 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@Remoting "endpoint" task-8 22:36:39,266 TRACE [org.jboss.remoting.endpoint] Resource closed count 00000002 of endpoint "endpoint" <4ba2ca36> (closed org.jboss.remoting3.EndpointImpl$TrackingExecutor@651698c9)
+@Remoting "endpoint" write-1 22:36:39,266 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@45e30c08 (with timeout)
+@remoting-jmx client-thread-1 22:36:39,267 TRACE [org.xnio.safe-close] Closing resource java.io.DataInputStream@5ad79457
+@main 22:36:39,274 TRACE [org.jboss.remotingjmx.RemotingConnectorServer] getMBeanServerConnection()
+@main 22:36:39,274 TRACE [org.jboss.remotingjmx.RemotingConnectorServer] getMBeanServerConnection(Subject)
+@main 22:40:27,734 TRACE [org.jboss.remotingjmx.RemotingConnectorServer] close()
+@main 22:40:27,735 TRACE [org.jboss.remoting.remote] CAS Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+	old: RS=false WS=false IM=0 OM=0
+	new: RS=false WS=true IM=0 OM=0
+@main 22:40:27,735 TRACE [org.jboss.remoting.remote] Closed channel writes on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@main 22:40:27,735 TRACE [org.xnio.channels.framed] Accepting java.nio.DirectByteBuffer[pos=0 lim=5 cap=8192] into java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
+@main 22:40:27,735 TRACE [org.xnio.channels.framed] Accepted a message into java.nio.HeapByteBuffer[pos=9 lim=8196 cap=8196]
+@main 22:40:27,735 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@main 22:40:27,735 TRACE [org.jboss.remoting.remote.connection] Sent message java.nio.DirectByteBuffer[pos=5 lim=5 cap=8192] (direct)
+@main 22:40:27,735 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@main 22:40:27,735 TRACE [org.jboss.remoting.remote.connection] Flushed channel (direct)
+@Remoting "endpoint" write-1 22:40:27,735 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@main 22:40:27,735 TRACE [org.jboss.remoting.resource] Closing Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447 synchronously
+@Remoting "endpoint" write-1 22:40:27,735 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@45e30c08 (with timeout)
+@main 22:40:27,736 TRACE [org.jboss.remoting.remote] CAS Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+	old: RS=false WS=true IM=0 OM=0
+	new: RS=true WS=true IM=0 OM=0
+@main 22:40:27,736 TRACE [org.jboss.remoting.remote] Closed channel reads and writes on Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447 (unregistering)
+@main 22:40:27,736 TRACE [org.jboss.remoting.remote] Unregistering Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@main 22:40:27,736 TRACE [org.jboss.remoting.resource] Closing Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447 asynchronously
+@main 22:40:27,736 TRACE [org.jboss.remoting.remote] CAS Connection handler for Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+	old: RS=false WS=false IC=0 OC=1
+	new: RS=false WS=false IC=0 OC=0
+@main 22:40:27,736 TRACE [org.jboss.remoting.remote] Closed outbound channel on Connection handler for Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@main 22:40:27,737 TRACE [org.jboss.remoting.endpoint] Allocated tick to 3 of endpoint "endpoint" <4ba2ca36> (opened org.jboss.remoting3.EndpointImpl$TrackingExecutor@651698c9)
+@Remoting "endpoint" task-9 22:40:27,737 TRACE [org.jboss.remoting.endpoint] Resource closed count 00000002 of endpoint "endpoint" <4ba2ca36> (closed org.jboss.remoting3.EndpointImpl$TrackingExecutor@651698c9)
+@main 22:40:27,739 TRACE [org.jboss.remoting.resource] Completed close of Channel ID 9cf7a53a (outbound) of Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@main 22:40:27,739 TRACE [org.jboss.remoting.resource] Closing Remoting connection <399a1388> synchronously
+@main 22:40:27,739 TRACE [org.jboss.remoting.resource] Closing Connection handler for Remoting connection 510f3d34 to localhost/127.0.0.1:4447 asynchronously
+@main 22:40:27,739 TRACE [org.jboss.remoting.remote] CAS Connection handler for Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+	old: RS=false WS=false IC=0 OC=0
+	new: RS=false WS=true IC=0 OC=0
+@main 22:40:27,739 TRACE [org.jboss.remoting.remote] Sending close request on Connection handler for Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@main 22:40:27,739 TRACE [org.xnio.channels.framed] Accepting java.nio.DirectByteBuffer[pos=0 lim=1 cap=8192] into java.nio.HeapByteBuffer[pos=0 lim=8196 cap=8196]
+@main 22:40:27,739 TRACE [org.xnio.channels.framed] Accepted a message into java.nio.HeapByteBuffer[pos=5 lim=8196 cap=8196]
+@main 22:40:27,739 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@main 22:40:27,739 TRACE [org.jboss.remoting.remote.connection] Sent message java.nio.DirectByteBuffer[pos=1 lim=1 cap=8192] (direct)
+@main 22:40:27,739 TRACE [org.xnio.nio.tcp.channel] Shutting down writes on TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:40:27,740 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" read-1 22:40:27,740 TRACE [org.xnio.nio.selector] Selected key sun.nio.ch.SelectionKeyImpl@1fa121e2 for java.nio.channels.SocketChannel[connected oshut local=/127.0.0.1:61065 remote=localhost/127.0.0.1:4447]
+@main 22:40:27,740 TRACE [org.xnio.nio] Cancelling key sun.nio.ch.SelectionKeyImpl@62ddbd7e of java.nio.channels.SocketChannel[connected oshut local=/127.0.0.1:61065 remote=localhost/127.0.0.1:4447] (other thread)
+@Remoting "endpoint" read-1 22:40:27,740 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel TCP socket channel (NIO) <5bda8e08>
+@main 22:40:27,740 TRACE [org.jboss.remoting.remote.connection] Shut down writes on channel (direct)
+@Remoting "endpoint" read-1 22:40:27,740 TRACE [org.xnio.listener] Invoking listener Read listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@main 22:40:27,740 TRACE [org.xnio.channels.framed] Fully flushed org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@main 22:40:27,740 TRACE [org.xnio.channels.framed] Finished shutting down writes on org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" write-1 22:40:27,741 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@Remoting "endpoint" read-1 22:40:27,740 TRACE [org.xnio.listener] Invoking listener org.jboss.remoting3.remote.RemoteReadListener@601b1a35 on channel org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" write-1 22:40:27,741 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@main 22:40:27,741 TRACE [org.jboss.remoting.remote.connection] Flushed channel (direct)
+@main 22:40:27,741 TRACE [org.jboss.remoting.remote] Sent close request on Connection handler for Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@Remoting "endpoint" read-1 22:40:27,741 TRACE [org.xnio.channels.framed] Copying message from java.nio.HeapByteBuffer[pos=4 lim=5 cap=8196] into java.nio.DirectByteBuffer[pos=0 lim=8192 cap=8192]
+@Remoting "endpoint" read-1 22:40:27,741 TRACE [org.jboss.remoting.remote] Received connection close request
+@Remoting "endpoint" read-1 22:40:27,741 TRACE [org.jboss.remoting.remote] CAS Connection handler for Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+	old: RS=false WS=true IC=0 OC=0
+	new: RS=true WS=true IC=0 OC=0
+@Remoting "endpoint" read-1 22:40:27,741 TRACE [org.jboss.remoting.remote] Received remote close request on Connection handler for Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@main 22:40:27,741 TRACE [org.jboss.remoting.remote.connection] Shut down writes on channel
+@main 22:40:27,741 TRACE [org.jboss.remoting.remote.connection] Shut down writes on channel
+@Remoting "endpoint" read-1 22:40:27,742 TRACE [org.jboss.remoting.remote.connection] Shut down writes on channel
+@Remoting "endpoint" read-1 22:40:27,742 TRACE [org.xnio.channels.framed] Did not read a length
+@Remoting "endpoint" read-1 22:40:27,742 TRACE [org.jboss.remoting.remote] Received connection end-of-stream
+@Remoting "endpoint" read-1 22:40:27,742 TRACE [org.xnio.channels.framed] Shutting down reads on org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:40:27,742 TRACE [org.xnio.nio.tcp.channel] Shutting down reads on TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:40:27,742 TRACE [org.xnio.nio] Cancelling key sun.nio.ch.SelectionKeyImpl@1fa121e2 of java.nio.channels.SocketChannel[connected ishut oshut local=/127.0.0.1:61065 remote=localhost/127.0.0.1:4447] (same thread)
+@Remoting "endpoint" read-1 22:40:27,743 TRACE [org.xnio.listener] Invoking listener Close listener for org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:40:27,743 TRACE [org.xnio.safe-close] Closing resource org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:40:27,743 TRACE [org.xnio.safe-close] Closing resource TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:40:27,743 TRACE [org.xnio.safe-close] Closing resource TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:40:27,743 TRACE [org.xnio.listener] Invoking listener Close listener for org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08> on channel org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:40:27,743 TRACE [org.xnio.safe-close] Closing resource org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:40:27,743 TRACE [org.xnio.listener] Invoking listener org.jboss.remoting3.remote.RemoteReadListener$1@2a3fb808 on channel org.xnio.channels.FramedMessageChannel around org.xnio.ssl.JsseConnectedSslStreamChannel around TCP socket channel (NIO) <5bda8e08>
+@Remoting "endpoint" read-1 22:40:27,744 TRACE [org.jboss.remoting.endpoint] Allocated tick to 3 of endpoint "endpoint" <4ba2ca36> (opened org.jboss.remoting3.EndpointImpl$TrackingExecutor@55682515)
+@Remoting "endpoint" read-1 22:40:27,744 TRACE [org.xnio.nio.selector] Beginning select on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" task-10 22:40:27,744 TRACE [org.jboss.remoting.remote.connection] Shut down writes on channel
+@Remoting "endpoint" task-10 22:40:27,744 TRACE [org.jboss.remoting.resource] Completed close of Connection handler for Remoting connection 510f3d34 to localhost/127.0.0.1:4447
+@Remoting "endpoint" task-10 22:40:27,745 TRACE [org.jboss.remoting.resource] Completed close of Remoting connection <399a1388>
+@main 22:40:27,745 TRACE [org.jboss.remoting.resource] Closing endpoint "endpoint" <4ba2ca36> synchronously
+@Remoting "endpoint" task-10 22:40:27,745 TRACE [org.jboss.remoting.endpoint] Resource closed count 00000002 of endpoint "endpoint" <4ba2ca36> (closed Remoting connection <399a1388>)
+@Remoting "endpoint" task-10 22:40:27,745 TRACE [org.jboss.remoting.resource] Closing Remoting connection <399a1388> asynchronously
+@Remoting "endpoint" task-10 22:40:27,745 TRACE [org.jboss.remoting.endpoint] Phase 1 shutdown count 00000001 of endpoint "endpoint" <4ba2ca36> (closed org.jboss.remoting3.EndpointImpl$TrackingExecutor@55682515)
+@main 22:40:27,746 TRACE [org.jboss.remoting.resource] Closing Remoting remote connection provider 3b07a0d6 for endpoint "endpoint" <4ba2ca36> asynchronously
+@main 22:40:27,746 TRACE [org.jboss.remoting.resource] Completed close of Remoting remote connection provider 3b07a0d6 for endpoint "endpoint" <4ba2ca36>
+@main 22:40:27,746 TRACE [org.jboss.remoting.resource] Closing Registration of 'remote': Remoting remote connection provider 3b07a0d6 for endpoint "endpoint" <4ba2ca36> asynchronously
+@main 22:40:27,746 TRACE [org.jboss.remoting.resource] Closing Remoting remote connection provider 3b07a0d6 for endpoint "endpoint" <4ba2ca36> asynchronously
+@main 22:40:27,746 TRACE [org.jboss.remoting.resource] Completed close of Registration of 'remote': Remoting remote connection provider 3b07a0d6 for endpoint "endpoint" <4ba2ca36>
+@main 22:40:27,746 TRACE [org.jboss.remoting.endpoint] Finished phase 1 shutdown of endpoint "endpoint" <4ba2ca36>
+@main 22:40:27,746 TRACE [org.xnio.nio] Initiating shutdown of org.xnio.nio.NioXnioWorker@679b62af
+@Remoting "endpoint" read-1 22:40:27,746 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" write-1 22:40:27,746 TRACE [org.xnio.nio.selector] Selected on sun.nio.ch.KQueueSelectorImpl@45e30c08
+@Remoting "endpoint" write-1 22:40:27,746 TRACE [org.xnio.nio] Shutting down channel thread "Thread[Remoting "endpoint" write-1,5,main]"
+@Remoting "endpoint" read-1 22:40:27,746 TRACE [org.xnio.nio] Shutting down channel thread "Thread[Remoting "endpoint" read-1,5,main]"
+@Remoting "endpoint" write-1 22:40:27,746 TRACE [org.xnio.safe-close] Closing resource sun.nio.ch.KQueueSelectorImpl@45e30c08
+@Remoting "endpoint" read-1 22:40:27,746 TRACE [org.xnio.safe-close] Closing resource sun.nio.ch.KQueueSelectorImpl@43f47969
+@Remoting "endpoint" write-1 22:40:27,747 TRACE [org.xnio.nio] CAS org.xnio.nio.NioXnioWorker@679b62af 80000003 -> 80000002
+@Remoting "endpoint" read-1 22:40:27,747 TRACE [org.xnio.nio] CAS org.xnio.nio.NioXnioWorker@679b62af 80000002 -> 80000001
+@main 22:40:27,747 TRACE [org.jboss.remoting.resource] Closing Remoting local connection provider 74455848 for endpoint "endpoint" <4ba2ca36> asynchronously
+@main 22:40:27,747 TRACE [org.jboss.remoting.resource] Completed close of Remoting local connection provider 74455848 for endpoint "endpoint" <4ba2ca36>
+@Remoting "endpoint" task-3 22:40:27,747 TRACE [org.xnio.nio] CAS org.xnio.nio.NioXnioWorker@679b62af 80000001 -> 80000000
+@Remoting "endpoint" task-3 22:40:27,748 TRACE [org.xnio.nio] CAS org.xnio.nio.NioXnioWorker@679b62af 80000000 -> c0000000 (close complete)
+@Remoting "endpoint" task-3 22:40:27,748 TRACE [org.jboss.remoting.resource] Completed close of endpoint "endpoint" <4ba2ca36>

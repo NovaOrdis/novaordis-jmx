@@ -27,6 +27,7 @@ import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXServiceURL;
 import javax.security.auth.Subject;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -49,11 +50,19 @@ public class MockJMXConnector implements JMXConnector {
 
     private MockMBeanServerConnection mockMBeanServerProxy;
 
+    private Map<String, ?> environmentCopyInConstructor;
+    private Map<String, ?> environmentCopyInConnect;
+
     // Constructors ----------------------------------------------------------------------------------------------------
 
     public MockJMXConnector(JMXServiceURL serviceURL, Map<String, ?> environment) {
 
         this.serviceUrl = serviceURL;
+
+        //
+        // make a shallow copy of the environment
+        //
+        environmentCopyInConstructor = new HashMap<>(environment);
     }
 
     // JMXConnector implementation -------------------------------------------------------------------------------------
@@ -72,6 +81,11 @@ public class MockJMXConnector implements JMXConnector {
         mockMBeanServerProxy = new MockMBeanServerConnection();
 
         connected = true;
+
+        //
+        // make a shallow copy of the environment
+        //
+        environmentCopyInConnect = new HashMap<>(env);
     }
 
     @Override
@@ -138,6 +152,16 @@ public class MockJMXConnector implements JMXConnector {
     public String toString() {
 
         return "MockJMXConnector[" + serviceUrl + "]";
+    }
+
+    public Map<String, ?> getEnvironmentCopyInConstructor() {
+
+        return environmentCopyInConstructor;
+    }
+
+    public Map<String, ?> getEnvironmentCopyInConnect() {
+
+        return environmentCopyInConnect;
     }
 
     // Package protected -----------------------------------------------------------------------------------------------

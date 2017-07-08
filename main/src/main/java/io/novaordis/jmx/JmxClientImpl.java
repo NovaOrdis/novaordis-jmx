@@ -133,20 +133,28 @@ public class JmxClientImpl implements JmxClient {
             log.debug("using protocol provider package " + protocolProviderPackage);
         }
 
-        log.debug("the jmx client instance attempting to connect to " + jmxServiceURL);
+        //
+        // If authentication credentials are available, place them in the environment. Valid connections may be
+        // established even without authentication credentials, as it is the case for the JBoss $local authentication
+        // and collocated server and client.
+        //
 
-        //
-        // if we're using an underlying JBoss Remoting connection, this is where we pass the authentication credentials
-        // down into the machinery
-        //
-        {
+        String username = address.getUsername();
+
+        if (username != null) {
+
+            char[] password = address.getPassword();
+
             if (environment == null) {
 
                 environment = new HashMap<>();
             }
 
-            environment.put("jmx.remote.credentials", new String[] { "blah", "blah123!"} );
+            String[] payload = new String[] {username, new String(password)};
+            environment.put(JMXConnector.CREDENTIALS, payload);
         }
+
+        log.debug("the jmx client instance attempting to connect to " + jmxServiceURL);
 
         try {
 
@@ -232,6 +240,14 @@ public class JmxClientImpl implements JmxClient {
     }
 
     // Package protected -----------------------------------------------------------------------------------------------
+
+    /**
+     * Exposed for package-level testing.
+     */
+    JMXConnector getJmxConnector() {
+
+        return jmxConnector;
+    }
 
     // Protected -------------------------------------------------------------------------------------------------------
 

@@ -41,6 +41,17 @@ public class MockJmxAddress extends JmxAddress {
 
     // Public ----------------------------------------------------------------------------------------------------------
 
+    public void setUsername(String username) {
+
+        super.setUsername(username);
+    }
+
+    public void setPassword(char[] password) {
+
+        super.setPassword(password);
+    }
+
+
     // Package protected -----------------------------------------------------------------------------------------------
 
     // Protected -------------------------------------------------------------------------------------------------------
