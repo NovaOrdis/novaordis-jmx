@@ -26,6 +26,7 @@ import io.novaordis.utilities.UserErrorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.management.AttributeNotFoundException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -49,16 +50,20 @@ public class CLInt {
 
         String help =
                 "\n" +
-                "A command line JMX browser. Use it to navigate the MBeanServer domain/MBean hierarchy as you\n" +
-                "would navigate a filesystem.\n" +
-                "\n" +
-                "Commands:\n" +
-                "\n" +
-                "   cd - navigate to a domain or MBean\n" +
-                "\n" +
-                "   ls - list the content of a domain or an MBean\n" +
-                "\n" +
-                "   pwd - show the location in the hierarchy\n";
+                        "A command line JMX browser. Use it to navigate the MBeanServer domain/MBean hierarchy as you\n" +
+                        "would navigate a filesystem.\n" +
+                        "\n" +
+                        "Commands:\n" +
+                        "\n" +
+                        "   cd - navigate to a domain or MBean\n" +
+                        "\n" +
+                        "   ls - list the content of a domain or an MBean\n" +
+                        "\n" +
+                        "   pwd - show the location in the hierarchy\n" +
+                        "\n" +
+                        "   get <attribute-name> - while located within an MBean, retrieves the value of the specified\n" +
+                        "       JMX attribute\n";
+
 
 
         System.out.println(help);
@@ -166,6 +171,11 @@ public class CLInt {
 
                     String args = line.substring("cd".length()).trim();
                     cd(args);
+                }
+                else if ("get".equals(line) || line.startsWith("get ")) {
+
+                    String args = line.substring("get".length()).trim();
+                    get(args);
                 }
                 else {
 
@@ -278,6 +288,26 @@ public class CLInt {
         catch(UserErrorException e) {
 
             throw new UserErrorException("cd: " + e.getMessage());
+        }
+    }
+
+    String get(String args) throws IOException, UserErrorException {
+
+        JmxNode n = jmxTree.getCurrent();
+
+        if (!(n instanceof JmxMBean)) {
+
+            throw new UserErrorException("NOT YET IMPLEMENTED");
+        }
+
+        try {
+
+            Object o = ((JmxMBean) n).get(args);
+            return o == null ? "null" : o.toString();
+        }
+        catch(AttributeNotFoundException e) {
+
+            throw new UserErrorException(args + ": no such attribute");
         }
     }
 

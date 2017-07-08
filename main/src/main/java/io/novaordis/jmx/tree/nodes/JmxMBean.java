@@ -18,11 +18,15 @@ package io.novaordis.jmx.tree.nodes;
 
 import io.novaordis.utilities.UserErrorException;
 
+import javax.management.AttributeNotFoundException;
+import javax.management.InstanceNotFoundException;
 import javax.management.MBeanAttributeInfo;
+import javax.management.MBeanException;
 import javax.management.MBeanInfo;
 import javax.management.MBeanServerConnection;
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
+import javax.management.ReflectionException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,6 +112,28 @@ public class JmxMBean extends JmxContainer {
     public ObjectName getObjectName() {
 
         return objectName;
+    }
+
+    /**
+     * @return the value of the JMX attribute whose name was specified (which may be null).
+     *
+     * @exception AttributeNotFoundException if the MBean does not have such an attribute.
+     */
+    public Object get(String jmxAttributeName) throws IOException, AttributeNotFoundException {
+
+        MBeanServerConnection c = getTree().getMBeanServerConnection();
+
+        try {
+
+            return c.getAttribute(objectName, jmxAttributeName);
+        }
+        catch (ReflectionException | MBeanException | InstanceNotFoundException e) {
+
+            //
+            // not expected here
+            //
+            throw new IllegalStateException(e);
+        }
     }
 
     // Package protected -----------------------------------------------------------------------------------------------

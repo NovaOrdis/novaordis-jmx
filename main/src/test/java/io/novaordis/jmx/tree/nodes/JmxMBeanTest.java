@@ -20,15 +20,16 @@ import io.novaordis.jmx.mockpackage.mockprotocol.MockMBeanServerConnection;
 import io.novaordis.jmx.tree.JmxTree;
 import io.novaordis.jmx.tree.JmxTreeImpl;
 import io.novaordis.utilities.UserErrorException;
-import org.junit.After;
 import org.junit.Test;
 
+import javax.management.AttributeNotFoundException;
 import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -47,8 +48,6 @@ public class JmxMBeanTest extends JmxContainerTest {
     // Constructors ----------------------------------------------------------------------------------------------------
 
     // Public ----------------------------------------------------------------------------------------------------------
-
-    // Tests -----------------------------------------------------------------------------------------------------------
 
     // Overrides -------------------------------------------------------------------------------------------------------
 
@@ -131,7 +130,7 @@ public class JmxMBeanTest extends JmxContainerTest {
         assertEquals("test-attribute-1", a.getName());
     }
 
-    // getTree() -------------------------------------------------------------------------------------------------------
+    // Tests -----------------------------------------------------------------------------------------------------------
 
     @Test
     public void getTree() throws Exception {
@@ -150,6 +149,60 @@ public class JmxMBeanTest extends JmxContainerTest {
         JmxRoot r = (JmxRoot)d.getParent();
         assertNotNull(r);
 
+    }
+
+    @Test
+    public void getObjectName() throws Exception {
+
+        MockMBeanServerConnection mc = new MockMBeanServerConnection();
+
+        JmxMBean n = getJmxContainerToTest(mc);
+
+        assertEquals(new ObjectName("mock-domain:service=Mock,color=Blue"), n.getObjectName());
+    }
+
+    // get() -----------------------------------------------------------------------------------------------------------
+
+    @Test
+    public void get() throws Exception {
+
+        MockMBeanServerConnection mc = new MockMBeanServerConnection();
+        JmxMBean b = getJmxContainerToTest(mc);
+
+        Integer i = (Integer)b.get("some-attribute");
+        assertEquals(1, i.intValue());
+    }
+
+    @Test
+    public void get_Null() throws Exception {
+
+        MockMBeanServerConnection mc = new MockMBeanServerConnection();
+
+        MockMBeanServerConnection.addAttribute(
+                new ObjectName("mock-domain:service=Mock,color=Blue"), "null-attribute", null);
+
+        JmxMBean b = getJmxContainerToTest(mc);
+
+        Object o = b.get("null-attribute");
+        assertNull(o);
+    }
+
+    @Test
+    public void get_NoSuchAttribute() throws Exception {
+
+        MockMBeanServerConnection mc = new MockMBeanServerConnection();
+        JmxMBean b = getJmxContainerToTest(mc);
+
+        try {
+
+            b.get("NoSuchAttribute");
+            fail("should have thrown exception");
+        }
+        catch(AttributeNotFoundException e) {
+
+            String msg = e.getMessage();
+            assertNotNull(msg);
+        }
     }
 
     // Package protected -----------------------------------------------------------------------------------------------

@@ -78,7 +78,6 @@ public class MockMBeanServerConnection implements MBeanServerConnection {
 
     public static void addAttribute(ObjectName on, String attributeName, Object value) {
 
-
         String domain = on.getDomain();
 
         Map<ObjectName, List<Attribute>> objectNamesForDomain = content.get(domain);

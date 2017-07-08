@@ -171,6 +171,83 @@ public class CLIntTest {
         assertEquals("/mock-domain:service=Mock", s);
     }
 
+    // get() -----------------------------------------------------------------------------------------------------------
+
+    @Test
+    public void get_Root() throws Exception {
+
+        MockMBeanServerConnection mc = new MockMBeanServerConnection();
+        MockMBeanServerConnection.addAttribute(new ObjectName("mock-domain:service=Mock"), "MockAttribute", 1);
+
+        JmxTree t = new JmxTreeImpl(mc);
+        CLInt c = new CLInt(t);
+
+        String s = c.pwd();
+        assertEquals("/", s);
+
+        c.get("something");
+    }
+
+    @Test
+    public void get_Domain() throws Exception {
+
+        MockMBeanServerConnection mc = new MockMBeanServerConnection();
+        MockMBeanServerConnection.addAttribute(new ObjectName("mock-domain:service=Mock"), "MockAttribute", 1);
+
+        JmxTree t = new JmxTreeImpl(mc);
+        CLInt c = new CLInt(t);
+
+        c.cd("mock-domain");
+        String s = c.pwd();
+        assertEquals("/mock-domain:", s);
+
+        c.get("something");
+    }
+
+    @Test
+    public void get_MBean_ValidAttribute() throws Exception {
+
+        MockMBeanServerConnection mc = new MockMBeanServerConnection();
+        MockMBeanServerConnection.addAttribute(new ObjectName("mock-domain:service=Mock"), "MockAttribute", 1);
+
+        JmxTree t = new JmxTreeImpl(mc);
+        CLInt c = new CLInt(t);
+
+        c.cd("mock-domain");
+        c.cd("service=Mock");
+        String s = c.pwd();
+        assertEquals("/mock-domain:service=Mock", s);
+
+        s = c.get("MockAttribute");
+        assertEquals("1", s);
+    }
+
+    @Test
+    public void get_MBean_NoSuchAttribute() throws Exception {
+
+        MockMBeanServerConnection mc = new MockMBeanServerConnection();
+        MockMBeanServerConnection.addAttribute(new ObjectName("mock-domain:service=Mock"), "MockAttribute", 1);
+
+        JmxTree t = new JmxTreeImpl(mc);
+        CLInt c = new CLInt(t);
+
+        c.cd("mock-domain");
+        c.cd("service=Mock");
+        String s = c.pwd();
+        assertEquals("/mock-domain:service=Mock", s);
+
+        try {
+
+            c.get("NoSuchAttribute");
+            fail("should have thrown exception");
+        }
+        catch (UserErrorException e) {
+
+            String msg = e.getMessage();
+            assertEquals("NoSuchAttribute: no such attribute", msg);
+        }
+    }
+
     // Package protected -----------------------------------------------------------------------------------------------
 
     // Protected -------------------------------------------------------------------------------------------------------
