@@ -36,6 +36,8 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
+        System.setProperty("remote.connection.default.callback.handler.class", "io.novaordis.NoSuchClass");
+
         if (args.length == 0) {
 
             throw new Exception("the address of the JMX server is needed in format jmx://<host>:<port>");

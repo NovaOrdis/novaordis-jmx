@@ -11,26 +11,43 @@
         </layout>
     </appender>
 
-    <!--
     <appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">
-       <errorHandler class="org.apache.log4j.helpers.OnlyOnceErrorHandler"/>
-      <param name="File" value="${test.log.directory}/test.log"/>
-      <param name="DatePattern" value="'.'yyyy-MM-dd"/>
-      <param name="Threshold" value="DEBUG"/>
-      <param name="Append" value="false"/>
-      <layout class="org.apache.log4j.PatternLayout">
-          <param name="ConversionPattern" value="@%t %d{ABSOLUTE} %-5p [%c{1}] %m%n"/>
-      </layout>
+        <errorHandler class="org.apache.log4j.helpers.OnlyOnceErrorHandler"/>
+        <param name="Threshold" value="TRACE"/>
+        <param name="File" value="./client.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <param name="Append" value="false"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="@%t %d{ABSOLUTE} %-5p [%c{1}] %m%n"/>
+        </layout>
     </appender>
-    -->
 
-    <category name="org.hibernate">
-        <priority value="WARN"/>
+    <category name="org.jboss.as.domain.management.security">
+        <priority value="TRACE"/>
+    </category>
+    <category name="org.jboss.sasl">
+        <priority value="TRACE"/>
+    </category>
+    <category name="org.jboss.security">
+        <priority value="TRACE"/>
+    </category>
+    <category name="org.jboss.as.ejb3">
+        <priority value="TRACE"/>
+    </category>
+    <category name="org.jboss.as.remoting">
+        <priority value="TRACE"/>
+    </category>
+    <category name="org.jboss.remoting3">
+        <priority value="TRACE"/>
+    </category>
+    <category name="org.jboss.remoting">
+        <priority value="TRACE"/>
     </category>
 
     <root>
+        <level value="TRACE"/>
         <appender-ref ref="CONSOLE"/>
-        <!-- <appender-ref ref="FILE"/> -->
+        <appender-ref ref="FILE"/>
     </root>
 
 </log4j:configuration>
