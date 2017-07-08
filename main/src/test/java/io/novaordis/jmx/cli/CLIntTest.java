@@ -185,7 +185,18 @@ public class CLIntTest {
         String s = c.pwd();
         assertEquals("/", s);
 
-        c.get("something");
+        try {
+            //
+            // TODO: this needs to be adjusted when functionality is implemented
+            //
+            c.get("something");
+            fail("should have thrown exception");
+        }
+        catch(UserErrorException e) {
+
+            String msg = e.getMessage();
+            assertEquals("NOT YET IMPLEMENTED", msg);
+        }
     }
 
     @Test
@@ -201,7 +212,18 @@ public class CLIntTest {
         String s = c.pwd();
         assertEquals("/mock-domain:", s);
 
-        c.get("something");
+        try {
+            //
+            // TODO: this needs to be adjusted when functionality is implemented
+            //
+            c.get("something");
+            fail("should have thrown exception");
+        }
+        catch(UserErrorException e) {
+
+            String msg = e.getMessage();
+            assertEquals("NOT YET IMPLEMENTED", msg);
+        }
     }
 
     @Test
