@@ -190,7 +190,7 @@ public class JmxClientImpl implements JmxClient {
 
             jmxConnector.close();
 
-            log.debug("closing JMXConnector instance " + jmxConnector + " closed");
+            log.debug("JMXConnector instance " + jmxConnector + " closed");
 
             jmxConnector = null;
         }
