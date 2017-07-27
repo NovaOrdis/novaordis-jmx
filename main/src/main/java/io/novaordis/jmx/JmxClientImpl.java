@@ -189,6 +189,9 @@ public class JmxClientImpl implements JmxClient {
         try {
 
             jmxConnector.close();
+
+            log.debug("closing JMXConnector instance " + jmxConnector + " closed");
+
             jmxConnector = null;
         }
         catch(Exception e) {
