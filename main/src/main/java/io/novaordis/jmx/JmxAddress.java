@@ -18,6 +18,7 @@ package io.novaordis.jmx;
 
 import io.novaordis.utilities.address.AddressException;
 import io.novaordis.utilities.address.AddressImpl;
+import org.apache.log4j.Logger;
 
 /**
  * @author Ovidiu Feodorov <ovidiu@novaordis.com>
@@ -26,6 +27,8 @@ import io.novaordis.utilities.address.AddressImpl;
 public class JmxAddress extends AddressImpl {
 
     // Constants -------------------------------------------------------------------------------------------------------
+
+    private static final Logger log = Logger.getLogger(JmxAddress.class);
 
     public static final String PROTOCOL = "jmx";
 
@@ -51,6 +54,8 @@ public class JmxAddress extends AddressImpl {
         super();
 
         setProtocol(PROTOCOL);
+
+        log.debug(this + " constructed");
     }
 
     /**
@@ -72,6 +77,8 @@ public class JmxAddress extends AddressImpl {
 
             throw new AddressException("missing port value");
         }
+
+        log.debug(this + " constructed");
     }
 
     public JmxAddress(String username, String password, String host, Integer port) throws AddressException {
@@ -82,6 +89,8 @@ public class JmxAddress extends AddressImpl {
 
             throw new AddressException("missing port value");
         }
+
+        log.debug(this + " constructed");
     }
 
     /**
@@ -145,6 +154,8 @@ public class JmxAddress extends AddressImpl {
     }
 
     public void setJmxServiceUrlProtocol(String s) {
+
+        if (log.isTraceEnabled()) { log.trace(this + " setting jmxServiceUrlProtocol to " + s); }
 
         this.jmxServiceUrlProtocol = s;
     }
