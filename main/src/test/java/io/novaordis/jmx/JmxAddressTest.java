@@ -63,7 +63,7 @@ public class JmxAddressTest {
         assertEquals("adminpasswd", new String(a.getPassword()));
         assertEquals("1.2.3.4", a.getHost());
         assertEquals(700, a.getPort().intValue());
-        assertEquals("admin@1.2.3.4:700", a.getLiteral());
+        assertEquals("jmx://admin@1.2.3.4:700", a.getLiteral());
     }
 
     @Test
@@ -91,7 +91,7 @@ public class JmxAddressTest {
         assertNull(a.getPassword());
         assertEquals("1.2.3.4", a.getHost());
         assertEquals(700, a.getPort().intValue());
-        assertEquals("1.2.3.4:700", a.getLiteral());
+        assertEquals("jmx://1.2.3.4:700", a.getLiteral());
     }
 
     @Test
