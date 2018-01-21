@@ -8,7 +8,7 @@
 
     <groupId>io.novaordis.jmx</groupId>
     <artifactId>novaordis-jmx-root</artifactId>
-    <version>1.2.5</version>
+    <version>1.2.6-SNAPSHOT-1</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -17,7 +17,7 @@
             Dependencies
         -->
 
-        <novaordis.utilities.version>4.7.11</novaordis.utilities.version>
+        <novaordis.utilities.version>4.7.14</novaordis.utilities.version>
         <slf4j.version>1.7.12</slf4j.version>
         <junit.version>4.12</junit.version>
 
@@ -34,6 +34,13 @@
         <maven.build.timestamp.format>MM/dd/yy</maven.build.timestamp.format>
         <release_date>${maven.build.timestamp}</release_date>
     </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>novaordis-nexus</id>
+            <url>https://maven.apps.openshift.novaordis.io/repository/maven-releases/</url>
+        </repository>
+    </distributionManagement>
 
     <modules>
         <module>main</module>
